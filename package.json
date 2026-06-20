@@ -8,6 +8,8 @@
     "build": "tsc -b tsconfig.json --pretty false",
     "docs:check": "node scripts/check-docs.mjs",
     "lint": "node scripts/lint.mjs",
+    "package:dry-run": "node scripts/package-dry-run.mjs",
+    "release:dry-run": "pnpm package:dry-run",
     "structure:check": "node scripts/check-structure.mjs",
     "test": "vitest run",
     "typecheck": "tsc -b tsconfig.json --pretty false",
