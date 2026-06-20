@@ -40,6 +40,7 @@ export interface CompiledAction {
 
 export interface CompiledBinding {
   readonly id: string;
+  readonly mapId: string;
   readonly action: ActionId;
   readonly control: ControlPath;
   readonly interaction: PressInteractionDefinition;
@@ -59,6 +60,7 @@ export const compileBindingGraph = (
   const bindingIds = new Set<string>();
 
   for (const map of maps) {
+    const mapId = map.id ?? "__default";
     for (const action of map.actions) {
       const actionId = asActionId(action.id);
       if (actions.has(actionId)) {
@@ -84,6 +86,7 @@ export const compileBindingGraph = (
 
       bindings.push({
         id: binding.id,
+        mapId,
         action: actionId,
         control: createControlPath(binding.source.path),
         interaction: binding.interactions?.[0] ?? { type: "press" }

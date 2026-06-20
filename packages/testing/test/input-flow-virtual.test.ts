@@ -66,7 +66,8 @@ describe("createInputFlow with VirtualInputSource", () => {
         isPressed: false,
         justPressed: false,
         justReleased: true,
-        heldMs: 0
+        heldMs: 0,
+        sourceControl: "<Keyboard>/code/KeyE"
       }
     ]);
   });

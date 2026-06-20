@@ -38,6 +38,11 @@ export interface InputFlow {
   dispose(): void;
 }
 
+interface ButtonCandidate {
+  readonly value: number;
+  readonly sourceControl: ControlPath;
+}
+
 export const createInputFlow = (options: InputFlowOptions): InputFlow => {
   const graph = compileBindingGraph(options.maps);
   const queue = new RawEventQueue();
@@ -59,28 +64,77 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
 
   const evaluateButton = (
     actionId: ActionId,
-    bindings: readonly CompiledBinding[],
+    candidate: ButtonCandidate | undefined,
     timeMs: number
   ): ButtonActionState => {
     const previous = snapshot.buttons.get(actionId) ?? createReleasedButtonState(actionId);
-    let value = 0;
-    let sourceControl: ControlPath | undefined;
-
-    for (const binding of bindings) {
-      const controlValue = deviceState.readScalar(binding.control);
-      if (controlValue > value) {
-        value = controlValue;
-        sourceControl = binding.control;
-      }
-    }
 
     return evaluatePress({
       actionId,
       previous,
-      value,
+      value: candidate?.value ?? 0,
       timeMs,
-      ...(sourceControl ? { sourceControl } : {})
+      ...(candidate?.sourceControl ? { sourceControl: candidate.sourceControl } : {})
     });
+  };
+
+  const contextIncludesBinding = (
+    contextMaps: readonly string[],
+    binding: CompiledBinding
+  ): boolean => contextMaps.length === 0 || contextMaps.includes(binding.mapId);
+
+  const collectButtonCandidates = (): Map<ActionId, ButtonCandidate> => {
+    const candidates = new Map<ActionId, ButtonCandidate>();
+    const activeContexts = contexts.activeContexts();
+    const consumedControls = new Set<ControlPath>();
+
+    const applyBinding = (binding: CompiledBinding): boolean => {
+      if (consumedControls.has(binding.control)) {
+        return false;
+      }
+
+      const value = deviceState.readScalar(binding.control);
+      const existing = candidates.get(binding.action);
+      if (!existing || value > existing.value) {
+        candidates.set(binding.action, { value, sourceControl: binding.control });
+      }
+
+      const pressPoint = binding.interaction.pressPoint ?? 0.5;
+      return value >= pressPoint;
+    };
+
+    if (activeContexts.length === 0) {
+      for (const binding of graph.bindings) {
+        applyBinding(binding);
+      }
+      return candidates;
+    }
+
+    for (const context of activeContexts) {
+      const contextBindings = graph.bindings.filter((binding) =>
+        contextIncludesBinding(context.maps, binding)
+      );
+      const matchedControls = new Set<ControlPath>();
+
+      for (const binding of contextBindings) {
+        const matched = applyBinding(binding);
+        if (matched) {
+          matchedControls.add(binding.control);
+        }
+      }
+
+      if (context.routing === "consumeMatched") {
+        for (const control of matchedControls) {
+          consumedControls.add(control);
+        }
+      }
+
+      if (context.routing === "exclusive") {
+        break;
+      }
+    }
+
+    return candidates;
   };
 
   return {
@@ -105,19 +159,13 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
         deviceState.apply(event);
       }
 
-      const bindingsByAction = new Map<ActionId, CompiledBinding[]>();
-      for (const binding of graph.bindings) {
-        const existing = bindingsByAction.get(binding.action) ?? [];
-        existing.push(binding);
-        bindingsByAction.set(binding.action, existing);
-      }
-
+      const candidates = collectButtonCandidates();
       const buttons = new Map<ActionId, ButtonActionState>();
       for (const action of graph.actions.values()) {
         if (action.valueType !== "button") {
           continue;
         }
-        buttons.set(action.id, evaluateButton(action.id, bindingsByAction.get(action.id) ?? [], timeMs));
+        buttons.set(action.id, evaluateButton(action.id, candidates.get(action.id), timeMs));
       }
 
       snapshot = { timeMs, buttons };
