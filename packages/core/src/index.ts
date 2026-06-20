@@ -15,9 +15,16 @@ export {
 } from "./ids.js";
 
 export {
+  createNeutralAxis1DState,
+  createNeutralAxis2DState,
   createReleasedButtonState,
+  updateAxis1DState,
+  updateAxis2DState,
   type ActionValueType,
-  type ButtonActionState
+  type Axis1DActionState,
+  type Axis2DActionState,
+  type ButtonActionState,
+  type Vector2
 } from "./action-state.js";
 
 export {
@@ -25,6 +32,10 @@ export {
   type CompiledAction,
   type CompiledBinding,
   type CompiledBindingGraph,
+  type CompiledBindingSource,
+  type BindingSourceDefinition,
+  type Composite1DBindingSourceDefinition,
+  type Composite2DBindingSourceDefinition,
   type ControlBindingSourceDefinition,
   type InputActionDefinition,
   type InputBindingDefinition,

@@ -12,6 +12,25 @@ export interface ControlBindingSourceDefinition {
   readonly path: string | ControlPath;
 }
 
+export interface Composite1DBindingSourceDefinition {
+  readonly kind: "composite1d";
+  readonly negative: string | ControlPath;
+  readonly positive: string | ControlPath;
+}
+
+export interface Composite2DBindingSourceDefinition {
+  readonly kind: "composite2d";
+  readonly up: string | ControlPath;
+  readonly down: string | ControlPath;
+  readonly left: string | ControlPath;
+  readonly right: string | ControlPath;
+}
+
+export type BindingSourceDefinition =
+  | ControlBindingSourceDefinition
+  | Composite1DBindingSourceDefinition
+  | Composite2DBindingSourceDefinition;
+
 export interface PressInteractionDefinition {
   readonly type: "press";
   readonly pressPoint?: number;
@@ -23,7 +42,7 @@ export type InteractionDefinition = PressInteractionDefinition;
 export interface InputBindingDefinition {
   readonly id: string;
   readonly action: string | ActionId;
-  readonly source: ControlBindingSourceDefinition;
+  readonly source: BindingSourceDefinition;
   readonly interactions?: readonly InteractionDefinition[];
 }
 
@@ -43,8 +62,28 @@ export interface CompiledBinding {
   readonly mapId: string;
   readonly action: ActionId;
   readonly control: ControlPath;
+  readonly controls: readonly ControlPath[];
+  readonly source: CompiledBindingSource;
   readonly interaction: PressInteractionDefinition;
 }
+
+export type CompiledBindingSource =
+  | {
+      readonly kind: "control";
+      readonly control: ControlPath;
+    }
+  | {
+      readonly kind: "composite1d";
+      readonly negative: ControlPath;
+      readonly positive: ControlPath;
+    }
+  | {
+      readonly kind: "composite2d";
+      readonly up: ControlPath;
+      readonly down: ControlPath;
+      readonly left: ControlPath;
+      readonly right: ControlPath;
+    };
 
 export interface CompiledBindingGraph {
   readonly actions: ReadonlyMap<ActionId, CompiledAction>;
@@ -80,15 +119,16 @@ export const compileBindingGraph = (
       if (!action) {
         throw new Error(`Binding ${binding.id} references unknown action: ${binding.action}`);
       }
-      if (action.valueType !== "button") {
-        throw new Error(`Binding ${binding.id} can only target button actions in this phase`);
-      }
+      const source = compileBindingSource(binding.source);
+      const controls = getBindingControls(source);
 
       bindings.push({
         id: binding.id,
         mapId,
         action: actionId,
-        control: createControlPath(binding.source.path),
+        control: controls[0] ?? createControlPath("<Unknown>/control/missing"),
+        controls,
+        source,
         interaction: binding.interactions?.[0] ?? { type: "press" }
       });
     }
@@ -106,4 +146,38 @@ export const compileBindingGraph = (
     bindings,
     bindingsByControl: byControl
   };
+};
+
+const compileBindingSource = (source: BindingSourceDefinition): CompiledBindingSource => {
+  if (source.kind === "control") {
+    return { kind: "control", control: createControlPath(source.path) };
+  }
+
+  if (source.kind === "composite1d") {
+    return {
+      kind: "composite1d",
+      negative: createControlPath(source.negative),
+      positive: createControlPath(source.positive)
+    };
+  }
+
+  return {
+    kind: "composite2d",
+    up: createControlPath(source.up),
+    down: createControlPath(source.down),
+    left: createControlPath(source.left),
+    right: createControlPath(source.right)
+  };
+};
+
+const getBindingControls = (source: CompiledBindingSource): readonly ControlPath[] => {
+  if (source.kind === "control") {
+    return [source.control];
+  }
+
+  if (source.kind === "composite1d") {
+    return [source.negative, source.positive];
+  }
+
+  return [source.up, source.down, source.left, source.right];
 };
