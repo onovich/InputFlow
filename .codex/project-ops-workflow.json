@@ -1,4 +1,4 @@
-﻿{
+{
     "schemaVersion":  1,
     "initializedMarker":  "codex-project-ops-workflow: initialized",
     "initializedAt":  "2026-06-20 19:23:05 +08:00",
@@ -15,32 +15,33 @@
     "operations":  {
                        "envCheck":  {
                                         "commands":  [
-
+                                                         "node --version",
+                                                         "pnpm --version"
                                                      ]
                                     },
                        "restoreDeps":  {
                                            "commands":  [
-
+                                                            "pnpm install --frozen-lockfile"
                                                         ]
                                        },
                        "installDeps":  {
                                            "commands":  [
-
+                                                            "pnpm install"
                                                         ]
                                        },
                        "build":  {
                                      "commands":  [
-
+                                                      "pnpm build"
                                                   ]
                                  },
                        "test":  {
                                     "commands":  [
-
+                                                     "pnpm test"
                                                  ]
                                 },
                        "lint":  {
                                     "commands":  [
-
+                                                     "pnpm lint"
                                                  ]
                                 },
                        "format":  {
@@ -50,12 +51,12 @@
                                   },
                        "typecheck":  {
                                          "commands":  [
-
+                                                          "pnpm typecheck"
                                                       ]
                                      },
                        "structureCheck":  {
                                               "commands":  [
-
+                                                               "pnpm structure:check"
                                                            ]
                                           },
                        "codegen":  {
@@ -65,7 +66,7 @@
                                    },
                        "docsCheck":  {
                                          "commands":  [
-
+                                                          "pnpm docs:check"
                                                       ]
                                      },
                        "smoke":  {

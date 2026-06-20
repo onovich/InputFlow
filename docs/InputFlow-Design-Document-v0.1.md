@@ -1,9 +1,9 @@
 # InputFlow 输入控制系统设计文档
 
-> 文档状态：Proposed / 可进入实现评审  
-> 版本：0.1  
-> 日期：2026-06-20  
-> 产品名：InputFlow（流控）  
+> 文档状态：Proposed / 可进入实现评审
+> 版本：0.1
+> 日期：2026-06-20
+> 产品名：InputFlow（流控）
 > 首个宿主项目：Sinan Scene Director
 
 ---
@@ -63,28 +63,28 @@ InputFlow 同时需要解决 Web 特有问题：
 
 ### 3.1 核心目标
 
-1. **动作语义优先**  
+1. **动作语义优先**
    业务读取 `gameplay.move`、`gameplay.interact`，而不是设备按键。
 
-2. **统一多设备**  
+2. **统一多设备**
    支持 Keyboard、Pointer、Touch、Gamepad 和 Virtual/Replay Source。
 
-3. **上下文路由**  
+3. **上下文路由**
    通过优先级、焦点条件和消费规则解决 editor/gameplay/modal 冲突。
 
-4. **确定性帧状态**  
+4. **确定性帧状态**
    在宿主调用 `update(time)` 后生成稳定快照；边沿状态保持到下一次 update。
 
-5. **数据优先**  
+5. **数据优先**
    默认 Input Map、Action 和 Binding 可以 JSON 序列化、校验、迁移和版本控制。
 
-6. **可重绑定**  
+6. **可重绑定**
    默认映射与用户 override 分离；更新默认映射时不覆盖用户配置。
 
-7. **可测试、可回放**  
+7. **可测试、可回放**
    不依赖真实 DOM 事件即可注入设备输入；记录结果可以稳定重放。
 
-8. **低耦合、低开销**  
+8. **低耦合、低开销**
    核心无 DOM、无框架、无渲染器依赖；高频查询不分配临时对象。
 
 ### 3.2 第一版非目标
@@ -934,10 +934,10 @@ const interact = useInputAction(input, 'gameplay.interact', {
 
 ### 17.1 两种记录层级
 
-1. **Raw Recording**  
+1. **Raw Recording**
    记录标准化 Control Event，可测试 Binding、Processor、Interaction 和 Context。
 
-2. **Action Recording**  
+2. **Action Recording**
    记录路由后的 Action Event，可用于游戏逻辑、教程和更稳定的跨设备回放。
 
 ### 17.2 记录格式

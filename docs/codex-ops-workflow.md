@@ -38,6 +38,19 @@ C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\ReleaseDry
 
 lint, typecheck, build, test, structureCheck, docsCheck
 
+Configured commands:
+
+- Env check: `node --version`, `pnpm --version`
+- Restore deps: `pnpm install --frozen-lockfile`
+- Install deps: `pnpm install`
+- Lint: `pnpm lint`
+- Typecheck: `pnpm typecheck`
+- Build: `pnpm build`
+- Test: `pnpm test`
+- Structure check: `pnpm structure:check`
+- Docs check: `pnpm docs:check`
+- Root validate: `pnpm validate`
+
 ## Dev Server
 
 Start command: ``

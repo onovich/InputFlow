@@ -1,4 +1,4 @@
-﻿{
+{
     "schemaVersion":  1,
     "initializedMarker":  "codex-project-git-workflow: initialized",
     "initializedAt":  "2026-06-20 19:23:04 +08:00",
@@ -7,7 +7,7 @@
     "safeDirectory":  "D:/LabProjects/Engine/InputFlow",
     "statusCommand":  "git -c safe.directory=D:/LabProjects/Engine/InputFlow status --short --branch",
     "validationCommands":  [
-
+                               "C:\\Users\\Administrator\\.codex\\skills\\project-ops-workflow\\scripts\\ops\\Validate.cmd"
                            ],
     "stagingPolicy":  "ask each time",
     "commitCommand":  "",
