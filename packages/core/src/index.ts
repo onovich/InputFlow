@@ -59,9 +59,15 @@ export {
 } from "./raw-event.js";
 
 export { DeviceState, type ControlState } from "./device-state.js";
+export type {
+  DiagnosticSeverity,
+  InputDiagnostic,
+  InputDiagnosticCode
+} from "./diagnostics.js";
 export {
   createInputFlow,
   type ActionSnapshot,
+  type InputDebugSnapshot,
   type InputFlow,
   type InputFlowOptions
 } from "./input-flow.js";

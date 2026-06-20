@@ -14,6 +14,8 @@ import {
   type InputContextOptions
 } from "./context-router.js";
 import { DeviceState } from "./device-state.js";
+import type { ControlState } from "./device-state.js";
+import type { InputDiagnostic } from "./diagnostics.js";
 import { asActionId, type ActionId, type ControlPath } from "./ids.js";
 import { evaluatePress } from "./interactions/press.js";
 import { RawEventQueue } from "./raw-event-queue.js";
@@ -28,6 +30,14 @@ export interface ActionSnapshot {
   readonly buttons: ReadonlyMap<ActionId, ButtonActionState>;
 }
 
+export interface InputDebugSnapshot {
+  readonly timeMs: number;
+  readonly activeContexts: readonly ActiveInputContext[];
+  readonly consumedControls: readonly ControlPath[];
+  readonly pressedControls: readonly ControlState[];
+  readonly diagnostics: readonly InputDiagnostic[];
+}
+
 export interface InputFlow {
   addSource(source: InputSource): void;
   activateContext(options: InputContextOptions): ContextLease;
@@ -35,6 +45,7 @@ export interface InputFlow {
   update(timeMs: number): ActionSnapshot;
   readButton(actionId: string | ActionId): ButtonActionState;
   snapshot(): ActionSnapshot;
+  debugSnapshot(): InputDebugSnapshot;
   dispose(): void;
 }
 
@@ -43,12 +54,25 @@ interface ButtonCandidate {
   readonly sourceControl: ControlPath;
 }
 
+interface ButtonCollectionResult {
+  readonly candidates: ReadonlyMap<ActionId, ButtonCandidate>;
+  readonly consumedControls: readonly ControlPath[];
+  readonly diagnostics: readonly InputDiagnostic[];
+}
+
 export const createInputFlow = (options: InputFlowOptions): InputFlow => {
   const graph = compileBindingGraph(options.maps);
   const queue = new RawEventQueue();
   const deviceState = new DeviceState();
   const contexts = new ContextRouter();
   const sources = new Map<string, InputSource>();
+  let debugSnapshot: InputDebugSnapshot = {
+    timeMs: 0,
+    activeContexts: [],
+    consumedControls: [],
+    pressedControls: [],
+    diagnostics: []
+  };
   let snapshot: ActionSnapshot = {
     timeMs: 0,
     buttons: new Map(
@@ -83,10 +107,11 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
     binding: CompiledBinding
   ): boolean => contextMaps.length === 0 || contextMaps.includes(binding.mapId);
 
-  const collectButtonCandidates = (): Map<ActionId, ButtonCandidate> => {
+  const collectButtonCandidates = (): ButtonCollectionResult => {
     const candidates = new Map<ActionId, ButtonCandidate>();
     const activeContexts = contexts.activeContexts();
     const consumedControls = new Set<ControlPath>();
+    const diagnostics: InputDiagnostic[] = [];
 
     const applyBinding = (binding: CompiledBinding): boolean => {
       if (consumedControls.has(binding.control)) {
@@ -107,10 +132,10 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
       for (const binding of graph.bindings) {
         applyBinding(binding);
       }
-      return candidates;
+      return { candidates, consumedControls: [], diagnostics };
     }
 
-    for (const context of activeContexts) {
+    for (const [index, context] of activeContexts.entries()) {
       const contextBindings = graph.bindings.filter((binding) =>
         contextIncludesBinding(context.maps, binding)
       );
@@ -126,15 +151,34 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
       if (context.routing === "consumeMatched") {
         for (const control of matchedControls) {
           consumedControls.add(control);
+          diagnostics.push({
+            severity: "info",
+            code: "CONTROL_CONSUMED",
+            message: `Control ${control} consumed by context ${context.id}`,
+            contextId: context.id,
+            control
+          });
         }
       }
 
       if (context.routing === "exclusive") {
+        if (index < activeContexts.length - 1) {
+          diagnostics.push({
+            severity: "info",
+            code: "CONTEXT_EXCLUSIVE_BLOCK",
+            message: `Context ${context.id} blocked lower-priority contexts`,
+            contextId: context.id
+          });
+        }
         break;
       }
     }
 
-    return candidates;
+    return {
+      candidates,
+      consumedControls: [...consumedControls],
+      diagnostics
+    };
   };
 
   return {
@@ -159,16 +203,23 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
         deviceState.apply(event);
       }
 
-      const candidates = collectButtonCandidates();
+      const collection = collectButtonCandidates();
       const buttons = new Map<ActionId, ButtonActionState>();
       for (const action of graph.actions.values()) {
         if (action.valueType !== "button") {
           continue;
         }
-        buttons.set(action.id, evaluateButton(action.id, candidates.get(action.id), timeMs));
+        buttons.set(action.id, evaluateButton(action.id, collection.candidates.get(action.id), timeMs));
       }
 
       snapshot = { timeMs, buttons };
+      debugSnapshot = {
+        timeMs,
+        activeContexts: contexts.activeContexts(),
+        consumedControls: collection.consumedControls,
+        pressedControls: deviceState.entries().filter((state) => state.value !== 0),
+        diagnostics: collection.diagnostics
+      };
       return snapshot;
     },
 
@@ -179,6 +230,10 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
 
     snapshot() {
       return snapshot;
+    },
+
+    debugSnapshot() {
+      return debugSnapshot;
     },
 
     dispose() {
