@@ -15,4 +15,11 @@ export {
   type ReplayTrace,
   type ReplayTraceEvent
 } from "./replay-runner.js";
+export {
+  createSinanGateAdapterContractFixture,
+  runSinanGateAdapterContractReplay,
+  sinanGateActionIds,
+  sinanGateMapIds,
+  type SinanGateAdapterContractFixture
+} from "./sinan-adapter-contract.js";
 export { VirtualInputSource, type VirtualInputSourceOptions } from "./virtual-input-source.js";
