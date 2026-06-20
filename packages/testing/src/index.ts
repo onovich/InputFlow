@@ -1,7 +1,11 @@
 export {
+  assertActionSnapshotTrace,
+  compareActionSnapshotTrace,
   toButtonTraceState,
   type ActionSnapshotTrace,
+  type ActionSnapshotTraceComparison,
   type ActionSnapshotTraceFrame,
+  type ActionSnapshotTraceMismatch,
   type ButtonActionTraceState
 } from "./action-trace.js";
 export { FakeClock } from "./fake-clock.js";
