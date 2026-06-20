@@ -38,7 +38,33 @@ export interface PressInteractionDefinition {
   readonly releasePoint?: number;
 }
 
-export type InteractionDefinition = PressInteractionDefinition;
+export interface TapInteractionDefinition {
+  readonly type: "tap";
+  readonly pressPoint?: number;
+  readonly releasePoint?: number;
+  readonly maxDurationMs?: number;
+}
+
+export interface HoldInteractionDefinition {
+  readonly type: "hold";
+  readonly pressPoint?: number;
+  readonly releasePoint?: number;
+  readonly minDurationMs?: number;
+}
+
+export interface RepeatInteractionDefinition {
+  readonly type: "repeat";
+  readonly pressPoint?: number;
+  readonly releasePoint?: number;
+  readonly delayMs?: number;
+  readonly intervalMs?: number;
+}
+
+export type InteractionDefinition =
+  | PressInteractionDefinition
+  | TapInteractionDefinition
+  | HoldInteractionDefinition
+  | RepeatInteractionDefinition;
 
 export interface InputBindingDefinition {
   readonly id: string;
@@ -67,7 +93,7 @@ export interface CompiledBinding {
   readonly controls: readonly ControlPath[];
   readonly source: CompiledBindingSource;
   readonly processors: readonly ProcessorDefinition[];
-  readonly interaction: PressInteractionDefinition;
+  readonly interaction: InteractionDefinition;
 }
 
 export type CompiledBindingSource =

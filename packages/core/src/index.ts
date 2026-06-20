@@ -84,6 +84,25 @@ export {
 } from "./input-flow.js";
 export { evaluatePress, type EvaluatePressOptions } from "./interactions/press.js";
 export {
+  evaluateHold,
+  initialHoldState,
+  type EvaluateHoldOptions,
+  type HoldInteractionResult,
+  type HoldInteractionState
+} from "./interactions/hold.js";
+export {
+  evaluateRepeat,
+  type EvaluateRepeatOptions,
+  type RepeatInteractionResult,
+  type RepeatInteractionState
+} from "./interactions/repeat.js";
+export {
+  evaluateTap,
+  type EvaluateTapOptions,
+  type TapInteractionResult,
+  type TapInteractionState
+} from "./interactions/tap.js";
+export {
   applyProcessor,
   applyProcessors,
   clampValue,
