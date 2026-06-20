@@ -1,0 +1,13 @@
+{
+  "name": "inputflow",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.12.4",
+  "scripts": {
+    "typecheck": "tsc -b tsconfig.json --pretty false"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
