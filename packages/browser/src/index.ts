@@ -2,8 +2,19 @@ export const inputFlowBrowserPackage = "@inputflow/browser";
 
 export {
   createKeyboardSource,
-  type BrowserEventTargetLike,
   type BrowserKeyboardSource,
-  type BrowserKeyboardSourceOptions,
-  type BrowserVisibilityTargetLike
+  type BrowserKeyboardSourceOptions
 } from "./keyboard-source.js";
+
+export {
+  hasEventTargetShape,
+  isEditableTarget,
+  type BrowserEventTargetLike,
+  type BrowserVisibilityTargetLike
+} from "./event-target.js";
+
+export {
+  createPointerSource,
+  type BrowserPointerSource,
+  type BrowserPointerSourceOptions
+} from "./pointer-source.js";

@@ -7,17 +7,14 @@ import {
   type RawInputSink,
   type SourceId
 } from "@inputflow/core";
-
-type BrowserEventListener = (event: Event) => void;
-
-export interface BrowserEventTargetLike {
-  addEventListener(type: string, listener: BrowserEventListener): void;
-  removeEventListener(type: string, listener: BrowserEventListener): void;
-}
-
-export interface BrowserVisibilityTargetLike extends BrowserEventTargetLike {
-  readonly visibilityState?: string;
-}
+import {
+  getEventTime,
+  resolveDefaultEventTarget,
+  resolveDefaultVisibilityTarget,
+  shouldIgnoreEditableTarget,
+  type BrowserEventTargetLike,
+  type BrowserVisibilityTargetLike
+} from "./event-target.js";
 
 export interface BrowserKeyboardSourceOptions {
   readonly sourceId?: string;
@@ -26,6 +23,7 @@ export interface BrowserKeyboardSourceOptions {
   readonly blurTarget?: BrowserEventTargetLike;
   readonly visibilityTarget?: BrowserVisibilityTargetLike;
   readonly now?: () => number;
+  readonly ignoreEditableTargets?: boolean;
 }
 
 export interface BrowserKeyboardSource extends InputSource {
@@ -38,6 +36,7 @@ export const createKeyboardSource = (
   const sourceId = asSourceId(options.sourceId ?? "browser.keyboard");
   const deviceId = asDeviceId(options.deviceId ?? "keyboard");
   const now = options.now ?? (() => 0);
+  const ignoreEditableTargets = options.ignoreEditableTargets ?? true;
   const pressedCodes = new Set<string>();
   let sink: RawInputSink | undefined;
   let connected:
@@ -66,6 +65,10 @@ export const createKeyboardSource = (
   };
 
   const onKeyDown = (event: Event): void => {
+    if (shouldIgnoreEditableTarget(event, ignoreEditableTargets)) {
+      return;
+    }
+
     const code = getKeyboardCode(event);
     if (!code) {
       return;
@@ -76,6 +79,10 @@ export const createKeyboardSource = (
   };
 
   const onKeyUp = (event: Event): void => {
+    if (shouldIgnoreEditableTarget(event, ignoreEditableTargets)) {
+      return;
+    }
+
     const code = getKeyboardCode(event);
     if (!code) {
       return;
@@ -143,25 +150,4 @@ export const createKeyboardSource = (
 const getKeyboardCode = (event: Event): string | undefined => {
   const code = (event as { readonly code?: unknown }).code;
   return typeof code === "string" && code.length > 0 ? code : undefined;
-};
-
-const getEventTime = (event: Event, now: () => number): number => {
-  const timeStamp = (event as { readonly timeStamp?: unknown }).timeStamp;
-  return typeof timeStamp === "number" && Number.isFinite(timeStamp) ? timeStamp : now();
-};
-
-const hasEventTargetShape = (value: unknown): value is BrowserEventTargetLike => {
-  const candidate = value as Partial<BrowserEventTargetLike> | undefined;
-  return (
-    typeof candidate?.addEventListener === "function" &&
-    typeof candidate.removeEventListener === "function"
-  );
-};
-
-const resolveDefaultEventTarget = (): BrowserEventTargetLike | undefined =>
-  hasEventTargetShape(globalThis) ? globalThis : undefined;
-
-const resolveDefaultVisibilityTarget = (): BrowserVisibilityTargetLike | undefined => {
-  const candidate = (globalThis as { readonly document?: unknown }).document;
-  return hasEventTargetShape(candidate) ? candidate : undefined;
 };
