@@ -24,6 +24,7 @@ import { DeviceState, type ControlState } from "./device-state.js";
 import type { InputDiagnostic } from "./diagnostics.js";
 import { asActionId, type ActionId, type ControlPath } from "./ids.js";
 import { evaluatePress } from "./interactions/press.js";
+import { applyProcessors } from "./processors/index.js";
 import { RawEventQueue } from "./raw-event-queue.js";
 import type { RawInputValue } from "./raw-event.js";
 import type { InputSource, RawInputSink } from "./source.js";
@@ -128,17 +129,20 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
 
   const evaluateBindingValue = (binding: CompiledBinding): RawInputValue => {
     if (binding.source.kind === "control") {
-      return deviceState.read(binding.source.control);
+      return applyProcessors(deviceState.read(binding.source.control), binding.processors);
     }
 
     if (binding.source.kind === "composite1d") {
-      return scalarForControl(binding.source.positive) - scalarForControl(binding.source.negative);
+      return applyProcessors(
+        scalarForControl(binding.source.positive) - scalarForControl(binding.source.negative),
+        binding.processors
+      );
     }
 
-    return {
+    return applyProcessors({
       x: scalarForControl(binding.source.right) - scalarForControl(binding.source.left),
       y: scalarForControl(binding.source.up) - scalarForControl(binding.source.down)
-    };
+    }, binding.processors);
   };
 
   const magnitudeOf = (value: RawInputValue): number =>

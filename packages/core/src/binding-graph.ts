@@ -1,6 +1,7 @@
 import { createControlPath } from "./control-path.js";
 import { asActionId, type ActionId, type ControlPath } from "./ids.js";
 import type { ActionValueType } from "./action-state.js";
+import type { ProcessorDefinition } from "./processors/index.js";
 
 export interface InputActionDefinition {
   readonly id: string | ActionId;
@@ -43,6 +44,7 @@ export interface InputBindingDefinition {
   readonly id: string;
   readonly action: string | ActionId;
   readonly source: BindingSourceDefinition;
+  readonly processors?: readonly ProcessorDefinition[];
   readonly interactions?: readonly InteractionDefinition[];
 }
 
@@ -64,6 +66,7 @@ export interface CompiledBinding {
   readonly control: ControlPath;
   readonly controls: readonly ControlPath[];
   readonly source: CompiledBindingSource;
+  readonly processors: readonly ProcessorDefinition[];
   readonly interaction: PressInteractionDefinition;
 }
 
@@ -129,6 +132,7 @@ export const compileBindingGraph = (
         control: controls[0] ?? createControlPath("<Unknown>/control/missing"),
         controls,
         source,
+        processors: binding.processors ?? [],
         interaction: binding.interactions?.[0] ?? { type: "press" }
       });
     }

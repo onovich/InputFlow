@@ -27,7 +27,8 @@ const map: InputMapDefinition = {
         down: "<Keyboard>/code/KeyS",
         left: "<Keyboard>/code/KeyA",
         right: "<Keyboard>/code/KeyD"
-      }
+      },
+      processors: [{ type: "normalize2d" }]
     }
   ]
 };
@@ -60,13 +61,14 @@ describe("axis actions and composites", () => {
     virtual.setButton("<Keyboard>/code/KeyD", true, 16);
     input.update(16);
 
-    expect(input.readAxis2D("runtime.gameplay.move")).toMatchObject({
-      value: { x: 1, y: 1 },
-      previousValue: { x: 0, y: 0 },
-      delta: { x: 1, y: 1 },
-      changed: true
-    });
-    expect(input.readAxis2D("runtime.gameplay.move").magnitude).toBeCloseTo(Math.SQRT2);
+    const move = input.readAxis2D("runtime.gameplay.move");
+    expect(move.previousValue).toEqual({ x: 0, y: 0 });
+    expect(move.changed).toBe(true);
+    expect(move.value.x).toBeCloseTo(Math.SQRT1_2);
+    expect(move.value.y).toBeCloseTo(Math.SQRT1_2);
+    expect(move.delta.x).toBeCloseTo(Math.SQRT1_2);
+    expect(move.delta.y).toBeCloseTo(Math.SQRT1_2);
+    expect(move.magnitude).toBeCloseTo(1);
   });
 
   it("returns neutral axis state when controls are released", () => {

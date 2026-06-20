@@ -83,5 +83,16 @@ export {
   type InputFlowOptions
 } from "./input-flow.js";
 export { evaluatePress, type EvaluatePressOptions } from "./interactions/press.js";
+export {
+  applyProcessor,
+  applyProcessors,
+  clampValue,
+  deadzone,
+  invertValue,
+  normalize2d,
+  radialDeadzone,
+  scaleValue,
+  type ProcessorDefinition
+} from "./processors/index.js";
 export { RawEventQueue } from "./raw-event-queue.js";
 export type { InputSource, RawInputSink } from "./source.js";
