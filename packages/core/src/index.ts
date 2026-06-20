@@ -29,6 +29,8 @@ export {
 
 export {
   compileBindingGraph,
+  compileBindingGraphWithDiagnostics,
+  type BindingGraphCompilationResult,
   type CompiledAction,
   type CompiledBinding,
   type CompiledBindingGraph,
@@ -75,6 +77,12 @@ export type {
   InputDiagnostic,
   InputDiagnosticCode
 } from "./diagnostics.js";
+export {
+  applyBindingOverrides,
+  type ApplyBindingOverridesResult,
+  type BindingOverrideDefinition,
+  type OverrideSetDefinition
+} from "./override.js";
 export {
   createInputFlow,
   type ActionSnapshot,

@@ -1,6 +1,7 @@
 import { createControlPath } from "./control-path.js";
 import { asActionId, type ActionId, type ControlPath } from "./ids.js";
 import type { ActionValueType } from "./action-state.js";
+import type { InputDiagnostic } from "./diagnostics.js";
 import type { ProcessorDefinition } from "./processors/index.js";
 
 export interface InputActionDefinition {
@@ -120,35 +121,87 @@ export interface CompiledBindingGraph {
   readonly bindingsByControl: ReadonlyMap<ControlPath, readonly CompiledBinding[]>;
 }
 
+export interface BindingGraphCompilationResult {
+  readonly graph: CompiledBindingGraph;
+  readonly diagnostics: readonly InputDiagnostic[];
+}
+
 export const compileBindingGraph = (
   maps: readonly InputMapDefinition[]
 ): CompiledBindingGraph => {
+  const result = compileBindingGraphWithDiagnostics(maps);
+  const firstError = result.diagnostics.find((diagnostic) => diagnostic.severity === "error");
+  if (firstError) {
+    throw new Error(firstError.message);
+  }
+  return result.graph;
+};
+
+export const compileBindingGraphWithDiagnostics = (
+  maps: readonly InputMapDefinition[]
+): BindingGraphCompilationResult => {
   const actions = new Map<ActionId, CompiledAction>();
   const bindings: CompiledBinding[] = [];
   const bindingIds = new Set<string>();
+  const diagnostics: InputDiagnostic[] = [];
 
   for (const map of maps) {
     const mapId = map.id ?? "__default";
     for (const action of map.actions) {
       const actionId = asActionId(action.id);
       if (actions.has(actionId)) {
-        throw new Error(`Duplicate action id: ${action.id}`);
+        diagnostics.push({
+          severity: "error",
+          code: "ACTION_CONFLICT",
+          message: `Duplicate action id: ${action.id}`,
+          mapId,
+          actionId
+        });
+        continue;
       }
       actions.set(actionId, { id: actionId, valueType: action.valueType });
     }
 
     for (const binding of map.bindings) {
       if (bindingIds.has(binding.id)) {
-        throw new Error(`Duplicate binding id: ${binding.id}`);
+        diagnostics.push({
+          severity: "error",
+          code: "BINDING_CONFLICT",
+          message: `Duplicate binding id: ${binding.id}`,
+          mapId,
+          bindingId: binding.id
+        });
+        continue;
       }
       bindingIds.add(binding.id);
 
       const actionId = asActionId(binding.action);
       const action = actions.get(actionId);
       if (!action) {
-        throw new Error(`Binding ${binding.id} references unknown action: ${binding.action}`);
+        diagnostics.push({
+          severity: "error",
+          code: "UNRESOLVED_ACTION",
+          message: `Binding ${binding.id} references unknown action: ${binding.action}`,
+          mapId,
+          bindingId: binding.id,
+          actionId
+        });
+        continue;
       }
-      const source = compileBindingSource(binding.source);
+
+      let source: CompiledBindingSource;
+      try {
+        source = compileBindingSource(binding.source);
+      } catch (error) {
+        diagnostics.push({
+          severity: "error",
+          code: "INVALID_CONTROL_PATH",
+          message: error instanceof Error ? error.message : `Invalid binding source: ${binding.id}`,
+          mapId,
+          bindingId: binding.id
+        });
+        continue;
+      }
       const controls = getBindingControls(source);
 
       bindings.push({
@@ -172,9 +225,12 @@ export const compileBindingGraph = (
   }
 
   return {
-    actions,
-    bindings,
-    bindingsByControl: byControl
+    graph: {
+      actions,
+      bindings,
+      bindingsByControl: byControl
+    },
+    diagnostics
   };
 };
 
