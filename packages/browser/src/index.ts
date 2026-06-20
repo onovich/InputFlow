@@ -1,6 +1,14 @@
 export const inputFlowBrowserPackage = "@inputflow/browser";
 
 export {
+  createGamepadSource,
+  type BrowserGamepadButtonLike,
+  type BrowserGamepadLike,
+  type BrowserGamepadSource,
+  type BrowserGamepadSourceOptions
+} from "./gamepad-source.js";
+
+export {
   createKeyboardSource,
   type BrowserKeyboardSource,
   type BrowserKeyboardSourceOptions
