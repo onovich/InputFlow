@@ -7,6 +7,12 @@ import {
   type CompiledBinding,
   type InputMapDefinition
 } from "./binding-graph.js";
+import {
+  ContextRouter,
+  type ActiveInputContext,
+  type ContextLease,
+  type InputContextOptions
+} from "./context-router.js";
 import { DeviceState } from "./device-state.js";
 import { asActionId, type ActionId, type ControlPath } from "./ids.js";
 import { evaluatePress } from "./interactions/press.js";
@@ -24,6 +30,8 @@ export interface ActionSnapshot {
 
 export interface InputFlow {
   addSource(source: InputSource): void;
+  activateContext(options: InputContextOptions): ContextLease;
+  activeContexts(): readonly ActiveInputContext[];
   update(timeMs: number): ActionSnapshot;
   readButton(actionId: string | ActionId): ButtonActionState;
   snapshot(): ActionSnapshot;
@@ -34,6 +42,7 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
   const graph = compileBindingGraph(options.maps);
   const queue = new RawEventQueue();
   const deviceState = new DeviceState();
+  const contexts = new ContextRouter();
   const sources = new Map<string, InputSource>();
   let snapshot: ActionSnapshot = {
     timeMs: 0,
@@ -80,6 +89,14 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
       source.connect(sink);
     },
 
+    activateContext(options) {
+      return contexts.activate(options);
+    },
+
+    activeContexts() {
+      return contexts.activeContexts();
+    },
+
     update(timeMs) {
       for (const source of sources.values()) {
         source.sample?.(timeMs);
@@ -121,6 +138,7 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
         source.disconnect();
       }
       sources.clear();
+      contexts.clear();
     }
   };
 };

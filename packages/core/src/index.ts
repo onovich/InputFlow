@@ -34,6 +34,14 @@ export {
 } from "./binding-graph.js";
 
 export {
+  ContextRouter,
+  type ActiveInputContext,
+  type ContextLease,
+  type ContextRoutingPolicy,
+  type InputContextOptions
+} from "./context-router.js";
+
+export {
   createControlPath,
   isControlPath,
   parseControlPath,
