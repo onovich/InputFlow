@@ -31,4 +31,6 @@ export {
   type Vector2Value
 } from "./raw-event.js";
 
+export { DeviceState, type ControlState } from "./device-state.js";
 export { RawEventQueue } from "./raw-event-queue.js";
+export type { InputSource, RawInputSink } from "./source.js";
