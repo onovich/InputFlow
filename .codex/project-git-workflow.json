@@ -1,0 +1,17 @@
+﻿{
+    "schemaVersion":  1,
+    "initializedMarker":  "codex-project-git-workflow: initialized",
+    "initializedAt":  "2026-06-20 19:23:04 +08:00",
+    "projectName":  "InputFlow",
+    "repoRoot":  "D:/LabProjects/Engine/InputFlow",
+    "safeDirectory":  "D:/LabProjects/Engine/InputFlow",
+    "statusCommand":  "git -c safe.directory=D:/LabProjects/Engine/InputFlow status --short --branch",
+    "validationCommands":  [
+
+                           ],
+    "stagingPolicy":  "ask each time",
+    "commitCommand":  "",
+    "pushCommand":  "git -c safe.directory=D:/LabProjects/Engine/InputFlow push -u origin HEAD",
+    "docsRequirement":  "",
+    "forbiddenCommands":  ""
+}
