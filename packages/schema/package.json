@@ -10,5 +10,8 @@
   ],
   "scripts": {
     "typecheck": "tsc -b tsconfig.json --pretty false"
+  },
+  "dependencies": {
+    "zod": "^4.1.13"
   }
 }
