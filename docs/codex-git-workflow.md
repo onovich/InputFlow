@@ -1,4 +1,4 @@
-﻿<!-- codex-project-git-workflow: initialized -->
+<!-- codex-project-git-workflow: initialized -->
 <!-- initialized-at: 2026-06-20 19:23:04 +08:00 -->
 
 # Codex Git Workflow

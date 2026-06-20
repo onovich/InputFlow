@@ -1,4 +1,4 @@
-﻿<!-- codex-project-ops-workflow: initialized -->
+<!-- codex-project-ops-workflow: initialized -->
 <!-- initialized-at: 2026-06-20 19:23:05 +08:00 -->
 
 # Codex Ops Workflow
