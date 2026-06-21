@@ -2,6 +2,8 @@
 
 Date: 2026-06-20
 
+Updated: 2026-06-21 after follow-up acceptance review.
+
 ## Scope
 
 - Phase 0: workspace, ADR baseline, four-package pnpm scaffold, validation workflow.
@@ -21,6 +23,9 @@ Date: 2026-06-20
 - Axis / processors / interactions / schema / diagnostics: `56ecf09`, `c06c358`, `88bce08`, `b9ec5be`, `76389d3`.
 - Browser source phase: `a5f677f`, `d19c988`, `c59606e`.
 - Sinan contract and v0.1 hardening: `8d4b219`, `c11981d`, `fac88f1`.
+- Follow-up acceptance fixes: timed interactions are now wired into `createInputFlow()`
+  runtime action evaluation, and composite bindings are indexed by every contributing
+  control in `bindingsByControl`.
 
 ## Commit List
 
@@ -55,7 +60,7 @@ Date: 2026-06-20
 - `pnpm validate`: passed.
 - `pnpm lint`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: passed, 26 test files and 81 tests.
+- `pnpm test`: passed, 27 test files and 86 tests.
 - `pnpm build`: passed.
 - `pnpm package:dry-run`: passed for `@inputflow/core`, `@inputflow/schema`, `@inputflow/testing`, and `@inputflow/browser`.
 
@@ -76,4 +81,6 @@ Date: 2026-06-20
 
 ## Result
 
-Phase 0-6 PASS standards are satisfied. The remote `main` branch contains all implementation, validation, contract, and hardening commits through `fac88f1`; this report records the final acceptance evidence.
+Phase 0-6 PASS standards are satisfied after the 2026-06-21 follow-up acceptance fixes.
+The remote `main` branch contains the implementation, validation, contract, hardening,
+and acceptance-fix commits; this report records the final acceptance evidence.

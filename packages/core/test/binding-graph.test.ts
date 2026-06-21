@@ -37,4 +37,33 @@ describe("compileBindingGraph", () => {
       ])
     ).toThrow("unknown action");
   });
+
+  it("indexes composite bindings by every contributing control", () => {
+    const graph = compileBindingGraph([
+      {
+        actions: [{ id: "move", valueType: "axis2d" }],
+        bindings: [
+          {
+            id: "move.wasd",
+            action: "move",
+            source: {
+              kind: "composite2d",
+              up: "<Keyboard>/code/KeyW",
+              down: "<Keyboard>/code/KeyS",
+              left: "<Keyboard>/code/KeyA",
+              right: "<Keyboard>/code/KeyD"
+            }
+          }
+        ]
+      }
+    ]);
+
+    for (const control of ["KeyW", "KeyS", "KeyA", "KeyD"]) {
+      expect(
+        graph.bindingsByControl
+          .get(createControlPath(`<Keyboard>/code/${control}`))
+          ?.map((binding) => binding.id)
+      ).toEqual(["move.wasd"]);
+    }
+  });
 });

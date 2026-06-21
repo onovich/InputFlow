@@ -23,7 +23,20 @@ import {
 import { DeviceState, type ControlState } from "./device-state.js";
 import type { InputDiagnostic } from "./diagnostics.js";
 import { asActionId, type ActionId, type ControlPath } from "./ids.js";
+import {
+  evaluateHold,
+  initialHoldState,
+  type HoldInteractionState
+} from "./interactions/hold.js";
 import { evaluatePress } from "./interactions/press.js";
+import {
+  evaluateRepeat,
+  type RepeatInteractionState
+} from "./interactions/repeat.js";
+import {
+  evaluateTap,
+  type TapInteractionState
+} from "./interactions/tap.js";
 import { applyProcessors } from "./processors/index.js";
 import { RawEventQueue } from "./raw-event-queue.js";
 import type { RawInputValue } from "./raw-event.js";
@@ -62,8 +75,17 @@ export interface InputFlow {
 }
 
 interface ButtonCandidate {
+  readonly binding: CompiledBinding;
   readonly value: number;
   readonly sourceControl: ControlPath;
+}
+
+interface EvaluatedButtonCandidate {
+  readonly value: number;
+  readonly sourceControl: ControlPath;
+  readonly pulse: boolean;
+  readonly pressPoint?: number;
+  readonly releasePoint?: number;
 }
 
 interface Axis1DCandidate {
@@ -77,11 +99,17 @@ interface Axis2DCandidate {
 }
 
 interface ActionCollectionResult {
-  readonly buttons: ReadonlyMap<ActionId, ButtonCandidate>;
+  readonly buttons: ReadonlyMap<ActionId, readonly ButtonCandidate[]>;
   readonly axes1D: ReadonlyMap<ActionId, Axis1DCandidate>;
   readonly axes2D: ReadonlyMap<ActionId, Axis2DCandidate>;
   readonly consumedControls: readonly ControlPath[];
   readonly diagnostics: readonly InputDiagnostic[];
+}
+
+interface BindingInteractionRuntimeState {
+  readonly tap?: TapInteractionState;
+  readonly hold?: HoldInteractionState;
+  readonly repeat?: RepeatInteractionState;
 }
 
 export const createInputFlow = (options: InputFlowOptions): InputFlow => {
@@ -90,6 +118,7 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
   const deviceState = new DeviceState();
   const contexts = new ContextRouter();
   const sources = new Map<string, InputSource>();
+  const interactionStates = new Map<string, BindingInteractionRuntimeState>();
   let debugSnapshot: InputDebugSnapshot = {
     timeMs: 0,
     activeContexts: [],
@@ -152,7 +181,7 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
     binding.controls.find((control) => scalarForControl(control) !== 0);
 
   const collectActions = (): ActionCollectionResult => {
-    const buttons = new Map<ActionId, ButtonCandidate>();
+    const buttons = new Map<ActionId, ButtonCandidate[]>();
     const axes1D = new Map<ActionId, Axis1DCandidate>();
     const axes2D = new Map<ActionId, Axis2DCandidate>();
     const activeContexts = contexts.activeContexts();
@@ -171,13 +200,13 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
 
       if (action?.valueType === "button") {
         const scalarValue = typeof value === "number" ? value : magnitude;
-        const existing = buttons.get(binding.action);
-        if (!existing || scalarValue > existing.value) {
-          buttons.set(binding.action, {
-            value: scalarValue,
-            sourceControl: sourceControl ?? binding.control
-          });
-        }
+        const existing = buttons.get(binding.action) ?? [];
+        existing.push({
+          binding,
+          value: scalarValue,
+          sourceControl: sourceControl ?? binding.control
+        });
+        buttons.set(binding.action, existing);
       }
 
       if (action?.valueType === "axis1d") {
@@ -265,19 +294,145 @@ export const createInputFlow = (options: InputFlowOptions): InputFlow => {
     };
   };
 
+  const interactionThresholds = (binding: CompiledBinding) => ({
+    ...(binding.interaction.pressPoint !== undefined
+      ? { pressPoint: binding.interaction.pressPoint }
+      : {}),
+    ...(binding.interaction.releasePoint !== undefined
+      ? { releasePoint: binding.interaction.releasePoint }
+      : {})
+  });
+
+  const evaluateButtonCandidate = (
+    candidate: ButtonCandidate,
+    timeMs: number
+  ): EvaluatedButtonCandidate => {
+    const { binding } = candidate;
+    const thresholds = interactionThresholds(binding);
+
+    if (binding.interaction.type === "press") {
+      return {
+        value: candidate.value,
+        sourceControl: candidate.sourceControl,
+        pulse: false,
+        ...thresholds
+      };
+    }
+
+    if (binding.interaction.type === "tap") {
+      const previousState = interactionStates.get(binding.id)?.tap ?? {};
+      const result = evaluateTap({
+        state: previousState,
+        value: candidate.value,
+        timeMs,
+        ...thresholds,
+        ...(binding.interaction.maxDurationMs !== undefined
+          ? { maxDurationMs: binding.interaction.maxDurationMs }
+          : {})
+      });
+      interactionStates.set(binding.id, { tap: result.state });
+      return {
+        value: result.performed ? 1 : 0,
+        sourceControl: candidate.sourceControl,
+        pulse: result.performed
+      };
+    }
+
+    if (binding.interaction.type === "hold") {
+      const previousState = interactionStates.get(binding.id)?.hold ?? initialHoldState;
+      const result = evaluateHold({
+        state: previousState,
+        value: candidate.value,
+        timeMs,
+        ...thresholds,
+        ...(binding.interaction.minDurationMs !== undefined
+          ? { minDurationMs: binding.interaction.minDurationMs }
+          : {})
+      });
+      interactionStates.set(binding.id, { hold: result.state });
+      return {
+        value: result.performed ? 1 : 0,
+        sourceControl: candidate.sourceControl,
+        pulse: result.performed
+      };
+    }
+
+    const previousState = interactionStates.get(binding.id)?.repeat ?? {};
+    const result = evaluateRepeat({
+      state: previousState,
+      value: candidate.value,
+      timeMs,
+      ...thresholds,
+      ...(binding.interaction.delayMs !== undefined
+        ? { delayMs: binding.interaction.delayMs }
+        : {}),
+      ...(binding.interaction.intervalMs !== undefined
+        ? { intervalMs: binding.interaction.intervalMs }
+        : {})
+    });
+    interactionStates.set(binding.id, { repeat: result.state });
+    return {
+      value: result.performed ? 1 : 0,
+      sourceControl: candidate.sourceControl,
+      pulse: result.performed
+    };
+  };
+
+  const createPulseButtonState = (
+    actionId: ActionId,
+    timeMs: number,
+    sourceControl: ControlPath
+  ): ButtonActionState => ({
+    actionId,
+    value: 1,
+    isPressed: true,
+    justPressed: true,
+    justReleased: false,
+    heldMs: 0,
+    lastChangedAt: timeMs,
+    sourceControl
+  });
+
+  const selectButtonCandidate = (
+    candidates: readonly ButtonCandidate[] | undefined,
+    timeMs: number
+  ): EvaluatedButtonCandidate | undefined => {
+    let selected: EvaluatedButtonCandidate | undefined;
+
+    for (const candidate of candidates ?? []) {
+      const evaluated = evaluateButtonCandidate(candidate, timeMs);
+      if (
+        !selected ||
+        evaluated.value > selected.value ||
+        (evaluated.value === selected.value && evaluated.pulse && !selected.pulse)
+      ) {
+        selected = evaluated;
+      }
+    }
+
+    return selected;
+  };
+
   const evaluateButton = (
     actionId: ActionId,
-    candidate: ButtonCandidate | undefined,
+    candidates: readonly ButtonCandidate[] | undefined,
     timeMs: number
   ): ButtonActionState => {
     const previous = snapshot.buttons.get(actionId) ?? createReleasedButtonState(actionId);
+    const selected = selectButtonCandidate(candidates, timeMs);
+
+    if (selected?.pulse) {
+      return createPulseButtonState(actionId, timeMs, selected.sourceControl);
+    }
 
     return evaluatePress({
       actionId,
       previous,
-      value: candidate?.value ?? 0,
+      value: selected?.value ?? 0,
       timeMs,
-      ...(candidate?.sourceControl ? { sourceControl: candidate.sourceControl } : {})
+      ...(selected?.pressPoint !== undefined ? { pressPoint: selected.pressPoint } : {}),
+      ...(selected?.releasePoint !== undefined ? { releasePoint: selected.releasePoint } : {}),
+      ...(selected?.sourceControl ? { sourceControl: selected.sourceControl } : {})
     });
   };
 

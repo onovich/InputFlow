@@ -219,9 +219,11 @@ export const compileBindingGraphWithDiagnostics = (
 
   const byControl = new Map<ControlPath, CompiledBinding[]>();
   for (const binding of bindings) {
-    const existing = byControl.get(binding.control) ?? [];
-    existing.push(binding);
-    byControl.set(binding.control, existing);
+    for (const control of binding.controls) {
+      const existing = byControl.get(control) ?? [];
+      existing.push(binding);
+      byControl.set(control, existing);
+    }
   }
 
   return {
