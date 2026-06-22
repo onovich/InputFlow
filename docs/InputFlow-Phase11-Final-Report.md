@@ -61,6 +61,9 @@ Completed before this draft:
 - Round 14 browser/replay/diagnostics refresh: `pnpm browser:test` passed with
   15 Chromium tests; replay/diagnostics targeted tests passed with 4 files / 13
   tests; `pnpm sinan:contract:check` passed.
+- Round 15 release confidence refresh: `pnpm release:dry-run` passed with 15
+  Chromium browser tests and package dry-run; standalone `pnpm package:dry-run`
+  passed for all four workspace packages.
 
 Final validation matrix is pending Round 16:
 
@@ -143,6 +146,7 @@ Sinan downstream owner still needs to provide:
 - Round 12: this draft report update commit
 - Round 13: this buffer validation report update commit
 - Round 14: this browser/replay/diagnostics refresh report update commit
+- Round 15: this release-confidence refresh report update commit
 
 ## Buffer Rounds
 
@@ -164,6 +168,12 @@ Sinan downstream owner still needs to provide:
   `packages/core/test/diagnostics.test.ts`. `pnpm sinan:contract:check`
   passed. The browser gamepad evidence remains a browser-level fixture, not
   physical hardware acceptance.
+- Round 15: consumed for release confidence refresh. `pnpm release:dry-run`
+  passed; it ran Chromium browser smoke with 15 tests and package dry-run for
+  `@inputflow/core`, `@inputflow/schema`, `@inputflow/testing`, and
+  `@inputflow/browser`. Standalone `pnpm package:dry-run` also passed. npm
+  reported the same unknown local environment config warnings during pack
+  summaries, but both commands exited successfully.
 
 ## Recommended Checker Conclusion
 
