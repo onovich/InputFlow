@@ -1,7 +1,7 @@
 # InputFlow Phase 10 Final Report
 
 > Date: 2026-06-22
-> Status: release-confidence decision recorded
+> Status: complete - `HARNESS_READY_NO_HARDWARE`
 > Phase: Phase 10 Physical Gamepad Acceptance / Manual Hardware Release Confidence
 
 ## Scope
@@ -52,13 +52,13 @@
 ## Validation Results
 
 - Round 1-10 wrapper validation: passed each committed round.
-- `pnpm validate`: passed in Rounds 3, 6, 9, 12, 13, 15, and wrapper
+- `pnpm validate`: passed in Rounds 3, 6, 9, 12, 13, 15, 16, and wrapper
   commits.
-- `pnpm browser:test`: passed in Rounds 3, 6, 12, 13, and 15.
-- `pnpm browser:test:all`: passed in Rounds 7, 8, and 14 with 45 tests.
-- `pnpm release:dry-run`: passed in Rounds 12 and 15; this includes Chromium
-  browser smoke and `pnpm package:dry-run`.
-- `pnpm package:dry-run`: passed explicitly in Round 15.
+- `pnpm browser:test`: passed in Rounds 3, 6, 12, 13, 15, and 16.
+- `pnpm browser:test:all`: passed in Rounds 7, 8, 14, and 16 with 45 tests.
+- `pnpm release:dry-run`: passed in Rounds 12, 15, and 16; this includes
+  Chromium browser smoke and `pnpm package:dry-run`.
+- `pnpm package:dry-run`: passed explicitly in Rounds 15 and 16.
 - `pnpm docs:check`: passed in documentation rounds.
 - `git diff --check`: passed with only CRLF normalization warnings.
 - BOM checks: passed for edited documentation files.
@@ -67,9 +67,12 @@
 ## Git Record
 
 - Starting commit: `0db555668540bc7947a82aa98c86b9eef02fdddd`
-- Current decision baseline commit: `27b31bef674b95de1fe7cb18045058fff7801f33`
+- Final validation baseline commit: `dc036cc25b1b6f36aeb7fe16b8cda3867f7c7e3a`
+- Final report update commit: the commit containing this report update; the
+  exact SHA is emitted in the executor completion handoff after push to avoid a
+  stale self-reference.
 - Branch: `main`
-- Pushed: yes, through Round 11
+- Pushed: yes, through Round 15 before this final report update
 - Round commits:
   - Round 1: `4f553f5` - physical Gamepad acceptance policy ADR
   - Round 2: `957d30c` - manual harness guide
@@ -82,6 +85,11 @@
   - Round 9: `c602650` - USB / Bluetooth coverage blockers
   - Round 10: `c0b7082` - README / changelog / checklist sync
   - Round 11: `27b31be` - final report draft and docs guard sync
+  - Round 12: `c4a42e0` - release-confidence decision
+  - Round 13: `407d090` - buffer validation refresh
+  - Round 14: `edd387e` - cross-browser refresh
+  - Round 15: `dc036cc` - release-confidence refresh
+  - Round 16: containing commit - final validation report update
 
 ## Buffer Rounds
 
@@ -94,6 +102,20 @@
   `pnpm browser:test`, `pnpm release:dry-run`, `pnpm package:dry-run`,
   `pnpm docs:check`, and `git diff --check` passed. No physical hardware
   evidence was added, so status remains `HARNESS_READY_NO_HARDWARE`.
+
+## Final Validation
+
+- `git status --short --branch`: clean `main...origin/main` before final
+  report update.
+- `git diff --check`: passed before final report update.
+- `pnpm validate`: passed with 27 files / 86 tests.
+- `pnpm browser:test`: passed with 15 Chromium tests.
+- `pnpm browser:test:all`: passed with 45 tests across Chromium, Firefox, and
+  WebKit.
+- `pnpm release:dry-run`: passed.
+- `pnpm package:dry-run`: passed.
+- Manual evidence review: no physical rows are marked `PASS`; status remains
+  `HARNESS_READY_NO_HARDWARE`.
 
 ## Remaining Risks
 
