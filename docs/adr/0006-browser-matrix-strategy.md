@@ -84,6 +84,14 @@ Per-round Phase 7 validation:
 - Round 15-16: required browser smoke, optional best effort, and
   `pnpm package:dry-run`.
 
+## Optional Matrix Status
+
+Round 10 verified the optional browser matrix on 2026-06-22. The first
+`pnpm browser:test:all` run failed at the harness setup layer because the local
+Firefox and WebKit Playwright binaries were not installed. After running
+`pnpm exec playwright install firefox webkit`, the full Chromium, Firefox, and
+WebKit smoke matrix passed with 45 tests.
+
 ## Architecture Boundaries
 
 - Playwright config, fixtures, and page harness code belong in test/config/docs
