@@ -1,7 +1,7 @@
 # InputFlow Phase 8 Final Report
 
 Date: 2026-06-22
-Status: Draft after Round 15 release-confidence verification
+Status: PASS after Round 16 final validation
 
 ## Scope
 
@@ -36,23 +36,26 @@ Status: Draft after Round 15 release-confidence verification
 
 ## Validation Results
 
-- `git diff --check`: passed through Round 12.
-- `pnpm validate`: passed through Round 15, with 27 test files and 86 tests.
-- `pnpm browser:test`: passed through Round 15 with 15 Chromium tests.
-- `pnpm browser:test:all`: passed through Round 14 with 45 tests across
+- `git status --short --branch`: clean at `main...origin/main` before Round 16
+  report update.
+- `git diff --check`: passed in Round 16.
+- `pnpm validate`: passed in Round 16, with 27 test files and 86 tests.
+- `pnpm browser:test`: passed in Round 16 with 15 Chromium tests.
+- `pnpm browser:test:all`: passed in Round 16 with 45 tests across
   Chromium, Firefox, and WebKit.
-- `pnpm release:dry-run`: passed through Round 15 with Chromium browser smoke
+- `pnpm release:dry-run`: passed in Round 16 with Chromium browser smoke
   and package dry-run checks.
-- `pnpm package:dry-run`: passed through Round 15 for `@inputflow/core`,
+- `pnpm package:dry-run`: passed standalone in Round 15 and through
+  `pnpm release:dry-run` in Round 16 for `@inputflow/core`,
   `@inputflow/schema`, `@inputflow/testing`, and `@inputflow/browser`.
 - Workflow structure check: `pnpm workflow:check` and `pnpm structure:check`
-  passed through Round 14.
+  passed in Round 16.
 
 ## Git Record
 
 - Phase 8 baseline before Round 1: `38d2aba`.
-- Latest pushed commit entering Round 15: `7f9ae03`.
-- Final commit: pending Round 16.
+- Latest pushed commit entering Round 16 final report update: `0367319`.
+- Final report commit: this Round 16 report update on `main`.
 - Pushed branch: `main`.
 
 Per-round commits:
@@ -71,8 +74,8 @@ Per-round commits:
 - Round 12: `2a43c55` docs: draft phase 8 final report
 - Round 13: `529ecf3` docs: record phase 8 buffer verification
 - Round 14: `7f9ae03` docs: clarify phase 8 hardware checklist
-- Round 15: pending
-- Round 16: pending
+- Round 15: `0367319` docs: record phase 8 release confidence
+- Round 16: this final report update commit
 
 ## Buffer Round Use
 
