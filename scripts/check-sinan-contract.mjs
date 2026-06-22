@@ -8,7 +8,8 @@ const requiredPhase11Docs = [
   "docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md",
   "docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md",
   "docs/sinan-cooperation/inputflow-sinan-diagnostics-handoff.md",
-  "docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md"
+  "docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md",
+  "docs/sinan-cooperation/inputflow-sinan-package-export-audit.md"
 ];
 
 const fixtureTokens = [
@@ -30,7 +31,8 @@ const docsGuardTokens = [
   "inputflow-sinan-contract-fixture-inventory.md",
   "inputflow-sinan-blur-reset-scenario.md",
   "inputflow-sinan-diagnostics-handoff.md",
-  "inputflow-sinan-downstream-acceptance-checklist.md"
+  "inputflow-sinan-downstream-acceptance-checklist.md",
+  "inputflow-sinan-package-export-audit.md"
 ];
 
 const boundaryPattern =
@@ -136,6 +138,14 @@ export const checkSinanContract = ({ log = false } = {}) => {
   requireIncludes(
     "docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md",
     "Physical Gamepad acceptance unless a real controller/browser run is attached"
+  );
+  requireIncludes(
+    "docs/sinan-cooperation/inputflow-sinan-package-export-audit.md",
+    "dist/sinan-adapter-contract.js"
+  );
+  requireIncludes(
+    "docs/sinan-cooperation/inputflow-sinan-package-export-audit.md",
+    "This repository still does not produce"
   );
 
   const coreBoundaryHits = [];
