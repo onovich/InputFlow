@@ -4,6 +4,10 @@ const packages = ["core", "schema", "testing", "browser"];
 
 const requiredFiles = [
   ".gitignore",
+  ".github/workflows/browser-smoke.yml",
+  ".github/workflows/optional-browser-matrix.yml",
+  ".github/workflows/release-dry-run.yml",
+  ".github/workflows/validate.yml",
   "package.json",
   "pnpm-lock.yaml",
   "pnpm-workspace.yaml",
@@ -40,6 +44,44 @@ for (const name of ["testing", "browser"]) {
   const manifest = JSON.parse(readFileSync(`packages/${name}/package.json`, "utf8"));
   if (manifest.dependencies?.["@inputflow/core"] !== "workspace:*") {
     throw new Error(`@inputflow/${name} must depend on @inputflow/core via workspace:*`);
+  }
+}
+
+const workflowChecks = [
+  {
+    file: ".github/workflows/validate.yml",
+    job: "validate:",
+    name: "Validate"
+  },
+  {
+    file: ".github/workflows/browser-smoke.yml",
+    job: "chromium-smoke:",
+    name: "Required Browser Smoke"
+  },
+  {
+    file: ".github/workflows/release-dry-run.yml",
+    job: "release-dry-run:",
+    name: "Release Dry Run"
+  },
+  {
+    file: ".github/workflows/optional-browser-matrix.yml",
+    job: "optional-browser-matrix:",
+    name: "Optional Browser Matrix"
+  }
+];
+
+for (const workflow of workflowChecks) {
+  const content = readFileSync(workflow.file, "utf8");
+  for (const required of [
+    `name: ${workflow.name}`,
+    "on:",
+    "jobs:",
+    workflow.job,
+    "runs-on:"
+  ]) {
+    if (!content.includes(required)) {
+      throw new Error(`${workflow.file} must include ${required}`);
+    }
   }
 }
 

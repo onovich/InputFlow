@@ -1,0 +1,13 @@
+name: Release Dry Run
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release-dry-run:
+    name: Release dry-run scaffold
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scaffold
+        run: echo "Release dry-run workflow scaffold"
+

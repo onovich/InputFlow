@@ -1,0 +1,17 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate scaffold
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scaffold
+        run: echo "Validate workflow scaffold"
+

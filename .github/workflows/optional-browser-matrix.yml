@@ -1,0 +1,13 @@
+name: Optional Browser Matrix
+
+on:
+  workflow_dispatch:
+
+jobs:
+  optional-browser-matrix:
+    name: Optional browser matrix scaffold
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scaffold
+        run: echo "Optional browser matrix workflow scaffold"
+

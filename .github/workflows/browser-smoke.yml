@@ -1,0 +1,17 @@
+name: Required Browser Smoke
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  chromium-smoke:
+    name: Chromium smoke scaffold
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scaffold
+        run: echo "Chromium smoke workflow scaffold"
+
