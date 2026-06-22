@@ -15,6 +15,7 @@ const requiredDocs = [
   "docs/release/InputFlow-v0.1-Owner-Sign-Off-Checklist.md",
   "docs/release/InputFlow-v0.1-Owner-Decision-Record.md",
   "docs/InputFlow-Phase12-Final-Report.md",
+  "docs/InputFlow-Phase13-Final-Report.md",
   "docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md",
   "docs/InputFlow-Phase11-Final-Report.md",
   "docs/sinan-cooperation/inputflow-sinan-handoff-packet.md"
@@ -210,6 +211,20 @@ export const checkReleaseAuthorization = () => {
   assertIncludes("Phase 12 final report", finalReport, "HARNESS_READY_NO_HARDWARE");
   assertIncludes("Phase 12 final report", finalReport, "HANDOFF_READY_BLOCKED_DOWNSTREAM");
   assertIncludes("Phase 12 final report", finalReport, "Phase 12 did not:");
+
+  const phase13FinalReport = readText("docs/InputFlow-Phase13-Final-Report.md");
+  for (const expected of [
+    "RELEASE_DEFERRED_DECISION_RECORDED",
+    "DEFERRED_RELEASE_DECISION",
+    "STILL_BLOCKED_EXACT_LICENSE",
+    "ACCEPTED_FOR_RC_KNOWN_LIMIT",
+    "HARNESS_READY_NO_HARDWARE",
+    "HANDOFF_READY_BLOCKED_DOWNSTREAM",
+    "No real publish",
+    "Phase 13 did not:"
+  ]) {
+    assertIncludes("Phase 13 final report", phase13FinalReport, expected);
+  }
 
   const plan = readText("docs/InputFlow-Development-Plan-v0.1.md");
   for (const file of requiredDocs) {

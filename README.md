@@ -138,6 +138,7 @@ That document covers:
 - Phase 12 owner sign-off checklist: `docs/release/InputFlow-v0.1-Owner-Sign-Off-Checklist.md`
 - Phase 12 final report: `docs/InputFlow-Phase12-Final-Report.md`
 - Phase 13 owner decision record: `docs/release/InputFlow-v0.1-Owner-Decision-Record.md`
+- Phase 13 final report: `docs/InputFlow-Phase13-Final-Report.md`
 - Phase 9 guide: `docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md`
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
 
