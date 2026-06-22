@@ -49,8 +49,25 @@ The remote release dry-run executed `pnpm release:dry-run`, including required
 Chromium browser smoke and package dry-run checks. Local `pnpm release:dry-run`
 also passed in Round 9.
 
+## Optional Browser Matrix
+
+Observed commit:
+
+- Short SHA: `b65613a`
+- Full SHA: `b65613aa4c3c98a2c85e63618d6d17cb31a39f8c`
+- Branch: `main`
+
+| Workflow | Run id | Branch | Commit | Status | Conclusion | URL | Observed at |
+|---|---:|---|---|---|---|---|---|
+| `optional-browser-matrix.yml` | `27940149513` | `main` | `b65613aa4c3c98a2c85e63618d6d17cb31a39f8c` | completed | success | https://github.com/onovich/InputFlow/actions/runs/27940149513 | 2026-06-22 16:38 +08:00 |
+
+The optional browser matrix remains a release-confidence signal rather than a
+required release gate. The remote job completed Chromium, Firefox, and WebKit
+coverage through `pnpm browser:test:all`; the local Round 10
+`pnpm browser:test:all` check also passed.
+
 ## Pending Remote Evidence
 
 Still pending for later Phase 9 rounds:
 
-- Remote `optional-browser-matrix.yml` manual workflow dispatch or observation.
+- Final Phase 9 evidence refresh after the last required RC validation commit.
