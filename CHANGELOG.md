@@ -8,7 +8,7 @@ published release announcement, npm publish record, git tag, or GitHub Release.
 ## v0.1.0-rc.0 Draft
 
 Date: 2026-06-22
-Status: release candidate review draft
+Status: release candidate review draft; real release deferred by owner decision
 
 ### Added
 
@@ -39,6 +39,9 @@ Status: release candidate review draft
   metadata audit, remote CI evidence, local release confidence, publish
   simulation and provenance notes, rollback/deprecation policy, and
   `pnpm release:authorization:check`.
+- Phase 13 owner decision record, matrix update, and sign-off split documenting
+  `RELEASE_DEFERRED_DECISION_RECORDED` without authorizing publish, tag,
+  GitHub Release, license, version, or package metadata changes.
 
 ### Validation Matrix
 
@@ -72,6 +75,9 @@ gates and the remote release dry-run.
   release-candidate review.
 - Package manifests currently use `UNLICENSED` until the owner chooses the
   public distribution license.
+- The owner deferred real release in Phase 13. Future RC planning may prefer
+  `0.1.0-rc.0`, public package access, and `next` dist-tag, but those remain
+  planning inclinations only until a later owner-approved release execution.
 - Optional Firefox and WebKit browser matrix remains optional / best effort.
 - Automated gamepad coverage uses a browser-level `navigator.getGamepads`
   fixture; Phase 10 adds a manual harness and evidence table, but the current
@@ -100,6 +106,8 @@ gates and the remote release dry-run.
 - A real v0.1 publish phase still needs final versioning, license, tag,
   npm access, dist-tag, provenance, release notes, rollback/deprecate owner,
   and release ownership decisions.
+- Exact public license remains the named blocking owner decision before public
+  package publish.
 - Remote GitHub Actions evidence must be observed on the target commit before
   full RC readiness can be claimed.
 - Consumers should treat action ids and context ids as host-owned opaque

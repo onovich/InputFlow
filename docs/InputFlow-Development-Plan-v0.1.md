@@ -24,6 +24,7 @@
 > Phase 12 owner sign-off checklist: `docs/release/InputFlow-v0.1-Owner-Sign-Off-Checklist.md`
 > Phase 12 release authorization check command: `pnpm release:authorization:check`
 > Phase 13 owner decision record: `docs/release/InputFlow-v0.1-Owner-Decision-Record.md`
+> Phase 13 owner decision status: `RELEASE_DEFERRED_DECISION_RECORDED`; real release deferred; exact public license remains blocking.
 > Phase 11 Sinan handoff strategy：`docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md`
 > Phase 11 Sinan fixture inventory：`docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md`
 > Phase 11 Sinan blur reset scenario：`docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md`

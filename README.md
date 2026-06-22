@@ -10,8 +10,9 @@ contract.
 
 > Current status: v0.1 release candidate review. The packages are not published
 > by this repository during this review. Do not treat this README as an npm
-> release announcement. Phase 12 release authorization remains blocked on owner
-> decisions.
+> release announcement. Phase 13 records the owner decision to defer real
+> release while preserving RC-oriented planning decisions. Exact public license
+> selection still blocks any future publish.
 
 ## Packages
 
@@ -136,6 +137,7 @@ That document covers:
 - Phase 12 final release candidate audit: `docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md`
 - Phase 12 owner sign-off checklist: `docs/release/InputFlow-v0.1-Owner-Sign-Off-Checklist.md`
 - Phase 12 final report: `docs/InputFlow-Phase12-Final-Report.md`
+- Phase 13 owner decision record: `docs/release/InputFlow-v0.1-Owner-Decision-Record.md`
 - Phase 9 guide: `docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md`
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
 
@@ -153,10 +155,10 @@ That document covers:
   executor environment has no physical controller evidence.
 - Firefox and WebKit browser smoke are covered by the optional Playwright
   matrix; physical controller checks remain manual / best effort.
-- Phase 12 expected status remains
-  `AUTH_PACKET_READY_BLOCKED_OWNER_DECISIONS` until the owner explicitly signs
-  license, version, tag, npm access, dist-tag, provenance, release notes,
-  rollback owner, and Phase 10 / Phase 11 limitation decisions.
+- Phase 13 records `RELEASE_DEFERRED_DECISION_RECORDED`: real release is
+  deferred, future RC planning may use `0.1.0-rc.0`, public package, and `next`
+  dist-tag as inclinations only, and exact public license remains a blocking
+  owner decision before any publish.
 
 ## Boundary
 
