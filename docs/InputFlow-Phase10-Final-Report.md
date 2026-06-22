@@ -1,7 +1,7 @@
 # InputFlow Phase 10 Final Report
 
 > Date: 2026-06-22
-> Status: draft for release-confidence decision
+> Status: release-confidence decision recorded
 > Phase: Phase 10 Physical Gamepad Acceptance / Manual Hardware Release Confidence
 
 ## Scope
@@ -20,13 +20,16 @@
   manual harness and evidence table, but no physical controller evidence exists
   in this execution pass.
 
-## Draft Status
+## Release-Confidence Decision
 
-- Draft status: `HARNESS_READY_NO_HARDWARE`
+- Status: `HARNESS_READY_NO_HARDWARE`
 - Reason: the manual harness, documentation, evidence table, and automated
   browser baseline are available, but no real controller was available to this
   executor environment. Phase 10 must not report `HARDWARE_ACCEPTED` until a
   tester records real controller evidence.
+- v0.1 RC impact: the repository can present harness-ready manual evidence
+  infrastructure, but it must not claim physical Gamepad acceptance for any
+  browser / controller / connection combination.
 
 ## PASS / Blocker Evidence
 
@@ -46,23 +49,25 @@
   the manual harness, browser test tooling, Playwright, GitHub Actions, release
   tooling, React, Three, Sinan, or Zod hot-path validation.
 
-## Validation Results So Far
+## Validation Results
 
 - Round 1-10 wrapper validation: passed each committed round.
 - `pnpm validate`: passed in Rounds 3, 6, 9, and wrapper commits.
 - `pnpm browser:test`: passed in Rounds 3 and 6.
 - `pnpm browser:test:all`: passed in Rounds 7 and 8 with 45 tests.
+- `pnpm release:dry-run`: passed in Round 12; this includes Chromium browser
+  smoke and `pnpm package:dry-run`.
 - `pnpm docs:check`: passed in documentation rounds.
 - `git diff --check`: passed with only CRLF normalization warnings.
 - BOM checks: passed for edited documentation files.
-- Manual evidence review: evidence rows do not claim physical PASS.
+- Manual evidence review: passed; evidence rows do not claim physical PASS.
 
 ## Git Record
 
 - Starting commit: `0db555668540bc7947a82aa98c86b9eef02fdddd`
-- Current draft baseline commit: `c0b70823621f792ac736b5fe371296f92e4fb654`
+- Current decision baseline commit: `27b31bef674b95de1fe7cb18045058fff7801f33`
 - Branch: `main`
-- Pushed: yes, through Round 10
+- Pushed: yes, through Round 11
 - Round commits:
   - Round 1: `4f553f5` - physical Gamepad acceptance policy ADR
   - Round 2: `957d30c` - manual harness guide
@@ -74,6 +79,7 @@
   - Round 8: `a9be317` - WebKit hardware blocker
   - Round 9: `c602650` - USB / Bluetooth coverage blockers
   - Round 10: `c0b7082` - README / changelog / checklist sync
+  - Round 11: `27b31be` - final report draft and docs guard sync
 
 ## Buffer Rounds
 

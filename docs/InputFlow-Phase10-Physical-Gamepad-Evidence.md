@@ -72,8 +72,9 @@ South button, left stick, disconnect reset, or reconnect behavior was observed
 with real hardware.
 
 Until a tester supplies real controller and browser observations, Phase 10 must
-not report `HARDWARE_ACCEPTED`. If the harness and automated baseline remain
-healthy, the likely final status is `HARNESS_READY_NO_HARDWARE`.
+not report `HARDWARE_ACCEPTED`. Round 12 records the release-confidence decision
+as `HARNESS_READY_NO_HARDWARE` because the harness and automated baseline are
+healthy but no physical controller is available in this executor environment.
 
 ## Automated Baseline References
 
