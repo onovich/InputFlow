@@ -14,6 +14,7 @@
 > Phase 12 Goal 入口：`docs/InputFlow-Phase12-v0.1-Release-Authorization-Goal-Mode-Execution-Guide.md`（Phase 12，16 轮）
 > Phase 12 release authorization packet: `docs/release/InputFlow-v0.1-Release-Authorization-Packet.md`
 > Phase 12 owner decision matrix: `docs/release/InputFlow-v0.1-Owner-Decision-Matrix.md`
+> Phase 12 package metadata audit: `docs/release/InputFlow-v0.1-Package-Metadata-Audit.md`
 > Phase 11 Sinan handoff strategy：`docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md`
 > Phase 11 Sinan fixture inventory：`docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md`
 > Phase 11 Sinan blur reset scenario：`docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md`

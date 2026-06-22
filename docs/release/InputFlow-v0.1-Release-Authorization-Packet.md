@@ -50,6 +50,9 @@ until the owner explicitly decides:
 The detailed matrix is maintained in
 `docs/release/InputFlow-v0.1-Owner-Decision-Matrix.md`.
 
+Package metadata and dry-run evidence is maintained in
+`docs/release/InputFlow-v0.1-Package-Metadata-Audit.md`.
+
 ## Evidence Entry Points
 
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
@@ -59,6 +62,7 @@ The detailed matrix is maintained in
 - Phase 10 physical Gamepad evidence: `docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md`
 - Phase 11 final report: `docs/InputFlow-Phase11-Final-Report.md`
 - Phase 11 Sinan handoff packet: `docs/sinan-cooperation/inputflow-sinan-handoff-packet.md`
+- Package metadata audit: `docs/release/InputFlow-v0.1-Package-Metadata-Audit.md`
 
 ## Non-Scope Confirmed
 
@@ -78,7 +82,7 @@ Phase 12 must not:
 
 - Keep owner decision matrix pending until explicit owner sign-off.
 - Refresh or document remote CI evidence for the current target commit.
-- Audit package metadata and dry-run output for publish prerequisites.
+- Keep package metadata audit current before owner sign-off.
 - Add publish simulation and provenance notes.
 - Add rollback/deprecate policy.
 - Add `pnpm release:authorization:check`.
