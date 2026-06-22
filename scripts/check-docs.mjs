@@ -24,6 +24,7 @@ const requiredDocs = [
   "docs/InputFlow-Phase11-Sinan-Adapter-POC-Handoff-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Technical-Architecture-v0.1.md",
   "docs/InputFlow-Sinan-Alignment-and-Roadmap-2026-06-20.md",
+  "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md",
   "docs/adr/0001-package-manager.md",
   "docs/adr/0002-host-semantics-boundary.md",
   "docs/adr/0003-replay-first-class-contract.md",
@@ -150,6 +151,11 @@ if (!plan.includes(phase10FinalReportPath)) {
 const phase11GuidePath = "docs/InputFlow-Phase11-Sinan-Adapter-POC-Handoff-Goal-Mode-Execution-Guide.md";
 if (!plan.includes(phase11GuidePath)) {
   throw new Error(`Development plan must link ${phase11GuidePath}`);
+}
+
+const phase11HandoffStrategyPath = "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md";
+if (!plan.includes(phase11HandoffStrategyPath)) {
+  throw new Error(`Development plan must link ${phase11HandoffStrategyPath}`);
 }
 
 for (const adr of requiredDocs.filter((file) => file.startsWith("docs/adr/"))) {
