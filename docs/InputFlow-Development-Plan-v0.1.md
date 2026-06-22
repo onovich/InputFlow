@@ -16,6 +16,7 @@
 > Phase 11 Sinan blur reset scenario：`docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md`
 > Phase 11 Sinan diagnostics handoff: `docs/sinan-cooperation/inputflow-sinan-diagnostics-handoff.md`
 > Phase 11 Sinan downstream acceptance checklist: `docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md`
+> Phase 11 Sinan contract check command: `pnpm sinan:contract:check`
 > Browser smoke 指南：`docs/InputFlow-Browser-Smoke-Guide.md`
 > CI troubleshooting 指南：`docs/InputFlow-CI-Troubleshooting.md`
 > Remote CI observation 指南：`docs/InputFlow-Remote-CI-Observation-Guide.md`

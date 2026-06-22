@@ -65,11 +65,19 @@ for (const requiredReadmeLink of [
   "docs/InputFlow-Manual-Gamepad-Harness-Guide.md",
   "docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md",
   "docs/InputFlow-Phase10-Final-Report.md",
+  "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md",
+  "docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md",
+  "docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md",
+  "docs/sinan-cooperation/inputflow-sinan-diagnostics-handoff.md",
+  "docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md",
   "docs/InputFlow-Phase9-Final-Report.md"
 ]) {
   if (!readme.includes(requiredReadmeLink)) {
     throw new Error(`README.md must link ${requiredReadmeLink}`);
   }
+}
+if (!readme.includes("pnpm sinan:contract:check")) {
+  throw new Error("README.md must document pnpm sinan:contract:check");
 }
 
 const guidePath = "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md";
@@ -181,6 +189,10 @@ const phase11DownstreamAcceptanceChecklistPath =
   "docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md";
 if (!plan.includes(phase11DownstreamAcceptanceChecklistPath)) {
   throw new Error(`Development plan must link ${phase11DownstreamAcceptanceChecklistPath}`);
+}
+
+if (!plan.includes("pnpm sinan:contract:check")) {
+  throw new Error("Development plan must document pnpm sinan:contract:check");
 }
 
 for (const adr of requiredDocs.filter((file) => file.startsWith("docs/adr/"))) {

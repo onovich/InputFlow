@@ -106,5 +106,25 @@ const result = runSinanGateAdapterContractReplay(
 );
 ```
 
+Available Phase 11 traces cover:
+
+- `keyboardInteract`
+- `pointerInteract`
+- `gamepadInteract`
+- `editorSelect`
+- `modalBlocksGameplay`
+- `pauseBlocksGameplay`
+- `pauseReleaseRestoresGameplay`
+
+InputFlow-side handoff assets can be checked with:
+
+```powershell
+pnpm sinan:contract:check
+```
+
+See the diagnostics handoff document for the `InputDiagnostic` fields and
+runtime debug snapshot evidence expected from downstream adapter runs.
+
 The Sinan adapter itself stays in the Sinan repository for v0.1. InputFlow exposes
-generic maps, browser sources, replay helpers, and contract fixtures.
+generic maps, browser sources, replay helpers, contract fixtures, diagnostics
+handoff documentation, and a downstream acceptance checklist.

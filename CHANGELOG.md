@@ -32,6 +32,9 @@ Status: release candidate review draft
   release-confidence review without making hardware a required CI gate.
 - README, API examples, package metadata, package metadata guard, and package
   dry-run workflow for release candidate review.
+- Phase 11 Sinan POC handoff assets: strategy, fixture inventory, blur/reset
+  scenario, diagnostics handoff, downstream acceptance checklist, and
+  `pnpm sinan:contract:check`.
 
 ### Validation Matrix
 
@@ -39,6 +42,7 @@ Local release-candidate review should run:
 
 - `pnpm validate`
 - `pnpm workflow:check`
+- `pnpm sinan:contract:check`
 - `pnpm browser:test`
 - `pnpm browser:test:all`
 - `pnpm release:dry-run`

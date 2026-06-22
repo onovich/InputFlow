@@ -42,6 +42,12 @@ Package tarball review:
 pnpm package:dry-run
 ```
 
+Sinan POC handoff guard:
+
+```powershell
+pnpm sinan:contract:check
+```
+
 ## Minimal Usage
 
 ```ts
@@ -104,6 +110,11 @@ That document covers:
 - Manual Gamepad harness guide: `docs/InputFlow-Manual-Gamepad-Harness-Guide.md`
 - Phase 10 physical Gamepad evidence: `docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md`
 - Phase 10 final report: `docs/InputFlow-Phase10-Final-Report.md`
+- Phase 11 Sinan handoff strategy: `docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md`
+- Phase 11 Sinan fixture inventory: `docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md`
+- Phase 11 Sinan blur/reset scenario: `docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md`
+- Phase 11 Sinan diagnostics handoff: `docs/sinan-cooperation/inputflow-sinan-diagnostics-handoff.md`
+- Phase 11 Sinan downstream acceptance checklist: `docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md`
 - Phase 9 guide: `docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md`
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
 
@@ -114,7 +125,8 @@ That document covers:
 - No React diagnostics package or rebind UI in v0.1.
 - No mobile virtual joystick, pointer picking, world ray, or entity hit logic.
 - No `@inputflow/sinan` package; Sinan integration remains a downstream adapter
-  contract.
+  contract with `pnpm sinan:contract:check` verifying only InputFlow-side
+  handoff assets.
 - Automated gamepad coverage uses a browser-level `navigator.getGamepads`
   fixture. Phase 10 adds a manual harness and evidence table, but the current
   executor environment has no physical controller evidence.

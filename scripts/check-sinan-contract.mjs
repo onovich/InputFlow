@@ -103,7 +103,29 @@ export const checkSinanContract = ({ log = false } = {}) => {
   for (const token of docsGuardTokens) {
     requireIncludes("scripts/check-docs.mjs", token);
     requireIncludes("docs/InputFlow-Development-Plan-v0.1.md", token);
+    requireIncludes("README.md", token);
   }
+
+  for (const token of ["pnpm sinan:contract:check", "diagnostics handoff"]) {
+    requireIncludes("README.md", token);
+    requireIncludes("docs/InputFlow-v0.1-API-Examples.md", token);
+  }
+
+  for (const token of [
+    "keyboardInteract",
+    "pointerInteract",
+    "gamepadInteract",
+    "editorSelect",
+    "modalBlocksGameplay",
+    "pauseBlocksGameplay",
+    "pauseReleaseRestoresGameplay",
+    "pnpm sinan:contract:check"
+  ]) {
+    requireIncludes("docs/InputFlow-v0.1-API-Examples.md", token);
+  }
+
+  requireIncludes("CHANGELOG.md", "pnpm sinan:contract:check");
+  requireIncludes("CHANGELOG.md", "Phase 11 Sinan POC handoff assets");
 
   requireIncludes("docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md", "blur");
   requireIncludes("docs/sinan-cooperation/inputflow-sinan-diagnostics-handoff.md", "CONTROL_CONSUMED");
