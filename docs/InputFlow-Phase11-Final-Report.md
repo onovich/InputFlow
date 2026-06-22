@@ -58,6 +58,9 @@ Completed before this draft:
 - BOM checks: passed for edited docs and scripts.
 - Round 13 buffer refresh: `pnpm sinan:contract:check`, `pnpm docs:check`,
   `git diff --check`, and the explicit `packages/core` boundary scan passed.
+- Round 14 browser/replay/diagnostics refresh: `pnpm browser:test` passed with
+  15 Chromium tests; replay/diagnostics targeted tests passed with 4 files / 13
+  tests; `pnpm sinan:contract:check` passed.
 
 Final validation matrix is pending Round 16:
 
@@ -139,6 +142,7 @@ Sinan downstream owner still needs to provide:
 - Round 11: `b852e66` - handoff packet
 - Round 12: this draft report update commit
 - Round 13: this buffer validation report update commit
+- Round 14: this browser/replay/diagnostics refresh report update commit
 
 ## Buffer Rounds
 
@@ -151,6 +155,15 @@ Sinan downstream owner still needs to provide:
 
   `pnpm sinan:contract:check`, `pnpm docs:check`, and `git diff --check`
   passed. No code or contract repair was required.
+- Round 14: consumed for browser/replay/diagnostics evidence refresh.
+  `pnpm browser:test` passed with 15 Chromium tests. Targeted
+  replay/diagnostics tests passed with 4 files / 13 tests:
+  `packages/testing/test/replay-runner.test.ts`,
+  `packages/testing/test/sinan-adapter-contract.test.ts`,
+  `packages/testing/test/input-flow-debug.test.ts`, and
+  `packages/core/test/diagnostics.test.ts`. `pnpm sinan:contract:check`
+  passed. The browser gamepad evidence remains a browser-level fixture, not
+  physical hardware acceptance.
 
 ## Recommended Checker Conclusion
 
