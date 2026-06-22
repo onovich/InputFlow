@@ -6,6 +6,7 @@ const requiredDocs = [
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Final-Report.md",
+  "docs/InputFlow-Phase8-CI-Release-Gates-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Technical-Architecture-v0.1.md",
   "docs/InputFlow-Sinan-Alignment-and-Roadmap-2026-06-20.md",
   "docs/adr/0001-package-manager.md",
@@ -13,7 +14,8 @@ const requiredDocs = [
   "docs/adr/0003-replay-first-class-contract.md",
   "docs/adr/0004-context-lease-lifecycle.md",
   "docs/adr/0005-schema-hot-path-boundary.md",
-  "docs/adr/0006-browser-matrix-strategy.md"
+  "docs/adr/0006-browser-matrix-strategy.md",
+  "docs/adr/0007-ci-release-gates.md"
 ];
 
 const missing = requiredDocs.filter((file) => !existsSync(file));
@@ -40,6 +42,11 @@ if (!plan.includes(browserSmokeGuidePath)) {
 const phase7FinalReportPath = "docs/InputFlow-Phase7-Final-Report.md";
 if (!plan.includes(phase7FinalReportPath)) {
   throw new Error(`Development plan must link ${phase7FinalReportPath}`);
+}
+
+const phase8GuidePath = "docs/InputFlow-Phase8-CI-Release-Gates-Goal-Mode-Execution-Guide.md";
+if (!plan.includes(phase8GuidePath)) {
+  throw new Error(`Development plan must link ${phase8GuidePath}`);
 }
 
 for (const adr of requiredDocs.filter((file) => file.startsWith("docs/adr/"))) {
