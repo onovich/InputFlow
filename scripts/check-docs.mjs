@@ -28,6 +28,7 @@ const requiredDocs = [
   "docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md",
   "docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md",
   "docs/sinan-cooperation/inputflow-sinan-diagnostics-handoff.md",
+  "docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md",
   "docs/adr/0001-package-manager.md",
   "docs/adr/0002-host-semantics-boundary.md",
   "docs/adr/0003-replay-first-class-contract.md",
@@ -174,6 +175,12 @@ if (!plan.includes(phase11BlurResetScenarioPath)) {
 const phase11DiagnosticsHandoffPath = "docs/sinan-cooperation/inputflow-sinan-diagnostics-handoff.md";
 if (!plan.includes(phase11DiagnosticsHandoffPath)) {
   throw new Error(`Development plan must link ${phase11DiagnosticsHandoffPath}`);
+}
+
+const phase11DownstreamAcceptanceChecklistPath =
+  "docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md";
+if (!plan.includes(phase11DownstreamAcceptanceChecklistPath)) {
+  throw new Error(`Development plan must link ${phase11DownstreamAcceptanceChecklistPath}`);
 }
 
 for (const adr of requiredDocs.filter((file) => file.startsWith("docs/adr/"))) {
