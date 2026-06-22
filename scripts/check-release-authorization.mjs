@@ -43,6 +43,19 @@ const assertDocExists = (file) => {
 };
 
 const assertNoReleaseActions = () => {
+  const rootManifest = readJson("package.json");
+  if (rootManifest.scripts?.["release:authorization:check"] !== "node scripts/check-release-authorization.mjs") {
+    throw new Error("root package.json must expose pnpm release:authorization:check");
+  }
+
+  for (const [scriptName, scriptValue] of Object.entries(rootManifest.scripts ?? {})) {
+    for (const blockedCommand of ["npm publish", "gh release create", "git tag"]) {
+      if (scriptValue.includes(blockedCommand)) {
+        throw new Error(`${scriptName} must not run ${blockedCommand} during Phase 12`);
+      }
+    }
+  }
+
   for (const packageName of ["core", "schema", "testing", "browser"]) {
     const manifestPath = `packages/${packageName}/package.json`;
     const manifest = readJson(manifestPath);
@@ -134,6 +147,12 @@ export const checkReleaseAuthorization = () => {
   assertIncludes("owner sign-off checklist", ownerChecklist, "Defer v0.1 release");
   assertIncludes("owner sign-off checklist", ownerChecklist, "Decline v0.1 release");
   assertIncludes("owner sign-off checklist", ownerChecklist, "AUTH_PACKET_READY_BLOCKED_OWNER_DECISIONS");
+
+  const finalReport = readText("docs/InputFlow-Phase12-Final-Report.md");
+  assertIncludes("Phase 12 final report", finalReport, "AUTH_PACKET_READY_BLOCKED_OWNER_DECISIONS");
+  assertIncludes("Phase 12 final report", finalReport, "HARNESS_READY_NO_HARDWARE");
+  assertIncludes("Phase 12 final report", finalReport, "HANDOFF_READY_BLOCKED_DOWNSTREAM");
+  assertIncludes("Phase 12 final report", finalReport, "Phase 12 did not:");
 
   const plan = readText("docs/InputFlow-Development-Plan-v0.1.md");
   for (const file of requiredDocs.slice(0, 7)) {
