@@ -110,6 +110,7 @@ That document covers:
 - Manual Gamepad harness guide: `docs/InputFlow-Manual-Gamepad-Harness-Guide.md`
 - Phase 10 physical Gamepad evidence: `docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md`
 - Phase 10 final report: `docs/InputFlow-Phase10-Final-Report.md`
+- Phase 11 final report: `docs/InputFlow-Phase11-Final-Report.md`
 - Phase 11 Sinan handoff strategy: `docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md`
 - Phase 11 Sinan fixture inventory: `docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md`
 - Phase 11 Sinan blur/reset scenario: `docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md`

@@ -1,0 +1,148 @@
+# InputFlow Phase 11 Final Report
+
+Date: 2026-06-22
+Status: HANDOFF_READY_BLOCKED_DOWNSTREAM (draft before final validation)
+Final commit: pending Round 16 final validation update
+Pushed branch: main
+
+## Summary
+
+Phase 11 prepares the InputFlow-side Sinan adapter POC handoff. It does not implement a Sinan adapter in this repository and does not claim downstream Sinan acceptance.
+
+Current conclusion:
+
+```txt
+HANDOFF_READY_BLOCKED_DOWNSTREAM
+```
+
+InputFlow-side assets are in place and guarded. The remaining blocker is downstream: a real adapter commit, logs, screenshots, diagnostics packet, and acceptance checklist must be produced in the Sinan repository.
+
+## Delivered Artifacts
+
+- Handoff strategy: `docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md`
+- Fixture inventory: `docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md`
+- Blur/reset downstream scenario: `docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md`
+- Diagnostics handoff: `docs/sinan-cooperation/inputflow-sinan-diagnostics-handoff.md`
+- Downstream acceptance checklist: `docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md`
+- Package export audit: `docs/sinan-cooperation/inputflow-sinan-package-export-audit.md`
+- Handoff packet: `docs/sinan-cooperation/inputflow-sinan-handoff-packet.md`
+- Dedicated guard command: `pnpm sinan:contract:check`
+
+## Fixture Coverage
+
+`packages/testing/src/sinan-adapter-contract.ts` now covers:
+
+- `runtime.gameplay.interact`
+- `editor.viewport.select`
+- `runtime.pause.confirm`
+- `ui.modal.confirm`
+- Keyboard E, Pointer Primary, and Gamepad South interact traces
+- Editor select trace
+- Modal isolation trace
+- Pause isolation trace
+- Pause release and gameplay restoration trace
+
+`packages/testing/test/sinan-adapter-contract.test.ts` validates the fixture behavior with deterministic replay.
+
+## Validation Evidence
+
+Completed before this draft:
+
+- Round 6 targeted diagnostics/schema/testing tests: 5 files / 21 tests passed.
+- Round 6-11 CommitAndPush wrapper validation: passed each committed round with 27 files / 89 tests.
+- `pnpm sinan:contract:check`: passed in Rounds 8-11.
+- `pnpm docs:check`: passed in documentation rounds.
+- `pnpm structure:check`: passed after the Sinan guard was wired into structure checks.
+- `pnpm package:dry-run`: passed in Round 10.
+- `git diff --check`: passed with only CRLF normalization warnings.
+- BOM checks: passed for edited docs and scripts.
+
+Final validation matrix is pending Round 16:
+
+```powershell
+git diff --check
+pnpm sinan:contract:check
+pnpm docs:check
+pnpm structure:check
+pnpm validate
+pnpm browser:test
+pnpm browser:test:all
+pnpm release:dry-run
+pnpm package:dry-run
+```
+
+## Sinan Handoff Packet
+
+Primary entrypoint:
+
+```txt
+docs/sinan-cooperation/inputflow-sinan-handoff-packet.md
+```
+
+The packet links contract docs, fixtures, check command, downstream checklist, known limits, package/export evidence, and suggested downstream implementation steps.
+
+## Boundary Evidence
+
+InputFlow still owns only generic input runtime, schema, browser source, testing, replay, diagnostics, and documentation assets.
+
+Sinan owns:
+
+- Adapter implementation inside the Sinan repository.
+- Adapter logs and screenshots.
+- Final action namespace policy.
+- Context priority policy.
+- EngineMode, World, EventSystem, Three, and scene behavior.
+- UI/editor presentation of diagnostics.
+
+`packages/core` remains free of DOM, React, Three, browser runtime, Playwright, and Sinan dependencies. The dedicated guard scans the core package boundary.
+
+## Downstream Remaining Work
+
+Sinan downstream owner still needs to provide:
+
+- Adapter repository commit and branch.
+- Exact test/smoke commands.
+- Runtime interact evidence for keyboard, pointer, and available gamepad paths.
+- Editor select evidence.
+- Modal/pause isolation evidence.
+- Blur/reset evidence from browser-source integration.
+- Replay determinism evidence.
+- Diagnostics payloads using the InputFlow diagnostic fields.
+- Screenshots/logs and unsupported-risk notes.
+
+## Non-Scope Confirmed
+
+- No `@inputflow/sinan` package was created.
+- No Sinan repository was modified.
+- No npm package was published.
+- No GitHub Release was created.
+- No git tag was created.
+- No physical Gamepad acceptance was claimed without real hardware evidence.
+- No Sinan final EngineMode, World, EventSystem, Three, action namespace, or context policy was defined by InputFlow.
+
+## Git Record
+
+- Phase 11 guide baseline: `34a26eb82bec7c1f889764695c79e4b5aa52f97f`
+- Phase 10 previous accepted executor commit: `50576205fc519bf55299685a11ae75e8d13be860`
+- Round 1: `655b025` - handoff strategy
+- Round 2: `65fc576` - fixture inventory
+- Round 3: `2972f8a` - editor select fixture
+- Round 4: `f0001bd` - modal/pause isolation fixture
+- Round 5: `a6e10a9` - blur/reset downstream scenario
+- Round 6: `ff0ee09` - diagnostics handoff
+- Round 7: `9caf149` - downstream acceptance checklist
+- Round 8: `5441853` - Sinan contract check command
+- Round 9: `462988f` - README/API/development plan sync
+- Round 10: `4448ef7` - package/export audit
+- Round 11: `b852e66` - handoff packet
+- Round 12: this draft report update commit
+
+## Recommended Checker Conclusion
+
+After Round 16 final validation passes and the report is updated with the final commit, the recommended checker conclusion is:
+
+```txt
+HANDOFF_READY_BLOCKED_DOWNSTREAM
+```
+
+InputFlow should not claim `HANDOFF_READY` unless the planner/checker chooses to treat InputFlow-only handoff readiness as sufficient without downstream Sinan repository evidence.

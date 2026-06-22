@@ -3,6 +3,7 @@ import { join, relative } from "node:path";
 import { pathToFileURL } from "node:url";
 
 const requiredPhase11Docs = [
+  "docs/InputFlow-Phase11-Final-Report.md",
   "docs/sinan-cooperation/inputflow-sinan-adapter-contract.md",
   "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md",
   "docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md",
@@ -28,6 +29,7 @@ const fixtureTokens = [
 ];
 
 const docsGuardTokens = [
+  "InputFlow-Phase11-Final-Report.md",
   "inputflow-sinan-poc-handoff-strategy.md",
   "inputflow-sinan-contract-fixture-inventory.md",
   "inputflow-sinan-blur-reset-scenario.md",
@@ -156,6 +158,11 @@ export const checkSinanContract = ({ log = false } = {}) => {
   requireIncludes(
     "docs/sinan-cooperation/inputflow-sinan-handoff-packet.md",
     "pnpm sinan:contract:check"
+  );
+  requireIncludes("docs/InputFlow-Phase11-Final-Report.md", "HANDOFF_READY_BLOCKED_DOWNSTREAM");
+  requireIncludes(
+    "docs/InputFlow-Phase11-Final-Report.md",
+    "docs/sinan-cooperation/inputflow-sinan-handoff-packet.md"
   );
 
   const coreBoundaryHits = [];

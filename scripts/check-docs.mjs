@@ -13,6 +13,7 @@ const requiredDocs = [
   "docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md",
   "docs/InputFlow-Manual-Gamepad-Release-Checklist.md",
   "docs/InputFlow-Phase10-Final-Report.md",
+  "docs/InputFlow-Phase11-Final-Report.md",
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Final-Report.md",
@@ -67,6 +68,7 @@ for (const requiredReadmeLink of [
   "docs/InputFlow-Manual-Gamepad-Harness-Guide.md",
   "docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md",
   "docs/InputFlow-Phase10-Final-Report.md",
+  "docs/InputFlow-Phase11-Final-Report.md",
   "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md",
   "docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md",
   "docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md",
@@ -162,6 +164,11 @@ if (!plan.includes(phase10GuidePath)) {
 const phase10FinalReportPath = "docs/InputFlow-Phase10-Final-Report.md";
 if (!plan.includes(phase10FinalReportPath)) {
   throw new Error(`Development plan must link ${phase10FinalReportPath}`);
+}
+
+const phase11FinalReportPath = "docs/InputFlow-Phase11-Final-Report.md";
+if (!plan.includes(phase11FinalReportPath)) {
+  throw new Error(`Development plan must link ${phase11FinalReportPath}`);
 }
 
 const phase11GuidePath = "docs/InputFlow-Phase11-Sinan-Adapter-POC-Handoff-Goal-Mode-Execution-Guide.md";
