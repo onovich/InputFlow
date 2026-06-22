@@ -84,6 +84,13 @@ for (const requiredReadmeLink of [
   "docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md",
   "docs/sinan-cooperation/inputflow-sinan-package-export-audit.md",
   "docs/sinan-cooperation/inputflow-sinan-handoff-packet.md",
+  "docs/release/InputFlow-v0.1-Release-Authorization-Packet.md",
+  "docs/release/InputFlow-v0.1-Owner-Decision-Matrix.md",
+  "docs/release/InputFlow-v0.1-Package-Metadata-Audit.md",
+  "docs/release/InputFlow-v0.1-Remote-CI-Evidence.md",
+  "docs/release/InputFlow-v0.1-Local-Release-Confidence.md",
+  "docs/release/InputFlow-v0.1-Publish-Simulation-and-Provenance.md",
+  "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md",
   "docs/InputFlow-Phase9-Final-Report.md"
 ]) {
   if (!readme.includes(requiredReadmeLink)) {
@@ -92,6 +99,9 @@ for (const requiredReadmeLink of [
 }
 if (!readme.includes("pnpm sinan:contract:check")) {
   throw new Error("README.md must document pnpm sinan:contract:check");
+}
+if (!readme.includes("pnpm release:authorization:check")) {
+  throw new Error("README.md must document pnpm release:authorization:check");
 }
 
 const guidePath = "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md";
@@ -268,6 +278,9 @@ if (!plan.includes(phase11HandoffPacketPath)) {
 
 if (!plan.includes("pnpm sinan:contract:check")) {
   throw new Error("Development plan must document pnpm sinan:contract:check");
+}
+if (!plan.includes("pnpm release:authorization:check")) {
+  throw new Error("Development plan must document pnpm release:authorization:check");
 }
 
 for (const adr of requiredDocs.filter((file) => file.startsWith("docs/adr/"))) {

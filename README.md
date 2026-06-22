@@ -10,7 +10,8 @@ contract.
 
 > Current status: v0.1 release candidate review. The packages are not published
 > by this repository during this review. Do not treat this README as an npm
-> release announcement.
+> release announcement. Phase 12 release authorization remains blocked on owner
+> decisions.
 
 ## Packages
 
@@ -26,6 +27,7 @@ contract.
 ```powershell
 pnpm install --frozen-lockfile
 pnpm validate
+pnpm release:authorization:check
 pnpm browser:test
 pnpm release:dry-run
 ```
@@ -46,6 +48,12 @@ Sinan POC handoff guard:
 
 ```powershell
 pnpm sinan:contract:check
+```
+
+Manual Gamepad harness guard:
+
+```powershell
+pnpm gamepad:harness:check
 ```
 
 ## Minimal Usage
@@ -118,6 +126,13 @@ That document covers:
 - Phase 11 Sinan downstream acceptance checklist: `docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md`
 - Phase 11 Sinan package export audit: `docs/sinan-cooperation/inputflow-sinan-package-export-audit.md`
 - Phase 11 Sinan handoff packet: `docs/sinan-cooperation/inputflow-sinan-handoff-packet.md`
+- Phase 12 release authorization packet: `docs/release/InputFlow-v0.1-Release-Authorization-Packet.md`
+- Phase 12 owner decision matrix: `docs/release/InputFlow-v0.1-Owner-Decision-Matrix.md`
+- Phase 12 package metadata audit: `docs/release/InputFlow-v0.1-Package-Metadata-Audit.md`
+- Phase 12 remote CI evidence: `docs/release/InputFlow-v0.1-Remote-CI-Evidence.md`
+- Phase 12 local release confidence: `docs/release/InputFlow-v0.1-Local-Release-Confidence.md`
+- Phase 12 publish simulation and provenance notes: `docs/release/InputFlow-v0.1-Publish-Simulation-and-Provenance.md`
+- Phase 12 rollback and deprecation policy: `docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md`
 - Phase 9 guide: `docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md`
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
 
@@ -135,6 +150,10 @@ That document covers:
   executor environment has no physical controller evidence.
 - Firefox and WebKit browser smoke are covered by the optional Playwright
   matrix; physical controller checks remain manual / best effort.
+- Phase 12 expected status remains
+  `AUTH_PACKET_READY_BLOCKED_OWNER_DECISIONS` until the owner explicitly signs
+  license, version, tag, npm access, dist-tag, provenance, release notes,
+  rollback owner, and Phase 10 / Phase 11 limitation decisions.
 
 ## Boundary
 

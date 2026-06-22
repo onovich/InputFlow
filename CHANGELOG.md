@@ -35,14 +35,20 @@ Status: release candidate review draft
 - Phase 11 Sinan POC handoff assets: strategy, fixture inventory, blur/reset
   scenario, diagnostics handoff, downstream acceptance checklist, and
   `pnpm sinan:contract:check`.
+- Phase 12 release authorization packet assets: owner decision matrix, package
+  metadata audit, remote CI evidence, local release confidence, publish
+  simulation and provenance notes, rollback/deprecation policy, and
+  `pnpm release:authorization:check`.
 
 ### Validation Matrix
 
 Local release-candidate review should run:
 
 - `pnpm validate`
+- `pnpm release:authorization:check`
 - `pnpm workflow:check`
 - `pnpm sinan:contract:check`
+- `pnpm gamepad:harness:check`
 - `pnpm browser:test`
 - `pnpm browser:test:all`
 - `pnpm release:dry-run`
@@ -92,7 +98,8 @@ gates and the remote release dry-run.
 ### Upgrade / Review Risks
 
 - A real v0.1 publish phase still needs final versioning, license, tag,
-  provenance, and release ownership decisions.
+  npm access, dist-tag, provenance, release notes, rollback/deprecate owner,
+  and release ownership decisions.
 - Remote GitHub Actions evidence must be observed on the target commit before
   full RC readiness can be claimed.
 - Consumers should treat action ids and context ids as host-owned opaque
