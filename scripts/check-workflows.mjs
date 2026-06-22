@@ -92,7 +92,8 @@ export const checkWorkflows = () => {
       "path: ~/.cache/ms-playwright",
       "path: test-results/browser",
       "run: corepack enable",
-      "run: pnpm install --frozen-lockfile"
+      "run: pnpm install --frozen-lockfile",
+      "run: pnpm build"
     ]);
   }
 
