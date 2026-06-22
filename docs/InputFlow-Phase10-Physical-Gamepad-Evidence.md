@@ -33,22 +33,22 @@ baseline confidence, but they do not count as physical controller PASS.
 
 | Field | Value |
 |---|---|
-| Tester |  |
-| Date / time |  |
-| Operating system |  |
-| Browser and version |  |
-| Controller model |  |
-| Connection type | USB / Bluetooth / other |
-| InputFlow commit |  |
+| Tester | Codex executor |
+| Date / time | 2026-06-22 17:26 +08:00 |
+| Operating system | Windows local Codex workspace |
+| Browser and version | Chromium / Chrome physical check not executed with real hardware |
+| Controller model | No physical controller available to this executor environment |
+| Connection type | Not available |
+| InputFlow commit | `a654e25807c884f61a493c4d9f6f78e9602d8bbf` |
 | Harness URL | `http://127.0.0.1:4173/examples/manual-gamepad-harness/index.html` |
 | Baseline commands | `pnpm validate`, `pnpm browser:test` |
-| Artifact | screenshot / copied log / notes |
+| Artifact | Evidence row below; no physical screenshot or copied log exists |
 
 ## Browser / Controller Matrix
 
 | Browser | Controller | Connection | Commit | South button | Left stick | Disconnect reset | Reconnect | Result | Notes / artifact |
 |---|---|---|---|---|---|---|---|---|---|
-| Chromium / Chrome |  | USB |  | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED |  |  |
+| Chromium / Chrome | No physical controller available | USB | `a654e25807c884f61a493c4d9f6f78e9602d8bbf` | BLOCKED | BLOCKED | BLOCKED | BLOCKED | BLOCKED | Round 6 could not observe real hardware in the executor environment. Automated Chromium fixture remains separate baseline evidence. |
 | Chromium / Chrome |  | Bluetooth |  | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED |  |  |
 | Firefox |  | USB |  | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED |  |  |
 | Firefox |  | Bluetooth |  | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED |  |  |
@@ -57,9 +57,13 @@ baseline confidence, but they do not count as physical controller PASS.
 
 ## Current Phase 10 Execution Notes
 
-No physical controller evidence has been recorded yet in this execution pass.
+Round 6 Chromium / Chrome physical check was blocked because the executor
+environment has no available physical controller. No South button, left stick,
+disconnect reset, or reconnect behavior was observed with real hardware.
+
 Until a tester supplies real controller and browser observations, Phase 10 must
-not report `HARDWARE_ACCEPTED`.
+not report `HARDWARE_ACCEPTED`. If the harness and automated baseline remain
+healthy, the likely final status is `HARNESS_READY_NO_HARDWARE`.
 
 ## Automated Baseline References
 
