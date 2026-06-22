@@ -3,6 +3,7 @@
 Date: 2026-06-20
 
 Updated: 2026-06-21 after follow-up acceptance review.
+Updated: 2026-06-22 after Phase 7 browser-matrix follow-up.
 
 ## Scope
 
@@ -26,6 +27,9 @@ Updated: 2026-06-21 after follow-up acceptance review.
 - Follow-up acceptance fixes: timed interactions are now wired into `createInputFlow()`
   runtime action evaluation, and composite bindings are indexed by every contributing
   control in `bindingsByControl`.
+- Phase 7 browser-matrix follow-up: real Playwright smoke now covers required
+  Chromium and optional Firefox/WebKit execution. See
+  `docs/InputFlow-Browser-Smoke-Guide.md` and ADR 0006.
 
 ## Commit List
 
@@ -72,9 +76,15 @@ Updated: 2026-06-21 after follow-up acceptance review.
 - Browser-specific globals are isolated to `@inputflow/browser`.
 - Sinan adapter code is not implemented in this repository; only contract docs and reusable testing fixtures were added.
 
+## Phase 7 Follow-Up
+
+The Phase 0-6 closeout originally identified the absence of a real
+Chromium/Firefox/WebKit matrix as a remaining release-confidence risk. Phase 7
+addresses that risk with a Playwright browser smoke harness, a required Chromium
+ops gate, and an explicit optional Firefox/WebKit matrix.
+
 ## Remaining Risks
 
-- Browser source tests use DOM-like fixtures, not a real Chromium/Firefox/WebKit matrix.
 - Gamepad support is intentionally basic: South button and left stick only.
 - Touch, full rebinding UI, React diagnostics UI, and `@inputflow/sinan` remain out of v0.1 scope.
 - `npm pack --dry-run` prints local npm environment warnings for unknown config keys, but exits successfully and produces valid dry-run tarball manifests.
