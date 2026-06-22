@@ -13,6 +13,7 @@ const requiredDocs = [
   "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md",
   "docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md",
   "docs/release/InputFlow-v0.1-Owner-Sign-Off-Checklist.md",
+  "docs/release/InputFlow-v0.1-Owner-Decision-Record.md",
   "docs/InputFlow-Phase12-Final-Report.md",
   "docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md",
   "docs/InputFlow-Phase11-Final-Report.md",
@@ -26,6 +27,7 @@ const requiredDecisions = [
   "npm access",
   "dist-tag",
   "publish owner",
+  "provenance",
   "release notes sign-off",
   "rollback"
 ];
@@ -47,11 +49,23 @@ const assertNoReleaseActions = () => {
   if (rootManifest.scripts?.["release:authorization:check"] !== "node scripts/check-release-authorization.mjs") {
     throw new Error("root package.json must expose pnpm release:authorization:check");
   }
+  if (rootManifest.version !== "0.0.0") {
+    throw new Error("root package.json version must remain 0.0.0 until owner authorization");
+  }
+  if (rootManifest.private !== true) {
+    throw new Error("root package.json must remain private until owner authorization");
+  }
+  if ("license" in rootManifest) {
+    throw new Error("root package.json must not define a license until owner authorization");
+  }
+  if (rootManifest.publishConfig) {
+    throw new Error("root package.json must not define publishConfig before owner authorization");
+  }
 
   for (const [scriptName, scriptValue] of Object.entries(rootManifest.scripts ?? {})) {
     for (const blockedCommand of ["npm publish", "gh release create", "git tag"]) {
       if (scriptValue.includes(blockedCommand)) {
-        throw new Error(`${scriptName} must not run ${blockedCommand} during Phase 12`);
+        throw new Error(`${scriptName} must not run ${blockedCommand} during Phase 13`);
       }
     }
   }
@@ -80,22 +94,61 @@ export const checkReleaseAuthorization = () => {
 
   const packet = readText("docs/release/InputFlow-v0.1-Release-Authorization-Packet.md");
   assertIncludes("authorization packet", packet, "AUTH_PACKET_READY_BLOCKED_OWNER_DECISIONS");
+  assertIncludes("authorization packet", packet, "RELEASE_DEFERRED_DECISION_RECORDED");
+  assertIncludes("authorization packet", packet, "STILL_BLOCKED_EXACT_LICENSE");
   assertIncludes("authorization packet", packet, "HARNESS_READY_NO_HARDWARE");
   assertIncludes("authorization packet", packet, "HANDOFF_READY_BLOCKED_DOWNSTREAM");
+  assertIncludes("authorization packet", packet, "accepted only as an RC known limit");
+  assertIncludes("authorization packet", packet, "no real release authorized");
   for (const boundary of ["npm publish", "GitHub Release", "git tag", "secrets"]) {
     assertIncludes("authorization packet", packet, boundary);
   }
-  for (const file of requiredDocs.slice(1, 9)) {
+  for (const file of requiredDocs.filter((entry) => entry.startsWith("docs/release/")).slice(1)) {
     assertIncludes("authorization packet", packet, file);
+  }
+
+  const ownerRecord = readText("docs/release/InputFlow-v0.1-Owner-Decision-Record.md");
+  for (const expected of [
+    "RELEASE_DEFERRED_DECISION_RECORDED",
+    "DEFERRED_RELEASE_DECISION",
+    "0.1.0-rc.0",
+    "Public package",
+    "`next`",
+    "STILL_BLOCKED_EXACT_LICENSE",
+    "ACCEPTED_FOR_RC_KNOWN_LIMIT",
+    "HARNESS_READY_NO_HARDWARE",
+    "HANDOFF_READY_BLOCKED_DOWNSTREAM",
+    "OWNER_APPROVAL_REQUIRED"
+  ]) {
+    assertIncludes("owner decision record", ownerRecord, expected);
+  }
+  for (const boundary of [
+    "not a package publish record",
+    "No npm publish",
+    "GitHub Release",
+    "git tag",
+    "secrets",
+    "publishConfig",
+    "provenance configuration",
+    "no physical Gamepad PASS",
+    "no downstream Sinan adapter acceptance"
+  ]) {
+    assertIncludes("owner decision record", ownerRecord, boundary);
   }
 
   const matrix = readText("docs/release/InputFlow-v0.1-Owner-Decision-Matrix.md");
   for (const decision of requiredDecisions) {
     assertIncludes("owner decision matrix", matrix.toLowerCase(), decision);
   }
+  assertIncludes("owner decision matrix", matrix, "RELEASE_DEFERRED_DECISION_RECORDED");
+  assertIncludes("owner decision matrix", matrix, "DEFERRED_RELEASE_DECISION");
+  assertIncludes("owner decision matrix", matrix, "STILL_BLOCKED_EXACT_LICENSE");
   assertIncludes("owner decision matrix", matrix, "BLOCKED_OWNER_DECISION");
+  assertIncludes("owner decision matrix", matrix, "ACCEPTED_FOR_RC_KNOWN_LIMIT");
   assertIncludes("owner decision matrix", matrix, "HARNESS_READY_NO_HARDWARE");
   assertIncludes("owner decision matrix", matrix, "HANDOFF_READY_BLOCKED_DOWNSTREAM");
+  assertIncludes("owner decision matrix", matrix, "no physical Gamepad PASS claimed");
+  assertIncludes("owner decision matrix", matrix, "no downstream Sinan adapter acceptance claimed");
 
   const remoteEvidence = readText("docs/release/InputFlow-v0.1-Remote-CI-Evidence.md");
   for (const workflow of [
@@ -147,6 +200,10 @@ export const checkReleaseAuthorization = () => {
   assertIncludes("owner sign-off checklist", ownerChecklist, "Defer v0.1 release");
   assertIncludes("owner sign-off checklist", ownerChecklist, "Decline v0.1 release");
   assertIncludes("owner sign-off checklist", ownerChecklist, "AUTH_PACKET_READY_BLOCKED_OWNER_DECISIONS");
+  assertIncludes("owner sign-off checklist", ownerChecklist, "RELEASE_DEFERRED_DECISION_RECORDED");
+  assertIncludes("owner sign-off checklist", ownerChecklist, "STILL_BLOCKED_EXACT_LICENSE");
+  assertIncludes("owner sign-off checklist", ownerChecklist, "RC known limit only");
+  assertIncludes("owner sign-off checklist", ownerChecklist, "no real release authorized");
 
   const finalReport = readText("docs/InputFlow-Phase12-Final-Report.md");
   assertIncludes("Phase 12 final report", finalReport, "AUTH_PACKET_READY_BLOCKED_OWNER_DECISIONS");
@@ -155,7 +212,7 @@ export const checkReleaseAuthorization = () => {
   assertIncludes("Phase 12 final report", finalReport, "Phase 12 did not:");
 
   const plan = readText("docs/InputFlow-Development-Plan-v0.1.md");
-  for (const file of requiredDocs.slice(0, 7)) {
+  for (const file of requiredDocs) {
     assertIncludes("development plan", plan, file);
   }
 

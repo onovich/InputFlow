@@ -24,6 +24,7 @@ const requiredDocs = [
   "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md",
   "docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md",
   "docs/release/InputFlow-v0.1-Owner-Sign-Off-Checklist.md",
+  "docs/release/InputFlow-v0.1-Owner-Decision-Record.md",
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Final-Report.md",
@@ -97,6 +98,7 @@ for (const requiredReadmeLink of [
   "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md",
   "docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md",
   "docs/release/InputFlow-v0.1-Owner-Sign-Off-Checklist.md",
+  "docs/release/InputFlow-v0.1-Owner-Decision-Record.md",
   "docs/InputFlow-Phase12-Final-Report.md",
   "docs/InputFlow-Phase9-Final-Report.md"
 ]) {
@@ -266,6 +268,12 @@ const phase12OwnerSignOffChecklistPath =
   "docs/release/InputFlow-v0.1-Owner-Sign-Off-Checklist.md";
 if (!plan.includes(phase12OwnerSignOffChecklistPath)) {
   throw new Error(`Development plan must link ${phase12OwnerSignOffChecklistPath}`);
+}
+
+const phase13OwnerDecisionRecordPath =
+  "docs/release/InputFlow-v0.1-Owner-Decision-Record.md";
+if (!plan.includes(phase13OwnerDecisionRecordPath)) {
+  throw new Error(`Development plan must link ${phase13OwnerDecisionRecordPath}`);
 }
 
 const phase11HandoffStrategyPath = "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md";
