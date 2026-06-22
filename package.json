@@ -5,6 +5,10 @@
   "type": "module",
   "packageManager": "pnpm@10.12.4",
   "scripts": {
+    "browser:install": "playwright install chromium firefox webkit",
+    "browser:test": "playwright test --project=chromium",
+    "browser:test:all": "playwright test",
+    "browser:test:list": "playwright test --list",
     "build": "tsc -b tsconfig.json --pretty false",
     "docs:check": "node scripts/check-docs.mjs",
     "lint": "node scripts/lint.mjs",
@@ -16,6 +20,7 @@
     "validate": "pnpm lint && pnpm typecheck && pnpm build && pnpm test && pnpm structure:check && pnpm docs:check"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.0",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
   }
