@@ -1,7 +1,7 @@
 # InputFlow Phase 8 Final Report
 
 Date: 2026-06-22
-Status: Draft after Round 12 report preparation
+Status: Draft after Round 13 buffer verification
 
 ## Scope
 
@@ -35,18 +35,18 @@ Status: Draft after Round 12 report preparation
 ## Validation Results
 
 - `git diff --check`: passed through Round 12.
-- `pnpm validate`: passed through Round 11, with 27 test files and 86 tests.
-- `pnpm browser:test`: passed through Round 11 with 15 Chromium tests.
+- `pnpm validate`: passed through Round 13, with 27 test files and 86 tests.
+- `pnpm browser:test`: passed through Round 13 with 15 Chromium tests.
 - `pnpm browser:test:all`: passed in Round 6 with 45 tests across Chromium,
   Firefox, and WebKit. Round 14-16 will refresh this result.
 - `pnpm release:dry-run`: passed through Round 11.
 - Workflow structure check: `pnpm workflow:check` and `pnpm structure:check`
-  passed through Round 11.
+  passed through Round 13.
 
 ## Git Record
 
 - Phase 8 baseline before Round 1: `38d2aba`.
-- Current draft base before Round 12 report commit: `87c7c35`.
+- Latest pushed commit entering Round 13: `2a43c55`.
 - Final commit: pending Round 16.
 - Pushed branch: `main`.
 
@@ -63,7 +63,7 @@ Per-round commits:
 - Round 9: `e82688a` docs: add manual gamepad release checklist
 - Round 10: `1ab0aae` docs: sync phase 8 ops gates
 - Round 11: `87c7c35` test: add workflow parity check
-- Round 12: pending
+- Round 12: `2a43c55` docs: draft phase 8 final report
 - Round 13: pending
 - Round 14: pending
 - Round 15: pending
@@ -71,7 +71,9 @@ Per-round commits:
 
 ## Buffer Round Use
 
-- Round 13: pending
+- Round 13: consumed. Verified no workflow, cache, documentation, or command
+  drift requiring a fix; `pnpm validate`, `pnpm browser:test`, and
+  `pnpm workflow:check` passed.
 - Round 14: pending
 - Round 15: pending
 
@@ -95,4 +97,3 @@ Per-round commits:
   scheduled release-confidence job.
 - Decide whether physical Gamepad coverage needs a later hardware-lab
   automation phase.
-
