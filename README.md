@@ -1,0 +1,109 @@
+# InputFlow
+
+Deterministic input runtime primitives for browser games, Web 3D editors, and
+interactive tools.
+
+InputFlow turns raw keyboard, pointer, gamepad, virtual, and replay input into
+stable action snapshots. Hosts own gameplay semantics, UI behavior, camera
+behavior, world picking, and editor commands. InputFlow owns the mechanical input
+contract.
+
+> Current status: v0.1 release candidate review. The packages are not published
+> by this repository in Phase 9. Do not treat this README as an npm release
+> announcement.
+
+## Packages
+
+| Package | Role |
+|---|---|
+| `@inputflow/core` | DOM-free runtime: control paths, binding graph, processors, interactions, action state, context routing, diagnostics. |
+| `@inputflow/schema` | Load-time input map, override, and replay trace schemas. |
+| `@inputflow/testing` | Virtual input source, fake clock, replay runner, action trace helpers, Sinan contract fixtures. |
+| `@inputflow/browser` | Browser keyboard, pointer, wheel, editable-target filtering, blur reset, and basic gamepad sources. |
+
+## Local RC Review
+
+```powershell
+pnpm install --frozen-lockfile
+pnpm validate
+pnpm browser:test
+pnpm release:dry-run
+```
+
+Optional cross-browser smoke:
+
+```powershell
+pnpm browser:test:all
+```
+
+Package tarball review:
+
+```powershell
+pnpm package:dry-run
+```
+
+## Minimal Usage
+
+```ts
+import { createInputFlow } from "@inputflow/core";
+import { VirtualInputSource } from "@inputflow/testing";
+
+const maps = [
+  {
+    id: "gameplay",
+    actions: [{ id: "runtime.gameplay.interact", valueType: "button" }],
+    bindings: [
+      {
+        id: "gameplay.interact.keyboard",
+        action: "runtime.gameplay.interact",
+        source: { kind: "control", path: "<Keyboard>/code/KeyE" }
+      }
+    ]
+  }
+];
+
+const input = createInputFlow({ maps });
+const virtual = new VirtualInputSource({ id: "fixture" });
+input.addSource(virtual);
+
+virtual.setButton("<Keyboard>/code/KeyE", true, 16);
+input.update(16);
+
+const interact = input.readButton("runtime.gameplay.interact");
+```
+
+Browser sources live outside core:
+
+```ts
+import { createKeyboardSource, createPointerSource } from "@inputflow/browser";
+
+input.addSource(createKeyboardSource());
+input.addSource(createPointerSource());
+```
+
+## Documentation
+
+- API examples: `docs/InputFlow-v0.1-API-Examples.md`
+- Technical architecture: `docs/InputFlow-Technical-Architecture-v0.1.md`
+- Development plan: `docs/InputFlow-Development-Plan-v0.1.md`
+- Browser smoke guide: `docs/InputFlow-Browser-Smoke-Guide.md`
+- CI troubleshooting: `docs/InputFlow-CI-Troubleshooting.md`
+- Remote CI observation: `docs/InputFlow-Remote-CI-Observation-Guide.md`
+- Manual Gamepad checklist: `docs/InputFlow-Manual-Gamepad-Release-Checklist.md`
+- Phase 9 guide: `docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md`
+
+## Current Limits
+
+- No real npm publish, GitHub Release, or git tag in Phase 9.
+- No React diagnostics package or rebind UI in v0.1.
+- No mobile virtual joystick, pointer picking, world ray, or entity hit logic.
+- No `@inputflow/sinan` package; Sinan integration remains a downstream adapter
+  contract.
+- Automated gamepad coverage uses a browser-level `navigator.getGamepads`
+  fixture. Physical controller pairing remains manual release-confidence work.
+- Optional Firefox and WebKit smoke remain manual / best effort.
+
+## Boundary
+
+`@inputflow/core` must remain free of DOM, React, Three, Sinan, Zod hot-path,
+Playwright, GitHub Actions, and release tooling dependencies.

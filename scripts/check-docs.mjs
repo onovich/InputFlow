@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 
 const requiredDocs = [
+  "README.md",
   "docs/InputFlow-Development-Plan-v0.1.md",
   "docs/InputFlow-Browser-Smoke-Guide.md",
   "docs/InputFlow-CI-Troubleshooting.md",
@@ -30,6 +31,23 @@ if (missing.length > 0) {
 }
 
 const plan = readFileSync("docs/InputFlow-Development-Plan-v0.1.md", "utf8");
+if (!plan.includes("README.md")) {
+  throw new Error("Development plan must link README.md");
+}
+
+const readme = readFileSync("README.md", "utf8");
+for (const requiredReadmeLink of [
+  "docs/InputFlow-v0.1-API-Examples.md",
+  "docs/InputFlow-Technical-Architecture-v0.1.md",
+  "docs/InputFlow-CI-Troubleshooting.md",
+  "docs/InputFlow-Remote-CI-Observation-Guide.md",
+  "docs/InputFlow-Manual-Gamepad-Release-Checklist.md"
+]) {
+  if (!readme.includes(requiredReadmeLink)) {
+    throw new Error(`README.md must link ${requiredReadmeLink}`);
+  }
+}
+
 const guidePath = "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md";
 if (!plan.includes(guidePath)) {
   throw new Error(`Development plan must link ${guidePath}`);
