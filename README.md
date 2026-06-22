@@ -81,6 +81,15 @@ input.addSource(createKeyboardSource());
 input.addSource(createPointerSource());
 ```
 
+For package-specific examples, see `docs/InputFlow-v0.1-API-Examples.md`.
+That document covers:
+
+- `@inputflow/core` maps and runtime reads.
+- `@inputflow/browser` keyboard, pointer, and gamepad sources.
+- `@inputflow/schema` input map and override validation.
+- `@inputflow/testing` replay helpers.
+- Sinan contract fixtures without shipping an `@inputflow/sinan` package.
+
 ## Documentation
 
 - API examples: `docs/InputFlow-v0.1-API-Examples.md`
