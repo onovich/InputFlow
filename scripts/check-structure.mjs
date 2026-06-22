@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { checkManualGamepadHarness } from "./check-manual-gamepad-harness.mjs";
 import { checkPackageMetadata } from "./check-package-metadata.mjs";
+import { checkReleaseAuthorization } from "./check-release-authorization.mjs";
 import { checkSinanContract } from "./check-sinan-contract.mjs";
 import { checkWorkflows } from "./check-workflows.mjs";
 
@@ -55,6 +56,7 @@ for (const name of ["testing", "browser"]) {
 
 checkWorkflows();
 checkPackageMetadata();
+checkReleaseAuthorization();
 checkManualGamepadHarness();
 checkSinanContract();
 

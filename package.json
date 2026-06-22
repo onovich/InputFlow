@@ -16,6 +16,7 @@
     "lint": "node scripts/lint.mjs",
     "package:dry-run": "node scripts/package-dry-run.mjs",
     "package:metadata:check": "node scripts/check-package-metadata.mjs",
+    "release:authorization:check": "node scripts/check-release-authorization.mjs",
     "release:dry-run": "pnpm browser:test && pnpm package:dry-run",
     "sinan:contract:check": "node scripts/check-sinan-contract.mjs",
     "structure:check": "node scripts/check-structure.mjs",
