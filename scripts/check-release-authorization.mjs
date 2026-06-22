@@ -13,6 +13,7 @@ const requiredDocs = [
   "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md",
   "docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md",
   "docs/release/InputFlow-v0.1-Owner-Sign-Off-Checklist.md",
+  "docs/InputFlow-Phase12-Final-Report.md",
   "docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md",
   "docs/InputFlow-Phase11-Final-Report.md",
   "docs/sinan-cooperation/inputflow-sinan-handoff-packet.md"

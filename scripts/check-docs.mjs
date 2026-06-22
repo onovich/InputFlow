@@ -14,6 +14,7 @@ const requiredDocs = [
   "docs/InputFlow-Manual-Gamepad-Release-Checklist.md",
   "docs/InputFlow-Phase10-Final-Report.md",
   "docs/InputFlow-Phase11-Final-Report.md",
+  "docs/InputFlow-Phase12-Final-Report.md",
   "docs/release/InputFlow-v0.1-Release-Authorization-Packet.md",
   "docs/release/InputFlow-v0.1-Owner-Decision-Matrix.md",
   "docs/release/InputFlow-v0.1-Package-Metadata-Audit.md",
@@ -95,6 +96,7 @@ for (const requiredReadmeLink of [
   "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md",
   "docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md",
   "docs/release/InputFlow-v0.1-Owner-Sign-Off-Checklist.md",
+  "docs/InputFlow-Phase12-Final-Report.md",
   "docs/InputFlow-Phase9-Final-Report.md"
 ]) {
   if (!readme.includes(requiredReadmeLink)) {
@@ -201,6 +203,11 @@ if (!plan.includes(phase11GuidePath)) {
 const phase12GuidePath = "docs/InputFlow-Phase12-v0.1-Release-Authorization-Goal-Mode-Execution-Guide.md";
 if (!plan.includes(phase12GuidePath)) {
   throw new Error(`Development plan must link ${phase12GuidePath}`);
+}
+
+const phase12FinalReportPath = "docs/InputFlow-Phase12-Final-Report.md";
+if (!plan.includes(phase12FinalReportPath)) {
+  throw new Error(`Development plan must link ${phase12FinalReportPath}`);
 }
 
 const phase12ReleaseAuthorizationPacketPath =
