@@ -26,6 +26,7 @@ const requiredDocs = [
   "docs/InputFlow-Sinan-Alignment-and-Roadmap-2026-06-20.md",
   "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md",
   "docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md",
+  "docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md",
   "docs/adr/0001-package-manager.md",
   "docs/adr/0002-host-semantics-boundary.md",
   "docs/adr/0003-replay-first-class-contract.md",
@@ -162,6 +163,11 @@ if (!plan.includes(phase11HandoffStrategyPath)) {
 const phase11FixtureInventoryPath = "docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md";
 if (!plan.includes(phase11FixtureInventoryPath)) {
   throw new Error(`Development plan must link ${phase11FixtureInventoryPath}`);
+}
+
+const phase11BlurResetScenarioPath = "docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md";
+if (!plan.includes(phase11BlurResetScenarioPath)) {
+  throw new Error(`Development plan must link ${phase11BlurResetScenarioPath}`);
 }
 
 for (const adr of requiredDocs.filter((file) => file.startsWith("docs/adr/"))) {
