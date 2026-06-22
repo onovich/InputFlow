@@ -14,6 +14,7 @@ const requiredDocs = [
   "docs/InputFlow-Manual-Gamepad-Release-Checklist.md",
   "docs/InputFlow-Phase10-Final-Report.md",
   "docs/InputFlow-Phase11-Final-Report.md",
+  "docs/release/InputFlow-v0.1-Release-Authorization-Packet.md",
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Final-Report.md",
@@ -180,6 +181,12 @@ if (!plan.includes(phase11GuidePath)) {
 const phase12GuidePath = "docs/InputFlow-Phase12-v0.1-Release-Authorization-Goal-Mode-Execution-Guide.md";
 if (!plan.includes(phase12GuidePath)) {
   throw new Error(`Development plan must link ${phase12GuidePath}`);
+}
+
+const phase12ReleaseAuthorizationPacketPath =
+  "docs/release/InputFlow-v0.1-Release-Authorization-Packet.md";
+if (!plan.includes(phase12ReleaseAuthorizationPacketPath)) {
+  throw new Error(`Development plan must link ${phase12ReleaseAuthorizationPacketPath}`);
 }
 
 const phase11HandoffStrategyPath = "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md";
