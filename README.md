@@ -103,6 +103,7 @@ That document covers:
 - Manual Gamepad checklist: `docs/InputFlow-Manual-Gamepad-Release-Checklist.md`
 - Manual Gamepad harness guide: `docs/InputFlow-Manual-Gamepad-Harness-Guide.md`
 - Phase 10 physical Gamepad evidence: `docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md`
+- Phase 10 final report: `docs/InputFlow-Phase10-Final-Report.md`
 - Phase 9 guide: `docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md`
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
 

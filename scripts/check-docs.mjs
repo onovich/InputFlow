@@ -12,6 +12,7 @@ const requiredDocs = [
   "docs/InputFlow-Manual-Gamepad-Harness-Guide.md",
   "docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md",
   "docs/InputFlow-Manual-Gamepad-Release-Checklist.md",
+  "docs/InputFlow-Phase10-Final-Report.md",
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Final-Report.md",
@@ -55,6 +56,9 @@ for (const requiredReadmeLink of [
   "docs/InputFlow-Remote-CI-Observation-Guide.md",
   "docs/InputFlow-Phase9-Package-Dry-Run-Audit.md",
   "docs/InputFlow-Manual-Gamepad-Release-Checklist.md",
+  "docs/InputFlow-Manual-Gamepad-Harness-Guide.md",
+  "docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md",
+  "docs/InputFlow-Phase10-Final-Report.md",
   "docs/InputFlow-Phase9-Final-Report.md"
 ]) {
   if (!readme.includes(requiredReadmeLink)) {
@@ -135,6 +139,11 @@ if (!plan.includes(phase9FinalReportPath)) {
 const phase10GuidePath = "docs/InputFlow-Phase10-Physical-Gamepad-Acceptance-Goal-Mode-Execution-Guide.md";
 if (!plan.includes(phase10GuidePath)) {
   throw new Error(`Development plan must link ${phase10GuidePath}`);
+}
+
+const phase10FinalReportPath = "docs/InputFlow-Phase10-Final-Report.md";
+if (!plan.includes(phase10FinalReportPath)) {
+  throw new Error(`Development plan must link ${phase10FinalReportPath}`);
 }
 
 for (const adr of requiredDocs.filter((file) => file.startsWith("docs/adr/"))) {
