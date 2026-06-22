@@ -47,6 +47,9 @@ until the owner explicitly decides:
 - rollback/deprecate owner,
 - whether Phase 10 and Phase 11 limitations are acceptable for v0.1.
 
+The detailed matrix is maintained in
+`docs/release/InputFlow-v0.1-Owner-Decision-Matrix.md`.
+
 ## Evidence Entry Points
 
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
@@ -73,7 +76,7 @@ Phase 12 must not:
 
 ## Phase 12 Work Remaining
 
-- Add owner decision matrix.
+- Keep owner decision matrix pending until explicit owner sign-off.
 - Refresh or document remote CI evidence for the current target commit.
 - Audit package metadata and dry-run output for publish prerequisites.
 - Add publish simulation and provenance notes.
