@@ -99,6 +99,7 @@ That document covers:
 - Browser smoke guide: `docs/InputFlow-Browser-Smoke-Guide.md`
 - CI troubleshooting: `docs/InputFlow-CI-Troubleshooting.md`
 - Remote CI observation: `docs/InputFlow-Remote-CI-Observation-Guide.md`
+- Phase 9 package dry-run audit: `docs/InputFlow-Phase9-Package-Dry-Run-Audit.md`
 - Manual Gamepad checklist: `docs/InputFlow-Manual-Gamepad-Release-Checklist.md`
 - Phase 9 guide: `docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md`
 

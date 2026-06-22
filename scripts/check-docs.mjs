@@ -8,6 +8,7 @@ const requiredDocs = [
   "docs/InputFlow-CI-Troubleshooting.md",
   "docs/InputFlow-Remote-CI-Observation-Guide.md",
   "docs/InputFlow-Phase9-Remote-CI-Evidence.md",
+  "docs/InputFlow-Phase9-Package-Dry-Run-Audit.md",
   "docs/InputFlow-Manual-Gamepad-Release-Checklist.md",
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
@@ -47,6 +48,7 @@ for (const requiredReadmeLink of [
   "docs/InputFlow-Technical-Architecture-v0.1.md",
   "docs/InputFlow-CI-Troubleshooting.md",
   "docs/InputFlow-Remote-CI-Observation-Guide.md",
+  "docs/InputFlow-Phase9-Package-Dry-Run-Audit.md",
   "docs/InputFlow-Manual-Gamepad-Release-Checklist.md"
 ]) {
   if (!readme.includes(requiredReadmeLink)) {
@@ -77,6 +79,11 @@ if (!plan.includes(ciTroubleshootingPath)) {
 const remoteCiEvidencePath = "docs/InputFlow-Phase9-Remote-CI-Evidence.md";
 if (!plan.includes(remoteCiEvidencePath)) {
   throw new Error(`Development plan must link ${remoteCiEvidencePath}`);
+}
+
+const packageDryRunAuditPath = "docs/InputFlow-Phase9-Package-Dry-Run-Audit.md";
+if (!plan.includes(packageDryRunAuditPath)) {
+  throw new Error(`Development plan must link ${packageDryRunAuditPath}`);
 }
 
 const manualGamepadChecklistPath = "docs/InputFlow-Manual-Gamepad-Release-Checklist.md";
