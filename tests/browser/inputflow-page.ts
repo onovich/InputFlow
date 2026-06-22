@@ -28,6 +28,15 @@ export const installInputFlowPageRoutes = async (page: Page): Promise<void> => {
       return;
     }
 
+    if (url.pathname === "/pointer-smoke.html") {
+      await route.fulfill({
+        status: 200,
+        contentType: contentTypes.get(".html"),
+        body: pointerSmokeHtml
+      });
+      return;
+    }
+
     const filePath = resolveModulePath(url.pathname);
     if (!filePath) {
       await route.fulfill({ status: 404, body: "Not found" });
@@ -110,6 +119,84 @@ const keyboardSmokeHtml = String.raw`
         },
         dispose() {
           input.dispose();
+        }
+      };
+      document.body.dataset.inputflowReady = "true";
+    </script>
+  </body>
+</html>
+`;
+
+const pointerSmokeHtml = String.raw`
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      #target {
+        display: block;
+        inline-size: 160px;
+        block-size: 120px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@inputflow/core": "/packages/core/dist/index.js",
+          "@inputflow/browser": "/packages/browser/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <button id="target" type="button">pointer target</button>
+    <script type="module">
+      import { createInputFlow } from "@inputflow/core";
+      import { createPointerSource } from "@inputflow/browser";
+
+      const target = document.getElementById("target");
+      const input = createInputFlow({
+        maps: [
+          {
+            actions: [{ id: "browser.pointer.interact", valueType: "button" }],
+            bindings: [
+              {
+                id: "browser.pointer.interact.primary",
+                action: "browser.pointer.interact",
+                source: { kind: "control", path: "<Pointer>/button/primary" }
+              }
+            ]
+          }
+        ]
+      });
+
+      const pointer = createPointerSource({
+        target,
+        blurTarget: window,
+        now: () => window.inputFlowPointerNow ?? performance.now()
+      });
+      input.addSource(pointer);
+
+      const read = (timeMs = performance.now()) => {
+        window.inputFlowPointerNow = timeMs;
+        input.update(timeMs);
+        return input.readButton("browser.pointer.interact");
+      };
+
+      window.inputFlowPointerSmoke = {
+        read,
+        disconnect(timeMs = performance.now()) {
+          window.inputFlowPointerNow = timeMs;
+          pointer.disconnect();
+          return read(timeMs);
+        },
+        dispatchCancel() {
+          target.dispatchEvent(
+            new PointerEvent("pointercancel", {
+              button: 0,
+              bubbles: true
+            })
+          );
         }
       };
       document.body.dataset.inputflowReady = "true";
