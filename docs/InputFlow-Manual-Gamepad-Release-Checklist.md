@@ -1,10 +1,10 @@
 # InputFlow Manual Gamepad Release Checklist
 
 > Date: 2026-06-22
-> Scope: Phase 8 manual hardware release confidence
+> Scope: Phase 10 manual hardware release confidence
 
 This checklist covers physical Gamepad verification that cannot be made a
-stable automated CI gate in Phase 8.
+stable automated CI gate in Phase 10.
 
 Use `docs/InputFlow-Manual-Gamepad-Harness-Guide.md` for the reusable local
 manual harness path, launch command, and evidence recording workflow.
@@ -34,8 +34,8 @@ Record the exact setup before testing:
 | Controller model |  |
 | Connection type | USB / Bluetooth / other |
 | InputFlow commit |  |
-| Command baseline | `pnpm validate`, `pnpm browser:test` |
-| Physical test page |  |
+| Command baseline | `pnpm validate`, `pnpm browser:test`, `pnpm browser:test:all` |
+| Physical test page | `http://127.0.0.1:4173/examples/manual-gamepad-harness/index.html` |
 
 Recommended controller coverage:
 
@@ -91,7 +91,7 @@ Use one row per browser / controller pair:
 
 | Browser | Controller | Connection | Result | Notes / artifact |
 |---|---|---|---|---|
-|  |  |  | PASS / FAIL / SKIP |  |
+|  |  |  | PASS / FAIL / SKIP / BLOCKED |  |
 
 Classify failures as one of:
 
@@ -105,9 +105,15 @@ Classify failures as one of:
 
 ## Release Decision
 
-Manual Gamepad failure does not automatically block Phase 8 CI gates. It should
-block a release only when the release explicitly claims physical Gamepad support
-for the failing browser / controller class.
+Manual Gamepad failure or hardware absence does not automatically block Phase 10
+CI gates. It should block a release only when the release explicitly claims
+physical Gamepad support for the failing or untested browser / controller class.
+
+Use `HARDWARE_ACCEPTED` only when real physical controller evidence exists. Use
+`HARNESS_READY_NO_HARDWARE` when the harness, docs, and automated baseline are
+ready but the execution environment has no physical controller. Use
+`HARDWARE_BLOCKED` when the harness or required manual evidence is blocked by a
+real browser, hardware, or environment issue.
 
 If a failure is accepted, record the affected device, browser, and user-facing
 limitation in the release notes.

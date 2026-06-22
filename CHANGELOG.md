@@ -28,6 +28,8 @@ Status: release candidate review draft
   browser smoke, manual release dry-run, and optional browser matrix.
 - CI troubleshooting, remote CI observation, and manual Gamepad release
   checklist documents.
+- Manual Gamepad harness guide and Phase 10 physical evidence table for
+  release-confidence review without making hardware a required CI gate.
 - README, API examples, package metadata, package metadata guard, and package
   dry-run workflow for release candidate review.
 
@@ -55,13 +57,15 @@ gates and the remote release dry-run.
 
 ### Known Limits
 
-- The packages are not published to npm by Phase 9.
-- The repository does not create a git tag or GitHub Release in Phase 9.
+- The packages are not published to npm by this release-candidate review.
+- The repository does not create a git tag or GitHub Release in this
+  release-candidate review.
 - Package manifests currently use `UNLICENSED` until the owner chooses the
   public distribution license.
-- Optional Firefox and WebKit matrix remains manual / best effort.
+- Optional Firefox and WebKit browser matrix remains optional / best effort.
 - Automated gamepad coverage uses a browser-level `navigator.getGamepads`
-  fixture; physical controller pairing remains manual.
+  fixture; Phase 10 adds a manual harness and evidence table, but the current
+  executor environment has no physical controller evidence.
 - `@inputflow/schema` uses Zod for load-time validation only; schema validation
   must not enter the frame hot path.
 - `@inputflow/core` must remain free of DOM, React, Three, Sinan, Playwright,

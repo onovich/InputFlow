@@ -9,8 +9,8 @@ behavior, world picking, and editor commands. InputFlow owns the mechanical inpu
 contract.
 
 > Current status: v0.1 release candidate review. The packages are not published
-> by this repository in Phase 9. Do not treat this README as an npm release
-> announcement.
+> by this repository during this review. Do not treat this README as an npm
+> release announcement.
 
 ## Packages
 
@@ -101,19 +101,24 @@ That document covers:
 - Remote CI observation: `docs/InputFlow-Remote-CI-Observation-Guide.md`
 - Phase 9 package dry-run audit: `docs/InputFlow-Phase9-Package-Dry-Run-Audit.md`
 - Manual Gamepad checklist: `docs/InputFlow-Manual-Gamepad-Release-Checklist.md`
+- Manual Gamepad harness guide: `docs/InputFlow-Manual-Gamepad-Harness-Guide.md`
+- Phase 10 physical Gamepad evidence: `docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md`
 - Phase 9 guide: `docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md`
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
 
 ## Current Limits
 
-- No real npm publish, GitHub Release, or git tag in Phase 9.
+- No real npm publish, GitHub Release, or git tag in this release-candidate
+  review.
 - No React diagnostics package or rebind UI in v0.1.
 - No mobile virtual joystick, pointer picking, world ray, or entity hit logic.
 - No `@inputflow/sinan` package; Sinan integration remains a downstream adapter
   contract.
 - Automated gamepad coverage uses a browser-level `navigator.getGamepads`
-  fixture. Physical controller pairing remains manual release-confidence work.
-- Optional Firefox and WebKit smoke remain manual / best effort.
+  fixture. Phase 10 adds a manual harness and evidence table, but the current
+  executor environment has no physical controller evidence.
+- Firefox and WebKit browser smoke are covered by the optional Playwright
+  matrix; physical controller checks remain manual / best effort.
 
 ## Boundary
 
