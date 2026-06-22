@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>InputFlow Manual Gamepad Harness</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@inputflow/core": "/packages/core/dist/index.js",
+          "@inputflow/browser": "/packages/browser/dist/index.js"
+        }
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        line-height: 1.45;
+      }
+
+      body {
+        margin: 0;
+        background: #f6f7f9;
+        color: #171a1f;
+      }
+
+      main {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        font-weight: 700;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 16px;
+      }
+
+      button,
+      select {
+        border: 1px solid #c7ccd6;
+        border-radius: 6px;
+        background: #ffffff;
+        color: #171a1f;
+        font: inherit;
+        padding: 8px 10px;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #eef2f6;
+      }
+
+      .header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .panel {
+        border: 1px solid #dde2ea;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 16px;
+      }
+
+      .panel.wide {
+        grid-column: 1 / -1;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        min-block-size: 28px;
+        border-radius: 999px;
+        padding: 0 10px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .status.ok {
+        background: #ddf6e7;
+        color: #136c35;
+      }
+
+      .status.warn {
+        background: #fff0c2;
+        color: #765100;
+      }
+
+      .status.missing {
+        background: #edf0f5;
+        color: #566070;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .metric {
+        border: 1px solid #e3e7ee;
+        border-radius: 6px;
+        padding: 10px;
+        min-block-size: 68px;
+      }
+
+      .label {
+        color: #596171;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .value {
+        margin-top: 4px;
+        overflow-wrap: anywhere;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .value.small {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .bar {
+        block-size: 10px;
+        border-radius: 999px;
+        background: #edf0f5;
+        overflow: hidden;
+      }
+
+      .bar > span {
+        display: block;
+        block-size: 100%;
+        inline-size: 50%;
+        background: #1769e0;
+        transform-origin: left center;
+      }
+
+      pre {
+        min-block-size: 220px;
+        max-block-size: 320px;
+        margin: 0;
+        overflow: auto;
+        border-radius: 6px;
+        background: #11151c;
+        color: #e8edf7;
+        padding: 12px;
+        font-size: 13px;
+        white-space: pre-wrap;
+      }
+
+      @media (max-width: 760px) {
+        main {
+          padding: 16px;
+        }
+
+        .header,
+        .section-head {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .grid,
+        .metrics {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #11151c;
+          color: #f6f7f9;
+        }
+
+        button,
+        select,
+        .panel {
+          border-color: #303948;
+          background: #1a202a;
+          color: #f6f7f9;
+        }
+
+        button:hover {
+          background: #222b37;
+        }
+
+        .metric {
+          border-color: #303948;
+        }
+
+        .label {
+          color: #aeb6c4;
+        }
+
+        .bar {
+          background: #2a3342;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="header">
+        <div>
+          <h1>InputFlow Manual Gamepad Harness</h1>
+          <p id="summary">Waiting for browser Gamepad API state.</p>
+        </div>
+        <div class="actions">
+          <select id="slot" aria-label="Gamepad slot">
+            <option value="0">Slot 0</option>
+            <option value="1">Slot 1</option>
+            <option value="2">Slot 2</option>
+            <option value="3">Slot 3</option>
+          </select>
+          <button id="toggle" type="button">Pause</button>
+          <button id="clear" type="button">Clear log</button>
+          <button id="copy" type="button">Copy log</button>
+        </div>
+      </div>
+
+      <div class="grid">
+        <section class="panel">
+          <div class="section-head">
+            <h2>Browser Device</h2>
+            <span id="device-status" class="status missing">No gamepad</span>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <div class="label">API</div>
+              <div id="api" class="value small">unknown</div>
+            </div>
+            <div class="metric">
+              <div class="label">Visible slots</div>
+              <div id="visible-slots" class="value">0</div>
+            </div>
+            <div class="metric">
+              <div class="label">Controller id</div>
+              <div id="pad-id" class="value small">none</div>
+            </div>
+            <div class="metric">
+              <div class="label">Mapping</div>
+              <div id="mapping" class="value small">none</div>
+            </div>
+            <div class="metric">
+              <div class="label">Buttons</div>
+              <div id="buttons" class="value">0</div>
+            </div>
+            <div class="metric">
+              <div class="label">Axes</div>
+              <div id="axes" class="value">0</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-head">
+            <h2>InputFlow South Button</h2>
+            <span id="button-status" class="status missing">Released</span>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <div class="label">Value</div>
+              <div id="south-value" class="value">0.00</div>
+            </div>
+            <div class="metric">
+              <div class="label">Pressed</div>
+              <div id="south-pressed" class="value small">false</div>
+            </div>
+            <div class="metric">
+              <div class="label">Just pressed</div>
+              <div id="south-just-pressed" class="value small">false</div>
+            </div>
+            <div class="metric">
+              <div class="label">Just released</div>
+              <div id="south-just-released" class="value small">false</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-head">
+            <h2>InputFlow Left Stick</h2>
+            <span id="stick-status" class="status missing">Neutral</span>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <div class="label">X</div>
+              <div id="stick-x" class="value">0.00</div>
+              <div class="bar"><span id="stick-x-bar"></span></div>
+            </div>
+            <div class="metric">
+              <div class="label">Y</div>
+              <div id="stick-y" class="value">0.00</div>
+              <div class="bar"><span id="stick-y-bar"></span></div>
+            </div>
+            <div class="metric">
+              <div class="label">Magnitude</div>
+              <div id="stick-magnitude" class="value">0.00</div>
+            </div>
+            <div class="metric">
+              <div class="label">Changed</div>
+              <div id="stick-changed" class="value small">false</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-head">
+            <h2>Evidence Fields</h2>
+            <span class="status warn">Manual</span>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <div class="label">Commit</div>
+              <div id="commit" class="value small">record separately</div>
+            </div>
+            <div class="metric">
+              <div class="label">Connection</div>
+              <div class="value small">USB / Bluetooth / other</div>
+            </div>
+            <div class="metric">
+              <div class="label">Result</div>
+              <div class="value small">PASS / FAIL / SKIP / BLOCKED</div>
+            </div>
+            <div class="metric">
+              <div class="label">Artifact</div>
+              <div class="value small">screenshot or copied log</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel wide">
+          <div class="section-head">
+            <h2>Event Log</h2>
+            <span id="frame" class="status missing">0 frames</span>
+          </div>
+          <pre id="log" aria-live="polite"></pre>
+        </section>
+      </div>
+    </main>
+
+    <script type="module">
+      import { createInputFlow } from "@inputflow/core";
+      import { createGamepadSource } from "@inputflow/browser";
+
+      const map = {
+        actions: [
+          { id: "manual.gamepad.confirm", valueType: "button" },
+          { id: "manual.gamepad.move", valueType: "axis2d" }
+        ],
+        bindings: [
+          {
+            id: "manual.gamepad.confirm.south",
+            action: "manual.gamepad.confirm",
+            source: { kind: "control", path: "<Gamepad>/button/south" }
+          },
+          {
+            id: "manual.gamepad.move.left",
+            action: "manual.gamepad.move",
+            source: { kind: "control", path: "<Gamepad>/stick/left" }
+          }
+        ]
+      };
+
+      const elements = {
+        api: document.getElementById("api"),
+        axes: document.getElementById("axes"),
+        buttonStatus: document.getElementById("button-status"),
+        buttons: document.getElementById("buttons"),
+        clear: document.getElementById("clear"),
+        copy: document.getElementById("copy"),
+        deviceStatus: document.getElementById("device-status"),
+        frame: document.getElementById("frame"),
+        log: document.getElementById("log"),
+        mapping: document.getElementById("mapping"),
+        padId: document.getElementById("pad-id"),
+        slot: document.getElementById("slot"),
+        southJustPressed: document.getElementById("south-just-pressed"),
+        southJustReleased: document.getElementById("south-just-released"),
+        southPressed: document.getElementById("south-pressed"),
+        southValue: document.getElementById("south-value"),
+        stickChanged: document.getElementById("stick-changed"),
+        stickMagnitude: document.getElementById("stick-magnitude"),
+        stickStatus: document.getElementById("stick-status"),
+        stickX: document.getElementById("stick-x"),
+        stickXBar: document.getElementById("stick-x-bar"),
+        stickY: document.getElementById("stick-y"),
+        stickYBar: document.getElementById("stick-y-bar"),
+        summary: document.getElementById("summary"),
+        toggle: document.getElementById("toggle"),
+        visibleSlots: document.getElementById("visible-slots")
+      };
+
+      let selectedSlot = Number(elements.slot.value);
+      let running = true;
+      let frameCount = 0;
+      let previousConnected = false;
+      let previousNeutral = true;
+      const logLines = [];
+
+      const input = createInputFlow({ maps: [map] });
+      input.addSource(
+        createGamepadSource({
+          getGamepads: () => [getGamepads()[selectedSlot] ?? null]
+        })
+      );
+
+      elements.slot.addEventListener("change", () => {
+        selectedSlot = Number(elements.slot.value);
+        appendLog(`selected slot ${selectedSlot}`);
+      });
+
+      elements.toggle.addEventListener("click", () => {
+        running = !running;
+        elements.toggle.textContent = running ? "Pause" : "Resume";
+        appendLog(running ? "resumed polling" : "paused polling");
+      });
+
+      elements.clear.addEventListener("click", () => {
+        logLines.length = 0;
+        renderLog();
+      });
+
+      elements.copy.addEventListener("click", async () => {
+        const text = logLines.join("\n");
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(text);
+          appendLog("copied log to clipboard");
+          return;
+        }
+        appendLog("clipboard API unavailable; copy log manually");
+      });
+
+      window.addEventListener("gamepadconnected", (event) => {
+        appendLog(`gamepadconnected index=${event.gamepad.index} id=${event.gamepad.id}`);
+      });
+
+      window.addEventListener("gamepaddisconnected", (event) => {
+        appendLog(`gamepaddisconnected index=${event.gamepad.index} id=${event.gamepad.id}`);
+      });
+
+      appendLog("harness ready");
+      requestAnimationFrame(tick);
+
+      function tick(timeMs) {
+        if (running) {
+          renderFrame(timeMs);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      function renderFrame(timeMs) {
+        frameCount += 1;
+        input.update(timeMs);
+
+        const pads = getGamepads();
+        const selected = pads[selectedSlot] ?? null;
+        const connected = Boolean(selected && selected.connected !== false);
+        const confirm = input.readButton("manual.gamepad.confirm");
+        const move = input.readAxis2D("manual.gamepad.move");
+        const neutral = Math.abs(move.value.x) < 0.05 && Math.abs(move.value.y) < 0.05;
+
+        elements.api.textContent = hasGamepadApi() ? "navigator.getGamepads" : "unavailable";
+        elements.visibleSlots.textContent = String(pads.filter(Boolean).length);
+        elements.padId.textContent = selected?.id || "none";
+        elements.mapping.textContent = selected?.mapping || "none";
+        elements.buttons.textContent = String(selected?.buttons?.length ?? 0);
+        elements.axes.textContent = String(selected?.axes?.length ?? 0);
+        elements.frame.textContent = `${frameCount} frames`;
+
+        elements.deviceStatus.textContent = connected ? "Connected" : "No gamepad";
+        elements.deviceStatus.className = `status ${connected ? "ok" : "missing"}`;
+        elements.summary.textContent = connected
+          ? "Physical controller is visible to the selected browser slot."
+          : "No physical controller is visible to the selected browser slot.";
+
+        elements.southValue.textContent = confirm.value.toFixed(2);
+        elements.southPressed.textContent = String(confirm.isPressed);
+        elements.southJustPressed.textContent = String(confirm.justPressed);
+        elements.southJustReleased.textContent = String(confirm.justReleased);
+        elements.buttonStatus.textContent = confirm.isPressed ? "Pressed" : "Released";
+        elements.buttonStatus.className = `status ${confirm.isPressed ? "ok" : "missing"}`;
+
+        elements.stickX.textContent = move.value.x.toFixed(2);
+        elements.stickY.textContent = move.value.y.toFixed(2);
+        elements.stickMagnitude.textContent = move.magnitude.toFixed(2);
+        elements.stickChanged.textContent = String(move.changed);
+        elements.stickStatus.textContent = neutral ? "Neutral" : "Moved";
+        elements.stickStatus.className = `status ${neutral ? "missing" : "ok"}`;
+        elements.stickXBar.style.transform = `scaleX(${axisBarScale(move.value.x)})`;
+        elements.stickYBar.style.transform = `scaleX(${axisBarScale(move.value.y)})`;
+
+        if (connected !== previousConnected) {
+          appendLog(connected ? `connected slot ${selectedSlot}` : `missing slot ${selectedSlot}`);
+          previousConnected = connected;
+        }
+        if (confirm.justPressed) {
+          appendLog("south button pressed");
+        }
+        if (confirm.justReleased) {
+          appendLog("south button released");
+        }
+        if (neutral !== previousNeutral) {
+          appendLog(neutral ? "left stick neutral" : "left stick moved");
+          previousNeutral = neutral;
+        }
+      }
+
+      function axisBarScale(value) {
+        return Math.max(0.02, Math.min(1, (value + 1) / 2));
+      }
+
+      function hasGamepadApi() {
+        return typeof navigator.getGamepads === "function";
+      }
+
+      function getGamepads() {
+        if (!hasGamepadApi()) {
+          return [];
+        }
+        return Array.from(navigator.getGamepads());
+      }
+
+      function appendLog(message) {
+        const stamp = new Date().toISOString();
+        logLines.push(`${stamp} ${message}`);
+        if (logLines.length > 200) {
+          logLines.shift();
+        }
+        renderLog();
+      }
+
+      function renderLog() {
+        elements.log.textContent = logLines.join("\n");
+        elements.log.scrollTop = elements.log.scrollHeight;
+      }
+    </script>
+  </body>
+</html>
