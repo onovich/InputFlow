@@ -49,6 +49,8 @@ evidence after the last RC validation commit.
   `@inputflow/schema`, `@inputflow/testing`, and `@inputflow/browser`.
 - `pnpm docs:check`, `pnpm structure:check`, and `git diff --check` passed for
   Round 11 documentation and guard changes.
+- Round 13 buffer refresh: `pnpm validate`, `pnpm package:dry-run`,
+  `git diff --check`, and BOM checks passed with no drift or repair required.
 
 ## Corrective Work
 
@@ -86,10 +88,16 @@ Per-round commits so far:
 - Round 10: `80edb8e` docs: record optional browser matrix evidence
 - Round 11: `0434733` docs: add phase 9 package dry-run audit
 - Round 12: this final report draft update commit
+- Round 13: this buffer verification update commit
+
+## Buffer Round Use
+
+- Round 13: consumed. Refreshed local validate and package dry-run after the
+  Round 12 final report draft. No docs, package, workflow, or tarball drift was
+  found.
 
 ## Remaining Refreshes
 
-- Round 13 buffer validation and any repair if drift appears.
 - Round 14 remote CI and optional matrix evidence refresh.
 - Round 15 local release confidence refresh.
 - Round 16 final validation, final report update, push, and planner/checker
