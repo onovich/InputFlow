@@ -27,7 +27,8 @@ const requiredDocs = [
   "docs/adr/0005-schema-hot-path-boundary.md",
   "docs/adr/0006-browser-matrix-strategy.md",
   "docs/adr/0007-ci-release-gates.md",
-  "docs/adr/0008-v0.1-release-candidate-policy.md"
+  "docs/adr/0008-v0.1-release-candidate-policy.md",
+  "docs/adr/0009-physical-gamepad-acceptance-policy.md"
 ];
 
 const missing = requiredDocs.filter((file) => !existsSync(file));
