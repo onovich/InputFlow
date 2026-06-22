@@ -80,6 +80,22 @@ pnpm browser:test:all
 
 Install missing Playwright browsers with `pnpm browser:install`.
 
+## CI Release Gates
+
+Phase 8 mirrors the local ops commands into GitHub Actions workflows without
+changing the default `Validate.cmd` contract.
+
+| Local gate | CI workflow | Required |
+|---|---|---|
+| `Validate.cmd` / `pnpm validate` | `.github/workflows/validate.yml` | Yes |
+| `Smoke.cmd` / `pnpm browser:test` | `.github/workflows/browser-smoke.yml` | Yes |
+| `ReleaseDryRun.cmd` / `pnpm release:dry-run` | `.github/workflows/release-dry-run.yml` | Manual release confidence |
+| `pnpm browser:test:all` | `.github/workflows/optional-browser-matrix.yml` | Manual best effort |
+
+Use `docs/InputFlow-CI-Troubleshooting.md` to classify CI failures by layer.
+Use `docs/InputFlow-Manual-Gamepad-Release-Checklist.md` for physical controller
+release confidence. Physical Gamepad checks are manual and do not run in CI.
+
 ## Dev Server
 
 Start command: ``
