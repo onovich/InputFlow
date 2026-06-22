@@ -84,6 +84,7 @@ input.addSource(createPointerSource());
 ## Documentation
 
 - API examples: `docs/InputFlow-v0.1-API-Examples.md`
+- Changelog / RC notes: `CHANGELOG.md`
 - Technical architecture: `docs/InputFlow-Technical-Architecture-v0.1.md`
 - Development plan: `docs/InputFlow-Development-Plan-v0.1.md`
 - Browser smoke guide: `docs/InputFlow-Browser-Smoke-Guide.md`

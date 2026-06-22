@@ -4,6 +4,7 @@
 > 状态：Execution plan draft
 > 配套文档：`docs/InputFlow-Technical-Architecture-v0.1.md`
 > 仓库 README：`README.md`
+> Changelog / RC notes：`CHANGELOG.md`
 > Goal 模式执行入口：`docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md`（Phase 0-6，24 轮）
 > 下一阶段 Goal 入口：`docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md`（Phase 7，16 轮）
 > Phase 8 Goal 入口：`docs/InputFlow-Phase8-CI-Release-Gates-Goal-Mode-Execution-Guide.md`（Phase 8，16 轮）

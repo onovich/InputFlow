@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 
 const requiredDocs = [
   "README.md",
+  "CHANGELOG.md",
   "docs/InputFlow-Development-Plan-v0.1.md",
   "docs/InputFlow-Browser-Smoke-Guide.md",
   "docs/InputFlow-CI-Troubleshooting.md",
@@ -34,9 +35,13 @@ const plan = readFileSync("docs/InputFlow-Development-Plan-v0.1.md", "utf8");
 if (!plan.includes("README.md")) {
   throw new Error("Development plan must link README.md");
 }
+if (!plan.includes("CHANGELOG.md")) {
+  throw new Error("Development plan must link CHANGELOG.md");
+}
 
 const readme = readFileSync("README.md", "utf8");
 for (const requiredReadmeLink of [
+  "CHANGELOG.md",
   "docs/InputFlow-v0.1-API-Examples.md",
   "docs/InputFlow-Technical-Architecture-v0.1.md",
   "docs/InputFlow-CI-Troubleshooting.md",
