@@ -1,8 +1,8 @@
 # InputFlow Phase 11 Final Report
 
 Date: 2026-06-22
-Status: HANDOFF_READY_BLOCKED_DOWNSTREAM (draft before final validation)
-Final commit: pending Round 16 final validation update
+Status: HANDOFF_READY_BLOCKED_DOWNSTREAM
+Final commit: the commit containing this final report update; the exact SHA is emitted in the executor completion handoff after push.
 Pushed branch: main
 
 ## Summary
@@ -64,8 +64,20 @@ Completed before this draft:
 - Round 15 release confidence refresh: `pnpm release:dry-run` passed with 15
   Chromium browser tests and package dry-run; standalone `pnpm package:dry-run`
   passed for all four workspace packages.
+- Round 16 final validation matrix:
+  - `git diff --check`: passed.
+  - `pnpm sinan:contract:check`: passed.
+  - `pnpm docs:check`: passed.
+  - `pnpm structure:check`: passed.
+  - `pnpm validate`: passed with 27 files / 89 tests.
+  - `pnpm browser:test`: passed with 15 Chromium tests.
+  - `pnpm browser:test:all`: passed with 45 tests across Chromium, Firefox,
+    and WebKit.
+  - `pnpm release:dry-run`: passed.
+  - `pnpm package:dry-run`: passed.
+  - explicit `packages/core` boundary scan: no output; treated as PASS.
 
-Final validation matrix is pending Round 16:
+Final validation matrix used:
 
 ```powershell
 git diff --check
@@ -143,10 +155,11 @@ Sinan downstream owner still needs to provide:
 - Round 9: `462988f` - README/API/development plan sync
 - Round 10: `4448ef7` - package/export audit
 - Round 11: `b852e66` - handoff packet
-- Round 12: this draft report update commit
-- Round 13: this buffer validation report update commit
-- Round 14: this browser/replay/diagnostics refresh report update commit
-- Round 15: this release-confidence refresh report update commit
+- Round 12: `fe2bdd3` - final report draft
+- Round 13: `676fe2d` - buffer validation refresh
+- Round 14: `0a5423d` - browser/replay/diagnostics refresh
+- Round 15: `7dd1406` - release confidence refresh
+- Round 16: this final validation report update commit
 
 ## Buffer Rounds
 
@@ -174,6 +187,25 @@ Sinan downstream owner still needs to provide:
   `@inputflow/browser`. Standalone `pnpm package:dry-run` also passed. npm
   reported the same unknown local environment config warnings during pack
   summaries, but both commands exited successfully.
+
+## Final Validation
+
+- `git status --short --branch`: clean `main...origin/main` before final
+  report update.
+- `git diff --check`: passed.
+- `pnpm sinan:contract:check`: passed.
+- `pnpm docs:check`: passed.
+- `pnpm structure:check`: passed.
+- `pnpm validate`: passed with 27 files / 89 tests.
+- `pnpm browser:test`: passed with 15 Chromium tests.
+- `pnpm browser:test:all`: passed with 45 tests across Chromium, Firefox, and
+  WebKit.
+- `pnpm release:dry-run`: passed with 15 Chromium tests and package dry-run.
+- `pnpm package:dry-run`: passed for all four workspace packages.
+- Boundary scan: no output for forbidden core host/browser/runtime terms.
+
+These results prove the InputFlow repository handoff assets are complete and
+guarded. They do not prove a real downstream Sinan adapter has been accepted.
 
 ## Recommended Checker Conclusion
 
