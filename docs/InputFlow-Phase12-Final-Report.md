@@ -94,4 +94,16 @@ Phase 12 did not:
 
 ## Final Validation
 
-Final validation will be filled in during the closing Phase 12 rounds.
+Round 15 final release confidence matrix:
+
+| Command | Result |
+|---|---|
+| `git diff --check` | PASS |
+| `pnpm release:authorization:check` | PASS |
+| `pnpm validate` | PASS, 27 test files / 89 tests |
+| `pnpm browser:test` | PASS, Chromium 15/15 |
+| `pnpm browser:test:all` | PASS, Chromium / Firefox / WebKit 45/45 |
+| `pnpm release:dry-run` | PASS |
+| `pnpm package:dry-run` | PASS |
+
+Final Round 16 validation will be filled in during the closing round.
