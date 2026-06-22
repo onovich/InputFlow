@@ -16,6 +16,7 @@
 > Phase 9 remote CI evidence：`docs/InputFlow-Phase9-Remote-CI-Evidence.md`
 > Phase 9 package dry-run audit：`docs/InputFlow-Phase9-Package-Dry-Run-Audit.md`
 > Manual Gamepad harness guide：`docs/InputFlow-Manual-Gamepad-Harness-Guide.md`
+> Phase 10 physical Gamepad evidence：`docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md`
 > Manual Gamepad checklist：`docs/InputFlow-Manual-Gamepad-Release-Checklist.md`
 > Phase 7 完成报告：`docs/InputFlow-Phase7-Final-Report.md`
 > Phase 8 完成报告：`docs/InputFlow-Phase8-Final-Report.md`
