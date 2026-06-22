@@ -42,6 +42,41 @@ describe("Sinan adapter contract fixture", () => {
     });
   });
 
+  it("keeps pause input isolated from runtime gameplay", () => {
+    const fixture = createSinanGateAdapterContractFixture();
+    const result = runSinanGateAdapterContractReplay(fixture.traces.pauseBlocksGameplay, fixture);
+
+    expect(result.frames[0]?.buttons[sinanGateActionIds.pauseConfirm]).toMatchObject({
+      isPressed: true,
+      justPressed: true
+    });
+    expect(result.frames[0]?.buttons[sinanGateActionIds.runtimeInteract]).toMatchObject({
+      isPressed: false,
+      justPressed: false
+    });
+  });
+
+  it("restores runtime gameplay after pause context is released", () => {
+    const fixture = createSinanGateAdapterContractFixture();
+    const result = runSinanGateAdapterContractReplay(
+      fixture.traces.pauseReleaseRestoresGameplay,
+      fixture
+    );
+
+    expect(result.frames[0]?.buttons[sinanGateActionIds.pauseConfirm]).toMatchObject({
+      isPressed: true,
+      justPressed: true
+    });
+    expect(result.frames[0]?.buttons[sinanGateActionIds.runtimeInteract]).toMatchObject({
+      isPressed: false,
+      justPressed: false
+    });
+    expect(result.frames[2]?.buttons[sinanGateActionIds.runtimeInteract]).toMatchObject({
+      isPressed: true,
+      justPressed: true
+    });
+  });
+
   it("treats editor viewport select as a host-owned action id", () => {
     const fixture = createSinanGateAdapterContractFixture();
     const result = runSinanGateAdapterContractReplay(fixture.traces.editorSelect, fixture);

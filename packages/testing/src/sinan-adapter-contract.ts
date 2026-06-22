@@ -9,18 +9,22 @@ export interface SinanGateAdapterContractFixture {
     readonly gamepadInteract: ReplayTrace;
     readonly editorSelect: ReplayTrace;
     readonly modalBlocksGameplay: ReplayTrace;
+    readonly pauseBlocksGameplay: ReplayTrace;
+    readonly pauseReleaseRestoresGameplay: ReplayTrace;
   };
 }
 
 export const sinanGateActionIds = {
   runtimeInteract: "runtime.gameplay.interact",
   editorSelect: "editor.viewport.select",
+  pauseConfirm: "runtime.pause.confirm",
   modalConfirm: "ui.modal.confirm"
 } as const;
 
 export const sinanGateMapIds = {
   gameplay: "gameplay",
   editorViewport: "editorViewport",
+  pause: "pause",
   modal: "modal"
 } as const;
 
@@ -76,8 +80,20 @@ export const createSinanGateAdapterContractFixture = (): SinanGateAdapterContrac
     ]
   };
 
+  const pauseMap: InputMapDefinition = {
+    id: sinanGateMapIds.pause,
+    actions: [{ id: sinanGateActionIds.pauseConfirm, valueType: "button" }],
+    bindings: [
+      {
+        id: "pause.confirm.keyboard",
+        action: sinanGateActionIds.pauseConfirm,
+        source: { kind: "control", path: "<Keyboard>/code/KeyE" }
+      }
+    ]
+  };
+
   return {
-    maps: [gameplayMap, modalMap, editorViewportMap],
+    maps: [gameplayMap, modalMap, editorViewportMap, pauseMap],
     traces: {
       keyboardInteract: createGameplayPressTrace("<Keyboard>/code/KeyE"),
       pointerInteract: createGameplayPressTrace("<Pointer>/button/primary"),
@@ -98,6 +114,59 @@ export const createSinanGateAdapterContractFixture = (): SinanGateAdapterContrac
           { t: 16, type: "frame" },
           { t: 32, type: "control", control: "<Pointer>/button/primary", value: 0 },
           { t: 32, type: "frame" }
+        ]
+      },
+      pauseBlocksGameplay: {
+        schemaVersion: 1,
+        kind: "raw-control-trace",
+        clock: "relative-ms",
+        events: [
+          {
+            t: 0,
+            type: "context.activate",
+            contextId: "runtimeGameplay",
+            priority: 400,
+            maps: [sinanGateMapIds.gameplay]
+          },
+          {
+            t: 0,
+            type: "context.activate",
+            contextId: "runtimePause",
+            priority: 900,
+            routing: "consumeMatched",
+            maps: [sinanGateMapIds.pause]
+          },
+          { t: 16, type: "control", control: "<Keyboard>/code/KeyE", value: 1 },
+          { t: 16, type: "frame" }
+        ]
+      },
+      pauseReleaseRestoresGameplay: {
+        schemaVersion: 1,
+        kind: "raw-control-trace",
+        clock: "relative-ms",
+        events: [
+          {
+            t: 0,
+            type: "context.activate",
+            contextId: "runtimeGameplay",
+            priority: 400,
+            maps: [sinanGateMapIds.gameplay]
+          },
+          {
+            t: 0,
+            type: "context.activate",
+            contextId: "runtimePause",
+            priority: 900,
+            routing: "consumeMatched",
+            maps: [sinanGateMapIds.pause]
+          },
+          { t: 16, type: "control", control: "<Keyboard>/code/KeyE", value: 1 },
+          { t: 16, type: "frame" },
+          { t: 32, type: "control", control: "<Keyboard>/code/KeyE", value: 0 },
+          { t: 32, type: "frame" },
+          { t: 48, type: "context.deactivate", contextId: "runtimePause" },
+          { t: 64, type: "control", control: "<Keyboard>/code/KeyE", value: 1 },
+          { t: 64, type: "frame" }
         ]
       },
       modalBlocksGameplay: {
