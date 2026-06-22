@@ -53,7 +53,7 @@
 
 - Round 1-10 wrapper validation: passed each committed round.
 - `pnpm validate`: passed in Rounds 3, 6, 9, and wrapper commits.
-- `pnpm browser:test`: passed in Rounds 3 and 6.
+- `pnpm browser:test`: passed in Rounds 3, 6, 12, and 13.
 - `pnpm browser:test:all`: passed in Rounds 7 and 8 with 45 tests.
 - `pnpm release:dry-run`: passed in Round 12; this includes Chromium browser
   smoke and `pnpm package:dry-run`.
@@ -83,7 +83,8 @@
 
 ## Buffer Rounds
 
-- Round 13: pending
+- Round 13: used for validation refresh; `pnpm validate`, `pnpm browser:test`,
+  `pnpm docs:check`, and `git diff --check` passed with no repair required.
 - Round 14: pending
 - Round 15: pending
 
