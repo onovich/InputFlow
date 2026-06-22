@@ -35,12 +35,16 @@ does not perform release execution.
 
 ## Evidence Snapshot
 
-Remote CI evidence captured for commit
+Remote push CI evidence captured for commit
+`13e2551953e0c409b38b21ffeb958a3b9ce86e62`:
+
+- Validate: `https://github.com/onovich/InputFlow/actions/runs/27959896472`
+- Required Browser Smoke:
+  `https://github.com/onovich/InputFlow/actions/runs/27959897277`
+
+Remote manual non-publishing evidence captured for commit
 `8a796e86789cdd7629b972539ffc968f66841a48`:
 
-- Validate: `https://github.com/onovich/InputFlow/actions/runs/27958368328`
-- Required Browser Smoke:
-  `https://github.com/onovich/InputFlow/actions/runs/27958368381`
 - Release Dry Run:
   `https://github.com/onovich/InputFlow/actions/runs/27958498216`
 - Optional Browser Matrix:
