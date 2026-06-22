@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 const requiredDocs = [
   "docs/InputFlow-Development-Plan-v0.1.md",
   "docs/InputFlow-Browser-Smoke-Guide.md",
+  "docs/InputFlow-CI-Troubleshooting.md",
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Final-Report.md",
@@ -37,6 +38,11 @@ if (!plan.includes(phase7GuidePath)) {
 const browserSmokeGuidePath = "docs/InputFlow-Browser-Smoke-Guide.md";
 if (!plan.includes(browserSmokeGuidePath)) {
   throw new Error(`Development plan must link ${browserSmokeGuidePath}`);
+}
+
+const ciTroubleshootingPath = "docs/InputFlow-CI-Troubleshooting.md";
+if (!plan.includes(ciTroubleshootingPath)) {
+  throw new Error(`Development plan must link ${ciTroubleshootingPath}`);
 }
 
 const phase7FinalReportPath = "docs/InputFlow-Phase7-Final-Report.md";
