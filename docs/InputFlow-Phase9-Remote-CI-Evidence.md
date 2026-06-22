@@ -66,6 +66,23 @@ required release gate. The remote job completed Chromium, Firefox, and WebKit
 coverage through `pnpm browser:test:all`; the local Round 10
 `pnpm browser:test:all` check also passed.
 
+## Round 14 Remote Refresh
+
+Observed commit:
+
+- Short SHA: `858b435`
+- Full SHA: `858b435ae8cfcf97edbe9c55fe0d00c1ae34494d`
+- Branch: `main`
+
+| Workflow | Run id | Event | Branch | Commit | Status | Conclusion | URL | Observed at |
+|---|---:|---|---|---|---|---|---|---|
+| `validate.yml` | `27940604220` | push | `main` | `858b435ae8cfcf97edbe9c55fe0d00c1ae34494d` | completed | success | https://github.com/onovich/InputFlow/actions/runs/27940604220 | 2026-06-22 16:46 +08:00 |
+| `browser-smoke.yml` | `27940604244` | push | `main` | `858b435ae8cfcf97edbe9c55fe0d00c1ae34494d` | completed | success | https://github.com/onovich/InputFlow/actions/runs/27940604244 | 2026-06-22 16:46 +08:00 |
+| `optional-browser-matrix.yml` | `27940638294` | workflow_dispatch | `main` | `858b435ae8cfcf97edbe9c55fe0d00c1ae34494d` | completed | success | https://github.com/onovich/InputFlow/actions/runs/27940638294 | 2026-06-22 16:47 +08:00 |
+
+Local Round 14 verification also passed `pnpm workflow:check` and
+`pnpm browser:test:all` with 45 tests across Chromium, Firefox, and WebKit.
+
 ## Pending Remote Evidence
 
 Still pending for later Phase 9 rounds:

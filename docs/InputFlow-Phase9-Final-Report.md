@@ -31,6 +31,10 @@ evidence after the last RC validation commit.
   commit `e44093b28fcd2779e3dbd4162c71e0a2b1578563`.
 - Optional browser matrix: `optional-browser-matrix.yml` run `27940149513`,
   success on commit `b65613aa4c3c98a2c85e63618d6d17cb31a39f8c`.
+- Round 14 remote refresh: `validate.yml` run `27940604220`,
+  `browser-smoke.yml` run `27940604244`, and
+  `optional-browser-matrix.yml` run `27940638294` all succeeded on commit
+  `858b435ae8cfcf97edbe9c55fe0d00c1ae34494d`.
 - Remote evidence document:
   `docs/InputFlow-Phase9-Remote-CI-Evidence.md`.
 - Package dry-run audit:
@@ -51,6 +55,9 @@ evidence after the last RC validation commit.
   Round 11 documentation and guard changes.
 - Round 13 buffer refresh: `pnpm validate`, `pnpm package:dry-run`,
   `git diff --check`, and BOM checks passed with no drift or repair required.
+- Round 14 evidence refresh: `pnpm workflow:check` and
+  `pnpm browser:test:all` passed locally with 45 tests across Chromium,
+  Firefox, and WebKit.
 
 ## Corrective Work
 
@@ -88,17 +95,20 @@ Per-round commits so far:
 - Round 10: `80edb8e` docs: record optional browser matrix evidence
 - Round 11: `0434733` docs: add phase 9 package dry-run audit
 - Round 12: this final report draft update commit
-- Round 13: this buffer verification update commit
+- Round 13: `858b435` docs: record phase 9 buffer verification
+- Round 14: this remote evidence refresh update commit
 
 ## Buffer Round Use
 
 - Round 13: consumed. Refreshed local validate and package dry-run after the
   Round 12 final report draft. No docs, package, workflow, or tarball drift was
   found.
+- Round 14: consumed. Refreshed required remote validate, required remote
+  browser smoke, optional remote browser matrix, local workflow guard, and local
+  three-browser smoke. No repair was required.
 
 ## Remaining Refreshes
 
-- Round 14 remote CI and optional matrix evidence refresh.
 - Round 15 local release confidence refresh.
 - Round 16 final validation, final report update, push, and planner/checker
   handoff.
