@@ -29,19 +29,19 @@ baseline confidence, but they do not count as physical controller PASS.
 | `SKIP` | The test combination was intentionally not available in this pass. |
 | `BLOCKED` | A real environmental or harness blocker prevents a trustworthy result. |
 
-## Setup Template
+## Latest Execution Setup
 
 | Field | Value |
 |---|---|
 | Tester | Codex executor |
-| Date / time | 2026-06-22 17:26 +08:00 |
+| Date / time | 2026-06-22 17:29 +08:00 |
 | Operating system | Windows local Codex workspace |
-| Browser and version | Chromium / Chrome physical check not executed with real hardware |
+| Browser and version | Physical browser checks not executed with real hardware |
 | Controller model | No physical controller available to this executor environment |
 | Connection type | Not available |
-| InputFlow commit | `a654e25807c884f61a493c4d9f6f78e9602d8bbf` |
+| InputFlow commit | `f9b06d0cd17a37cf9b992eef60c3e179ff87b7d2` |
 | Harness URL | `http://127.0.0.1:4173/examples/manual-gamepad-harness/index.html` |
-| Baseline commands | `pnpm validate`, `pnpm browser:test` |
+| Baseline commands | `pnpm validate`, `pnpm browser:test`, `pnpm browser:test:all` |
 | Artifact | Evidence row below; no physical screenshot or copied log exists |
 
 ## Browser / Controller Matrix
@@ -50,7 +50,7 @@ baseline confidence, but they do not count as physical controller PASS.
 |---|---|---|---|---|---|---|---|---|---|
 | Chromium / Chrome | No physical controller available | USB | `a654e25807c884f61a493c4d9f6f78e9602d8bbf` | BLOCKED | BLOCKED | BLOCKED | BLOCKED | BLOCKED | Round 6 could not observe real hardware in the executor environment. Automated Chromium fixture remains separate baseline evidence. |
 | Chromium / Chrome |  | Bluetooth |  | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED |  |  |
-| Firefox |  | USB |  | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED |  |  |
+| Firefox | No physical controller available | USB | `f9b06d0cd17a37cf9b992eef60c3e179ff87b7d2` | BLOCKED | BLOCKED | BLOCKED | BLOCKED | BLOCKED | Round 7 could not observe real hardware in the executor environment. Cross-browser automated fixtures remain separate baseline evidence. |
 | Firefox |  | Bluetooth |  | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED |  |  |
 | WebKit / Safari |  | USB |  | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED |  |  |
 | WebKit / Safari |  | Bluetooth |  | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED | PASS / FAIL / SKIP / BLOCKED |  |  |
@@ -58,8 +58,9 @@ baseline confidence, but they do not count as physical controller PASS.
 ## Current Phase 10 Execution Notes
 
 Round 6 Chromium / Chrome physical check was blocked because the executor
-environment has no available physical controller. No South button, left stick,
-disconnect reset, or reconnect behavior was observed with real hardware.
+environment has no available physical controller. Round 7 Firefox physical check
+was blocked for the same reason. No South button, left stick, disconnect reset,
+or reconnect behavior was observed with real hardware.
 
 Until a tester supplies real controller and browser observations, Phase 10 must
 not report `HARDWARE_ACCEPTED`. If the harness and automated baseline remain
