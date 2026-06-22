@@ -85,4 +85,19 @@ for (const workflow of workflowChecks) {
   }
 }
 
+const validateWorkflow = readFileSync(".github/workflows/validate.yml", "utf8");
+for (const required of [
+  "uses: actions/checkout@v4",
+  "uses: actions/setup-node@v4",
+  "node-version: 24",
+  "cache: pnpm",
+  "run: corepack enable",
+  "run: pnpm install --frozen-lockfile",
+  "run: pnpm validate"
+]) {
+  if (!validateWorkflow.includes(required)) {
+    throw new Error(`.github/workflows/validate.yml must include ${required}`);
+  }
+}
+
 console.log("structure check passed");
