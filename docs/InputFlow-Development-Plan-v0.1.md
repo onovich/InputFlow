@@ -12,6 +12,7 @@
 > Phase 10 Goal 入口：`docs/InputFlow-Phase10-Physical-Gamepad-Acceptance-Goal-Mode-Execution-Guide.md`（Phase 10，16 轮）
 > Phase 11 Goal 入口：`docs/InputFlow-Phase11-Sinan-Adapter-POC-Handoff-Goal-Mode-Execution-Guide.md`（Phase 11，16 轮）
 > Phase 11 Sinan handoff strategy：`docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md`
+> Phase 11 Sinan fixture inventory：`docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md`
 > Browser smoke 指南：`docs/InputFlow-Browser-Smoke-Guide.md`
 > CI troubleshooting 指南：`docs/InputFlow-CI-Troubleshooting.md`
 > Remote CI observation 指南：`docs/InputFlow-Remote-CI-Observation-Guide.md`

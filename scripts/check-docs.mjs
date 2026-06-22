@@ -25,6 +25,7 @@ const requiredDocs = [
   "docs/InputFlow-Technical-Architecture-v0.1.md",
   "docs/InputFlow-Sinan-Alignment-and-Roadmap-2026-06-20.md",
   "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md",
+  "docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md",
   "docs/adr/0001-package-manager.md",
   "docs/adr/0002-host-semantics-boundary.md",
   "docs/adr/0003-replay-first-class-contract.md",
@@ -156,6 +157,11 @@ if (!plan.includes(phase11GuidePath)) {
 const phase11HandoffStrategyPath = "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md";
 if (!plan.includes(phase11HandoffStrategyPath)) {
   throw new Error(`Development plan must link ${phase11HandoffStrategyPath}`);
+}
+
+const phase11FixtureInventoryPath = "docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md";
+if (!plan.includes(phase11FixtureInventoryPath)) {
+  throw new Error(`Development plan must link ${phase11FixtureInventoryPath}`);
 }
 
 for (const adr of requiredDocs.filter((file) => file.startsWith("docs/adr/"))) {
