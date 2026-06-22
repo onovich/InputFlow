@@ -19,6 +19,7 @@
 > Phase 12 local release confidence: `docs/release/InputFlow-v0.1-Local-Release-Confidence.md`
 > Phase 12 publish simulation and provenance notes: `docs/release/InputFlow-v0.1-Publish-Simulation-and-Provenance.md`
 > Phase 12 rollback and deprecation policy: `docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md`
+> Phase 12 final release candidate audit: `docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md`
 > Phase 12 release authorization check command: `pnpm release:authorization:check`
 > Phase 11 Sinan handoff strategy：`docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md`
 > Phase 11 Sinan fixture inventory：`docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md`

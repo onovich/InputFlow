@@ -65,6 +65,9 @@ Publish simulation and provenance notes are maintained in
 Rollback and deprecation policy is maintained in
 `docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md`.
 
+Final release candidate audit is maintained in
+`docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md`.
+
 ## Evidence Entry Points
 
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
@@ -79,6 +82,7 @@ Rollback and deprecation policy is maintained in
 - Local release confidence: `docs/release/InputFlow-v0.1-Local-Release-Confidence.md`
 - Publish simulation and provenance notes: `docs/release/InputFlow-v0.1-Publish-Simulation-and-Provenance.md`
 - Rollback and deprecation policy: `docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md`
+- Final release candidate audit: `docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md`
 
 ## Non-Scope Confirmed
 

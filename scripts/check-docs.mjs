@@ -21,6 +21,7 @@ const requiredDocs = [
   "docs/release/InputFlow-v0.1-Local-Release-Confidence.md",
   "docs/release/InputFlow-v0.1-Publish-Simulation-and-Provenance.md",
   "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md",
+  "docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md",
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Final-Report.md",
@@ -91,6 +92,7 @@ for (const requiredReadmeLink of [
   "docs/release/InputFlow-v0.1-Local-Release-Confidence.md",
   "docs/release/InputFlow-v0.1-Publish-Simulation-and-Provenance.md",
   "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md",
+  "docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md",
   "docs/InputFlow-Phase9-Final-Report.md"
 ]) {
   if (!readme.includes(requiredReadmeLink)) {
@@ -237,6 +239,12 @@ const phase12RollbackPolicyPath =
   "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md";
 if (!plan.includes(phase12RollbackPolicyPath)) {
   throw new Error(`Development plan must link ${phase12RollbackPolicyPath}`);
+}
+
+const phase12FinalRcAuditPath =
+  "docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md";
+if (!plan.includes(phase12FinalRcAuditPath)) {
+  throw new Error(`Development plan must link ${phase12FinalRcAuditPath}`);
 }
 
 const phase11HandoffStrategyPath = "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md";

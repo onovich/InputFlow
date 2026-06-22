@@ -11,6 +11,7 @@ const requiredDocs = [
   "docs/release/InputFlow-v0.1-Local-Release-Confidence.md",
   "docs/release/InputFlow-v0.1-Publish-Simulation-and-Provenance.md",
   "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md",
+  "docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md",
   "docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md",
   "docs/InputFlow-Phase11-Final-Report.md",
   "docs/sinan-cooperation/inputflow-sinan-handoff-packet.md"
@@ -69,7 +70,7 @@ export const checkReleaseAuthorization = () => {
   for (const boundary of ["npm publish", "GitHub Release", "git tag", "secrets"]) {
     assertIncludes("authorization packet", packet, boundary);
   }
-  for (const file of requiredDocs.slice(1, 7)) {
+  for (const file of requiredDocs.slice(1, 8)) {
     assertIncludes("authorization packet", packet, file);
   }
 
