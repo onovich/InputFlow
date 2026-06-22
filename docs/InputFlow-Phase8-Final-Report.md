@@ -1,7 +1,7 @@
 # InputFlow Phase 8 Final Report
 
 Date: 2026-06-22
-Status: Draft after Round 14 optional matrix verification
+Status: Draft after Round 15 release-confidence verification
 
 ## Scope
 
@@ -37,18 +37,21 @@ Status: Draft after Round 14 optional matrix verification
 ## Validation Results
 
 - `git diff --check`: passed through Round 12.
-- `pnpm validate`: passed through Round 13, with 27 test files and 86 tests.
-- `pnpm browser:test`: passed through Round 13 with 15 Chromium tests.
+- `pnpm validate`: passed through Round 15, with 27 test files and 86 tests.
+- `pnpm browser:test`: passed through Round 15 with 15 Chromium tests.
 - `pnpm browser:test:all`: passed through Round 14 with 45 tests across
   Chromium, Firefox, and WebKit.
-- `pnpm release:dry-run`: passed through Round 11.
+- `pnpm release:dry-run`: passed through Round 15 with Chromium browser smoke
+  and package dry-run checks.
+- `pnpm package:dry-run`: passed through Round 15 for `@inputflow/core`,
+  `@inputflow/schema`, `@inputflow/testing`, and `@inputflow/browser`.
 - Workflow structure check: `pnpm workflow:check` and `pnpm structure:check`
   passed through Round 14.
 
 ## Git Record
 
 - Phase 8 baseline before Round 1: `38d2aba`.
-- Latest pushed commit entering Round 14: `529ecf3`.
+- Latest pushed commit entering Round 15: `7f9ae03`.
 - Final commit: pending Round 16.
 - Pushed branch: `main`.
 
@@ -67,10 +70,7 @@ Per-round commits:
 - Round 11: `87c7c35` test: add workflow parity check
 - Round 12: `2a43c55` docs: draft phase 8 final report
 - Round 13: `529ecf3` docs: record phase 8 buffer verification
-- Round 14: consumed. Refreshed optional browser matrix with
-  `pnpm browser:test:all`, rechecked CI troubleshooting and workflow structure,
-  and clarified that physical Gamepad checks need a real controller page rather
-  than the automated Playwright fixture.
+- Round 14: `7f9ae03` docs: clarify phase 8 hardware checklist
 - Round 15: pending
 - Round 16: pending
 
@@ -79,8 +79,13 @@ Per-round commits:
 - Round 13: consumed. Verified no workflow, cache, documentation, or command
   drift requiring a fix; `pnpm validate`, `pnpm browser:test`, and
   `pnpm workflow:check` passed.
-- Round 14: pending
-- Round 15: pending
+- Round 14: consumed. Refreshed optional browser matrix with
+  `pnpm browser:test:all`, rechecked CI troubleshooting and workflow structure,
+  and clarified that physical Gamepad checks need a real controller page rather
+  than the automated Playwright fixture.
+- Round 15: consumed. Refreshed `pnpm validate`, `pnpm release:dry-run`, and
+  explicit `pnpm package:dry-run`; no release-blocking issue found before final
+  validation.
 
 ## Remaining Risks
 
