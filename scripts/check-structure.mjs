@@ -100,4 +100,20 @@ for (const required of [
   }
 }
 
+const browserSmokeWorkflow = readFileSync(".github/workflows/browser-smoke.yml", "utf8");
+for (const required of [
+  "uses: actions/checkout@v4",
+  "uses: actions/setup-node@v4",
+  "node-version: 24",
+  "cache: pnpm",
+  "run: corepack enable",
+  "run: pnpm install --frozen-lockfile",
+  "run: pnpm exec playwright install --with-deps chromium",
+  "run: pnpm browser:test"
+]) {
+  if (!browserSmokeWorkflow.includes(required)) {
+    throw new Error(`.github/workflows/browser-smoke.yml must include ${required}`);
+  }
+}
+
 console.log("structure check passed");

@@ -9,9 +9,26 @@ on:
 
 jobs:
   chromium-smoke:
-    name: Chromium smoke scaffold
+    name: Chromium smoke
     runs-on: ubuntu-latest
     steps:
-      - name: Scaffold
-        run: echo "Chromium smoke workflow scaffold"
+      - name: Checkout
+        uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Required browser smoke
+        run: pnpm browser:test
