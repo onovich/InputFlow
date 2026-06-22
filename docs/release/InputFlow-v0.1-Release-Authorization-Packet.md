@@ -3,7 +3,7 @@
 Date: 2026-06-22
 Status: Draft owner decision packet
 Target branch: `main`
-Target commit under review: `e388bcde471d00c0c76b75f526c4dee46820fc7e`
+Latest remote evidence commit: `8a796e86789cdd7629b972539ffc968f66841a48`
 
 ## Purpose
 
@@ -53,6 +53,9 @@ The detailed matrix is maintained in
 Package metadata and dry-run evidence is maintained in
 `docs/release/InputFlow-v0.1-Package-Metadata-Audit.md`.
 
+Remote CI evidence is maintained in
+`docs/release/InputFlow-v0.1-Remote-CI-Evidence.md`.
+
 ## Evidence Entry Points
 
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
@@ -63,6 +66,7 @@ Package metadata and dry-run evidence is maintained in
 - Phase 11 final report: `docs/InputFlow-Phase11-Final-Report.md`
 - Phase 11 Sinan handoff packet: `docs/sinan-cooperation/inputflow-sinan-handoff-packet.md`
 - Package metadata audit: `docs/release/InputFlow-v0.1-Package-Metadata-Audit.md`
+- Remote CI evidence: `docs/release/InputFlow-v0.1-Remote-CI-Evidence.md`
 
 ## Non-Scope Confirmed
 
@@ -81,7 +85,7 @@ Phase 12 must not:
 ## Phase 12 Work Remaining
 
 - Keep owner decision matrix pending until explicit owner sign-off.
-- Refresh or document remote CI evidence for the current target commit.
+- Keep remote CI evidence current before owner sign-off.
 - Keep package metadata audit current before owner sign-off.
 - Add publish simulation and provenance notes.
 - Add rollback/deprecate policy.
