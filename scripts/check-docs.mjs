@@ -34,6 +34,7 @@ const requiredDocs = [
   "docs/InputFlow-Phase10-Physical-Gamepad-Acceptance-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase11-Sinan-Adapter-POC-Handoff-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase12-v0.1-Release-Authorization-Goal-Mode-Execution-Guide.md",
+  "docs/InputFlow-Phase13-Owner-Decision-Application-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Technical-Architecture-v0.1.md",
   "docs/InputFlow-Sinan-Alignment-and-Roadmap-2026-06-20.md",
   "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md",
@@ -208,6 +209,11 @@ if (!plan.includes(phase12GuidePath)) {
 const phase12FinalReportPath = "docs/InputFlow-Phase12-Final-Report.md";
 if (!plan.includes(phase12FinalReportPath)) {
   throw new Error(`Development plan must link ${phase12FinalReportPath}`);
+}
+
+const phase13GuidePath = "docs/InputFlow-Phase13-Owner-Decision-Application-Goal-Mode-Execution-Guide.md";
+if (!plan.includes(phase13GuidePath)) {
+  throw new Error(`Development plan must link ${phase13GuidePath}`);
 }
 
 const phase12ReleaseAuthorizationPacketPath =
