@@ -9,6 +9,7 @@ const requiredDocs = [
   "docs/InputFlow-Remote-CI-Observation-Guide.md",
   "docs/InputFlow-Phase9-Remote-CI-Evidence.md",
   "docs/InputFlow-Phase9-Package-Dry-Run-Audit.md",
+  "docs/InputFlow-Manual-Gamepad-Harness-Guide.md",
   "docs/InputFlow-Manual-Gamepad-Release-Checklist.md",
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
@@ -88,6 +89,11 @@ if (!plan.includes(remoteCiEvidencePath)) {
 const packageDryRunAuditPath = "docs/InputFlow-Phase9-Package-Dry-Run-Audit.md";
 if (!plan.includes(packageDryRunAuditPath)) {
   throw new Error(`Development plan must link ${packageDryRunAuditPath}`);
+}
+
+const manualGamepadHarnessGuidePath = "docs/InputFlow-Manual-Gamepad-Harness-Guide.md";
+if (!plan.includes(manualGamepadHarnessGuidePath)) {
+  throw new Error(`Development plan must link ${manualGamepadHarnessGuidePath}`);
 }
 
 const manualGamepadChecklistPath = "docs/InputFlow-Manual-Gamepad-Release-Checklist.md";

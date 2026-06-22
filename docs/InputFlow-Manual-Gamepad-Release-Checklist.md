@@ -6,6 +6,9 @@
 This checklist covers physical Gamepad verification that cannot be made a
 stable automated CI gate in Phase 8.
 
+Use `docs/InputFlow-Manual-Gamepad-Harness-Guide.md` for the reusable local
+manual harness path, launch command, and evidence recording workflow.
+
 Automated coverage still comes from the browser-level `navigator.getGamepads`
 fixture in `pnpm browser:test` and `pnpm browser:test:all`. This checklist is a
 manual release-confidence supplement, not an automated required gate.
