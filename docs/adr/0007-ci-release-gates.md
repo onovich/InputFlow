@@ -86,9 +86,9 @@ Phase 8. It is a release-confidence gate, not an automatic npm publish or
 GitHub release workflow.
 
 Required validate and required Chromium smoke workflows may run on pull requests
-and pushes to `main`. Optional browser matrix workflows should remain manual or
-otherwise explicitly best-effort until the cross-engine environment is proven
-stable in CI.
+and pushes to `main`. Optional browser matrix workflows remain manual
+`workflow_dispatch` jobs in Phase 8. If they fail, the failure is a
+release-confidence signal to investigate, not a required PR gate failure.
 
 ## Architecture Boundaries
 

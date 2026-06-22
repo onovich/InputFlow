@@ -5,9 +5,26 @@ on:
 
 jobs:
   optional-browser-matrix:
-    name: Optional browser matrix scaffold
+    name: Optional browser matrix
     runs-on: ubuntu-latest
     steps:
-      - name: Scaffold
-        run: echo "Optional browser matrix workflow scaffold"
+      - name: Checkout
+        uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install browser matrix
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
+
+      - name: Optional browser matrix
+        run: pnpm browser:test:all

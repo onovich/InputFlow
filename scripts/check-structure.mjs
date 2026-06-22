@@ -133,4 +133,24 @@ for (const required of [
   }
 }
 
+const optionalBrowserMatrixWorkflow = readFileSync(
+  ".github/workflows/optional-browser-matrix.yml",
+  "utf8"
+);
+for (const required of [
+  "workflow_dispatch:",
+  "uses: actions/checkout@v4",
+  "uses: actions/setup-node@v4",
+  "node-version: 24",
+  "cache: pnpm",
+  "run: corepack enable",
+  "run: pnpm install --frozen-lockfile",
+  "run: pnpm exec playwright install --with-deps chromium firefox webkit",
+  "run: pnpm browser:test:all"
+]) {
+  if (!optionalBrowserMatrixWorkflow.includes(required)) {
+    throw new Error(`.github/workflows/optional-browser-matrix.yml must include ${required}`);
+  }
+}
+
 console.log("structure check passed");
