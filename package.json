@@ -17,7 +17,8 @@
     "structure:check": "node scripts/check-structure.mjs",
     "test": "vitest run",
     "typecheck": "tsc -b tsconfig.json --pretty false",
-    "validate": "pnpm lint && pnpm typecheck && pnpm build && pnpm test && pnpm structure:check && pnpm docs:check"
+    "validate": "pnpm lint && pnpm typecheck && pnpm build && pnpm test && pnpm structure:check && pnpm docs:check",
+    "workflow:check": "node scripts/check-workflows.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.0",
