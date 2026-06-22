@@ -16,6 +16,7 @@ const requiredDocs = [
   "docs/InputFlow-Phase8-CI-Release-Gates-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase8-Final-Report.md",
   "docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md",
+  "docs/InputFlow-Phase9-Final-Report.md",
   "docs/InputFlow-Technical-Architecture-v0.1.md",
   "docs/InputFlow-Sinan-Alignment-and-Roadmap-2026-06-20.md",
   "docs/adr/0001-package-manager.md",
@@ -49,7 +50,8 @@ for (const requiredReadmeLink of [
   "docs/InputFlow-CI-Troubleshooting.md",
   "docs/InputFlow-Remote-CI-Observation-Guide.md",
   "docs/InputFlow-Phase9-Package-Dry-Run-Audit.md",
-  "docs/InputFlow-Manual-Gamepad-Release-Checklist.md"
+  "docs/InputFlow-Manual-Gamepad-Release-Checklist.md",
+  "docs/InputFlow-Phase9-Final-Report.md"
 ]) {
   if (!readme.includes(requiredReadmeLink)) {
     throw new Error(`README.md must link ${requiredReadmeLink}`);
@@ -109,6 +111,11 @@ if (!plan.includes(phase8FinalReportPath)) {
 const phase9GuidePath = "docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md";
 if (!plan.includes(phase9GuidePath)) {
   throw new Error(`Development plan must link ${phase9GuidePath}`);
+}
+
+const phase9FinalReportPath = "docs/InputFlow-Phase9-Final-Report.md";
+if (!plan.includes(phase9FinalReportPath)) {
+  throw new Error(`Development plan must link ${phase9FinalReportPath}`);
 }
 
 for (const adr of requiredDocs.filter((file) => file.startsWith("docs/adr/"))) {

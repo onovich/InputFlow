@@ -102,6 +102,7 @@ That document covers:
 - Phase 9 package dry-run audit: `docs/InputFlow-Phase9-Package-Dry-Run-Audit.md`
 - Manual Gamepad checklist: `docs/InputFlow-Manual-Gamepad-Release-Checklist.md`
 - Phase 9 guide: `docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md`
+- Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
 
 ## Current Limits
 

@@ -17,7 +17,7 @@
 > Manual Gamepad checklist：`docs/InputFlow-Manual-Gamepad-Release-Checklist.md`
 > Phase 7 完成报告：`docs/InputFlow-Phase7-Final-Report.md`
 > Phase 8 完成报告：`docs/InputFlow-Phase8-Final-Report.md`
-> Phase 9 完成报告：`docs/InputFlow-Phase9-Final-Report.md`（planned）
+> Phase 9 完成报告：`docs/InputFlow-Phase9-Final-Report.md`（draft）
 > ADR 入口：`docs/adr/0001-package-manager.md`、`docs/adr/0002-host-semantics-boundary.md`、`docs/adr/0003-replay-first-class-contract.md`、`docs/adr/0004-context-lease-lifecycle.md`、`docs/adr/0005-schema-hot-path-boundary.md`、`docs/adr/0006-browser-matrix-strategy.md`、`docs/adr/0007-ci-release-gates.md`、`docs/adr/0008-v0.1-release-candidate-policy.md`
 
 ---
