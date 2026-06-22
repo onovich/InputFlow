@@ -20,6 +20,7 @@ const requiredDocs = [
   "docs/release/InputFlow-v0.1-Remote-CI-Evidence.md",
   "docs/release/InputFlow-v0.1-Local-Release-Confidence.md",
   "docs/release/InputFlow-v0.1-Publish-Simulation-and-Provenance.md",
+  "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md",
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Final-Report.md",
@@ -220,6 +221,12 @@ const phase12PublishSimulationPath =
   "docs/release/InputFlow-v0.1-Publish-Simulation-and-Provenance.md";
 if (!plan.includes(phase12PublishSimulationPath)) {
   throw new Error(`Development plan must link ${phase12PublishSimulationPath}`);
+}
+
+const phase12RollbackPolicyPath =
+  "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md";
+if (!plan.includes(phase12RollbackPolicyPath)) {
+  throw new Error(`Development plan must link ${phase12RollbackPolicyPath}`);
 }
 
 const phase11HandoffStrategyPath = "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md";

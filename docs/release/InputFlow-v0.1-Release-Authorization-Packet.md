@@ -62,6 +62,9 @@ Local release confidence evidence is maintained in
 Publish simulation and provenance notes are maintained in
 `docs/release/InputFlow-v0.1-Publish-Simulation-and-Provenance.md`.
 
+Rollback and deprecation policy is maintained in
+`docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md`.
+
 ## Evidence Entry Points
 
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
@@ -75,6 +78,7 @@ Publish simulation and provenance notes are maintained in
 - Remote CI evidence: `docs/release/InputFlow-v0.1-Remote-CI-Evidence.md`
 - Local release confidence: `docs/release/InputFlow-v0.1-Local-Release-Confidence.md`
 - Publish simulation and provenance notes: `docs/release/InputFlow-v0.1-Publish-Simulation-and-Provenance.md`
+- Rollback and deprecation policy: `docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md`
 
 ## Non-Scope Confirmed
 
@@ -96,7 +100,7 @@ Phase 12 must not:
 - Keep remote CI evidence current before owner sign-off.
 - Keep package metadata audit current before owner sign-off.
 - Keep publish simulation and provenance notes current before owner sign-off.
-- Add rollback/deprecate policy.
+- Keep rollback/deprecate policy pending owner sign-off.
 - Add `pnpm release:authorization:check`.
 - Sync README, CHANGELOG, development plan, and docs guard.
 - Produce `docs/InputFlow-Phase12-Final-Report.md`.
