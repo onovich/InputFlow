@@ -95,6 +95,23 @@ Per-round Phase 7 validation:
 - The browser matrix must not introduce Sinan, React, Three, or DOM dependencies
   into `@inputflow/core`.
 
+## Gamepad Automation Strategy
+
+Playwright cannot reliably drive physical Gamepad hardware across local and CI
+machines. Phase 7 therefore treats real hardware pairing, nonstandard devices,
+and long-lived player assignment as out of scope.
+
+Automated browser coverage uses a real browser page with a browser-level
+`getGamepads` fixture. This validates that `BrowserGamepadSource` polls in the
+browser JavaScript environment and maps the v0.1 scope correctly:
+
+- South button to `<Gamepad>/button/south`.
+- Left stick to `<Gamepad>/stick/left`.
+- Disconnect / missing pad reset to neutral values.
+
+Physical hardware remains a manual release checklist item until InputFlow has a
+broader device pairing policy.
+
 ## Consequences
 
 - Phase 7 gains a real-browser validation path without destabilizing the default

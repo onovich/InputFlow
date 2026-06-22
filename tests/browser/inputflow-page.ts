@@ -46,6 +46,15 @@ export const installInputFlowPageRoutes = async (page: Page): Promise<void> => {
       return;
     }
 
+    if (url.pathname === "/gamepad-smoke.html") {
+      await route.fulfill({
+        status: 200,
+        contentType: contentTypes.get(".html"),
+        body: gamepadSmokeHtml
+      });
+      return;
+    }
+
     const filePath = resolveModulePath(url.pathname);
     if (!filePath) {
       await route.fulfill({ status: 404, body: "Not found" });
@@ -134,6 +143,74 @@ const keyboardSmokeHtml = String.raw`
         },
         dispose() {
           input.dispose();
+        }
+      };
+      document.body.dataset.inputflowReady = "true";
+    </script>
+  </body>
+</html>
+`;
+
+const gamepadSmokeHtml = String.raw`
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@inputflow/core": "/packages/core/dist/index.js",
+          "@inputflow/browser": "/packages/browser/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="target">gamepad target</main>
+    <script type="module">
+      import { createInputFlow } from "@inputflow/core";
+      import { createGamepadSource } from "@inputflow/browser";
+
+      const input = createInputFlow({
+        maps: [
+          {
+            actions: [
+              { id: "browser.gamepad.confirm", valueType: "button" },
+              { id: "browser.gamepad.move", valueType: "axis2d" }
+            ],
+            bindings: [
+              {
+                id: "browser.gamepad.confirm.south",
+                action: "browser.gamepad.confirm",
+                source: { kind: "control", path: "<Gamepad>/button/south" }
+              },
+              {
+                id: "browser.gamepad.move.left",
+                action: "browser.gamepad.move",
+                source: { kind: "control", path: "<Gamepad>/stick/left" }
+              }
+            ]
+          }
+        ]
+      });
+
+      window.inputFlowGamepadPads = [];
+      input.addSource(
+        createGamepadSource({
+          getGamepads: () => window.inputFlowGamepadPads
+        })
+      );
+
+      window.inputFlowGamepadSmoke = {
+        read(timeMs = performance.now()) {
+          input.update(timeMs);
+          return {
+            confirm: input.readButton("browser.gamepad.confirm"),
+            move: input.readAxis2D("browser.gamepad.move")
+          };
+        },
+        setPads(pads) {
+          window.inputFlowGamepadPads = pads;
         }
       };
       document.body.dataset.inputflowReady = "true";
