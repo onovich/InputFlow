@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from "node:fs";
+import { checkPackageMetadata } from "./check-package-metadata.mjs";
 import { checkWorkflows } from "./check-workflows.mjs";
 
 const packages = ["core", "schema", "testing", "browser"];
@@ -49,5 +50,6 @@ for (const name of ["testing", "browser"]) {
 }
 
 checkWorkflows();
+checkPackageMetadata();
 
 console.log("structure check passed");

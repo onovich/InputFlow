@@ -13,6 +13,7 @@
     "docs:check": "node scripts/check-docs.mjs",
     "lint": "node scripts/lint.mjs",
     "package:dry-run": "node scripts/package-dry-run.mjs",
+    "package:metadata:check": "node scripts/check-package-metadata.mjs",
     "release:dry-run": "pnpm browser:test && pnpm package:dry-run",
     "structure:check": "node scripts/check-structure.mjs",
     "test": "vitest run",
