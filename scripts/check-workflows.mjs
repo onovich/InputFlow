@@ -65,6 +65,8 @@ export const checkWorkflows = () => {
 
   assertIncludes(".github/workflows/validate.yml", [
     "uses: actions/checkout@v4",
+    "uses: pnpm/action-setup@v4",
+    "run_install: false",
     "uses: actions/setup-node@v4",
     "node-version: 24",
     "cache: pnpm",
@@ -80,9 +82,11 @@ export const checkWorkflows = () => {
   ]) {
     assertIncludes(file, [
       "uses: actions/checkout@v4",
+      "uses: pnpm/action-setup@v4",
       "uses: actions/setup-node@v4",
       "uses: actions/cache@v4",
       "uses: actions/upload-artifact@v4",
+      "run_install: false",
       "node-version: 24",
       "cache: pnpm",
       "path: ~/.cache/ms-playwright",
@@ -125,4 +129,3 @@ if (process.argv[1]?.endsWith("check-workflows.mjs")) {
   checkWorkflows();
   console.log("workflow check passed");
 }
-
