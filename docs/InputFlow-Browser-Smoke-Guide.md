@@ -30,7 +30,8 @@ C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\ReleaseDry
 ```
 
 `Smoke.cmd` runs the required Chromium browser smoke. `ReleaseDryRun.cmd` runs
-the required Chromium browser smoke and then `pnpm package:dry-run`.
+`pnpm release:dry-run`, which performs the required Chromium browser smoke and
+then `pnpm package:dry-run`.
 
 The smoke harness serves built package output from `packages/*/dist`. On a
 fresh checkout, run dependency restore and build before browser smoke:

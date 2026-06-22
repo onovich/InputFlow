@@ -84,8 +84,7 @@
                                    },
                        "releaseDryRun":  {
                                              "commands":  [
-                                                              "pnpm browser:test",
-                                                              "pnpm package:dry-run"
+                                                              "pnpm release:dry-run"
                                                           ]
                                          }
                    },

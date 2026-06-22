@@ -52,7 +52,7 @@ Configured commands:
 - Root validate: `pnpm validate`
 - Smoke: `pnpm browser:test`
 - Package: `pnpm package:dry-run`
-- Release dry-run: `pnpm browser:test`, `pnpm package:dry-run`
+- Release dry-run: `pnpm release:dry-run`
 
 ## Browser Smoke And Release Gate
 
@@ -66,7 +66,7 @@ C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\Smoke.cmd
 ```
 
 Use `ReleaseDryRun.cmd` when preparing release confidence. It runs the required
-Chromium browser smoke before the package dry-run:
+Chromium browser smoke before the package dry-run through `pnpm release:dry-run`:
 
 ```powershell
 C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\ReleaseDryRun.cmd
