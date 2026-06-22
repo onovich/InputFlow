@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { checkManualGamepadHarness } from "./check-manual-gamepad-harness.mjs";
 import { checkPackageMetadata } from "./check-package-metadata.mjs";
+import { checkSinanContract } from "./check-sinan-contract.mjs";
 import { checkWorkflows } from "./check-workflows.mjs";
 
 const packages = ["core", "schema", "testing", "browser"];
@@ -55,5 +56,6 @@ for (const name of ["testing", "browser"]) {
 checkWorkflows();
 checkPackageMetadata();
 checkManualGamepadHarness();
+checkSinanContract();
 
 console.log("structure check passed");

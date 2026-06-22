@@ -17,6 +17,7 @@
     "package:dry-run": "node scripts/package-dry-run.mjs",
     "package:metadata:check": "node scripts/check-package-metadata.mjs",
     "release:dry-run": "pnpm browser:test && pnpm package:dry-run",
+    "sinan:contract:check": "node scripts/check-sinan-contract.mjs",
     "structure:check": "node scripts/check-structure.mjs",
     "test": "vitest run",
     "typecheck": "tsc -b tsconfig.json --pretty false",
