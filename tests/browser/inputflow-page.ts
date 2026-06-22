@@ -37,6 +37,15 @@ export const installInputFlowPageRoutes = async (page: Page): Promise<void> => {
       return;
     }
 
+    if (url.pathname === "/lifecycle-smoke.html") {
+      await route.fulfill({
+        status: 200,
+        contentType: contentTypes.get(".html"),
+        body: lifecycleSmokeHtml
+      });
+      return;
+    }
+
     const filePath = resolveModulePath(url.pathname);
     if (!filePath) {
       await route.fulfill({ status: 404, body: "Not found" });
@@ -125,6 +134,74 @@ const keyboardSmokeHtml = String.raw`
         },
         dispose() {
           input.dispose();
+        }
+      };
+      document.body.dataset.inputflowReady = "true";
+    </script>
+  </body>
+</html>
+`;
+
+const lifecycleSmokeHtml = String.raw`
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      #target {
+        display: block;
+        inline-size: 160px;
+        block-size: 120px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@inputflow/core": "/packages/core/dist/index.js",
+          "@inputflow/browser": "/packages/browser/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <button id="target" type="button">lifecycle target</button>
+    <script type="module">
+      import { createPointerSource } from "@inputflow/browser";
+
+      const target = document.getElementById("target");
+      const events = [];
+      let timeMs = 0;
+      const pointer = createPointerSource({
+        target,
+        blurTarget: window,
+        now: () => timeMs
+      });
+      const sink = {
+        push(event) {
+          events.push({
+            control: event.control,
+            value: event.value,
+            timeMs: event.timeMs
+          });
+        }
+      };
+
+      window.inputFlowLifecycleSmoke = {
+        clear() {
+          events.length = 0;
+        },
+        connect() {
+          pointer.connect(sink);
+        },
+        disconnect(nextTimeMs = timeMs) {
+          timeMs = nextTimeMs;
+          pointer.disconnect();
+        },
+        events() {
+          return [...events];
+        },
+        setTime(nextTimeMs) {
+          timeMs = nextTimeMs;
         }
       };
       document.body.dataset.inputflowReady = "true";
