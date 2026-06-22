@@ -116,4 +116,21 @@ for (const required of [
   }
 }
 
+const releaseDryRunWorkflow = readFileSync(".github/workflows/release-dry-run.yml", "utf8");
+for (const required of [
+  "workflow_dispatch:",
+  "uses: actions/checkout@v4",
+  "uses: actions/setup-node@v4",
+  "node-version: 24",
+  "cache: pnpm",
+  "run: corepack enable",
+  "run: pnpm install --frozen-lockfile",
+  "run: pnpm exec playwright install --with-deps chromium",
+  "run: pnpm release:dry-run"
+]) {
+  if (!releaseDryRunWorkflow.includes(required)) {
+    throw new Error(`.github/workflows/release-dry-run.yml must include ${required}`);
+  }
+}
+
 console.log("structure check passed");

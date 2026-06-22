@@ -79,6 +79,17 @@ Phase 8 workflows should use:
 Optional matrix workflows may install all Playwright browsers with
 `pnpm browser:install` and run `pnpm browser:test:all`.
 
+## Workflow Triggers
+
+The release dry-run workflow is manually triggered with `workflow_dispatch` in
+Phase 8. It is a release-confidence gate, not an automatic npm publish or
+GitHub release workflow.
+
+Required validate and required Chromium smoke workflows may run on pull requests
+and pushes to `main`. Optional browser matrix workflows should remain manual or
+otherwise explicitly best-effort until the cross-engine environment is proven
+stable in CI.
+
 ## Architecture Boundaries
 
 - CI configuration belongs in `.github/workflows`, scripts, and docs.
@@ -96,4 +107,3 @@ Optional matrix workflows may install all Playwright browsers with
 - Release confidence is repeatable locally and in CI through the same
   `pnpm release:dry-run` script.
 - Real publish/release automation remains a future phase.
-
