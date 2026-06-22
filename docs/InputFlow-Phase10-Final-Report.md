@@ -52,11 +52,13 @@
 ## Validation Results
 
 - Round 1-10 wrapper validation: passed each committed round.
-- `pnpm validate`: passed in Rounds 3, 6, 9, and wrapper commits.
-- `pnpm browser:test`: passed in Rounds 3, 6, 12, and 13.
+- `pnpm validate`: passed in Rounds 3, 6, 9, 12, 13, 15, and wrapper
+  commits.
+- `pnpm browser:test`: passed in Rounds 3, 6, 12, 13, and 15.
 - `pnpm browser:test:all`: passed in Rounds 7, 8, and 14 with 45 tests.
-- `pnpm release:dry-run`: passed in Round 12; this includes Chromium browser
-  smoke and `pnpm package:dry-run`.
+- `pnpm release:dry-run`: passed in Rounds 12 and 15; this includes Chromium
+  browser smoke and `pnpm package:dry-run`.
+- `pnpm package:dry-run`: passed explicitly in Round 15.
 - `pnpm docs:check`: passed in documentation rounds.
 - `git diff --check`: passed with only CRLF normalization warnings.
 - BOM checks: passed for edited documentation files.
@@ -88,7 +90,10 @@
 - Round 14: used for cross-browser refresh; `pnpm browser:test:all` passed
   with 45 tests across Chromium, Firefox, and WebKit. This remains automated
   fixture evidence, not physical controller acceptance.
-- Round 15: pending
+- Round 15: used for release-confidence refresh; `pnpm validate`,
+  `pnpm browser:test`, `pnpm release:dry-run`, `pnpm package:dry-run`,
+  `pnpm docs:check`, and `git diff --check` passed. No physical hardware
+  evidence was added, so status remains `HARNESS_READY_NO_HARDWARE`.
 
 ## Remaining Risks
 
