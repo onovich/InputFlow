@@ -158,12 +158,20 @@ const pointerSmokeHtml = String.raw`
       const input = createInputFlow({
         maps: [
           {
-            actions: [{ id: "browser.pointer.interact", valueType: "button" }],
+            actions: [
+              { id: "browser.pointer.interact", valueType: "button" },
+              { id: "browser.pointer.scroll", valueType: "axis2d" }
+            ],
             bindings: [
               {
                 id: "browser.pointer.interact.primary",
                 action: "browser.pointer.interact",
                 source: { kind: "control", path: "<Pointer>/button/primary" }
+              },
+              {
+                id: "browser.pointer.scroll.wheel",
+                action: "browser.pointer.scroll",
+                source: { kind: "control", path: "<Pointer>/wheel/main" }
               }
             ]
           }
@@ -182,9 +190,15 @@ const pointerSmokeHtml = String.raw`
         input.update(timeMs);
         return input.readButton("browser.pointer.interact");
       };
+      const readWheel = (timeMs = performance.now()) => {
+        window.inputFlowPointerNow = timeMs;
+        input.update(timeMs);
+        return input.readAxis2D("browser.pointer.scroll");
+      };
 
       window.inputFlowPointerSmoke = {
         read,
+        readWheel,
         disconnect(timeMs = performance.now()) {
           window.inputFlowPointerNow = timeMs;
           pointer.disconnect();
