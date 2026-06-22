@@ -30,6 +30,7 @@ const requiredDocs = [
   "docs/sinan-cooperation/inputflow-sinan-diagnostics-handoff.md",
   "docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md",
   "docs/sinan-cooperation/inputflow-sinan-package-export-audit.md",
+  "docs/sinan-cooperation/inputflow-sinan-handoff-packet.md",
   "docs/adr/0001-package-manager.md",
   "docs/adr/0002-host-semantics-boundary.md",
   "docs/adr/0003-replay-first-class-contract.md",
@@ -72,6 +73,7 @@ for (const requiredReadmeLink of [
   "docs/sinan-cooperation/inputflow-sinan-diagnostics-handoff.md",
   "docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md",
   "docs/sinan-cooperation/inputflow-sinan-package-export-audit.md",
+  "docs/sinan-cooperation/inputflow-sinan-handoff-packet.md",
   "docs/InputFlow-Phase9-Final-Report.md"
 ]) {
   if (!readme.includes(requiredReadmeLink)) {
@@ -197,6 +199,11 @@ const phase11PackageExportAuditPath =
   "docs/sinan-cooperation/inputflow-sinan-package-export-audit.md";
 if (!plan.includes(phase11PackageExportAuditPath)) {
   throw new Error(`Development plan must link ${phase11PackageExportAuditPath}`);
+}
+
+const phase11HandoffPacketPath = "docs/sinan-cooperation/inputflow-sinan-handoff-packet.md";
+if (!plan.includes(phase11HandoffPacketPath)) {
+  throw new Error(`Development plan must link ${phase11HandoffPacketPath}`);
 }
 
 if (!plan.includes("pnpm sinan:contract:check")) {

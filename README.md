@@ -116,6 +116,7 @@ That document covers:
 - Phase 11 Sinan diagnostics handoff: `docs/sinan-cooperation/inputflow-sinan-diagnostics-handoff.md`
 - Phase 11 Sinan downstream acceptance checklist: `docs/sinan-cooperation/inputflow-sinan-downstream-acceptance-checklist.md`
 - Phase 11 Sinan package export audit: `docs/sinan-cooperation/inputflow-sinan-package-export-audit.md`
+- Phase 11 Sinan handoff packet: `docs/sinan-cooperation/inputflow-sinan-handoff-packet.md`
 - Phase 9 guide: `docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md`
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
 
