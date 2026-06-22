@@ -6,7 +6,7 @@
 > Goal 模式执行入口：`docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md`（Phase 0-6，24 轮）
 > 下一阶段 Goal 入口：`docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md`（Phase 7，16 轮）
 > Browser smoke 指南：`docs/InputFlow-Browser-Smoke-Guide.md`
-> Phase 7 完成报告：`docs/InputFlow-Phase7-Browser-Matrix-Final-Report.md`
+> Phase 7 完成报告：`docs/InputFlow-Phase7-Final-Report.md`
 > ADR 入口：`docs/adr/0001-package-manager.md`、`docs/adr/0002-host-semantics-boundary.md`、`docs/adr/0003-replay-first-class-contract.md`、`docs/adr/0004-context-lease-lifecycle.md`、`docs/adr/0005-schema-hot-path-boundary.md`、`docs/adr/0006-browser-matrix-strategy.md`
 
 ---

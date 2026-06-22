@@ -5,7 +5,7 @@ const requiredDocs = [
   "docs/InputFlow-Browser-Smoke-Guide.md",
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
-  "docs/InputFlow-Phase7-Browser-Matrix-Final-Report.md",
+  "docs/InputFlow-Phase7-Final-Report.md",
   "docs/InputFlow-Technical-Architecture-v0.1.md",
   "docs/InputFlow-Sinan-Alignment-and-Roadmap-2026-06-20.md",
   "docs/adr/0001-package-manager.md",
@@ -37,7 +37,7 @@ if (!plan.includes(browserSmokeGuidePath)) {
   throw new Error(`Development plan must link ${browserSmokeGuidePath}`);
 }
 
-const phase7FinalReportPath = "docs/InputFlow-Phase7-Browser-Matrix-Final-Report.md";
+const phase7FinalReportPath = "docs/InputFlow-Phase7-Final-Report.md";
 if (!plan.includes(phase7FinalReportPath)) {
   throw new Error(`Development plan must link ${phase7FinalReportPath}`);
 }
