@@ -10,6 +10,7 @@
     "browser:test:all": "playwright test",
     "browser:test:list": "playwright test --list",
     "gamepad:harness": "node scripts/serve-manual-gamepad-harness.mjs",
+    "gamepad:harness:check": "node scripts/check-manual-gamepad-harness.mjs",
     "build": "tsc -b tsconfig.json --pretty false",
     "docs:check": "node scripts/check-docs.mjs",
     "lint": "node scripts/lint.mjs",

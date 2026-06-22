@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from "node:fs";
+import { checkManualGamepadHarness } from "./check-manual-gamepad-harness.mjs";
 import { checkPackageMetadata } from "./check-package-metadata.mjs";
 import { checkWorkflows } from "./check-workflows.mjs";
 
@@ -12,6 +13,8 @@ const requiredFiles = [
   ".github/workflows/validate.yml",
   "package.json",
   "pnpm-lock.yaml",
+  "examples/manual-gamepad-harness/index.html",
+  "scripts/serve-manual-gamepad-harness.mjs",
   "pnpm-workspace.yaml",
   "tsconfig.base.json",
   "tsconfig.json",
@@ -51,5 +54,6 @@ for (const name of ["testing", "browser"]) {
 
 checkWorkflows();
 checkPackageMetadata();
+checkManualGamepadHarness();
 
 console.log("structure check passed");
