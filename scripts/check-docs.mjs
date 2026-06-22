@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 
 const requiredDocs = [
   "docs/InputFlow-Development-Plan-v0.1.md",
+  "docs/InputFlow-Browser-Smoke-Guide.md",
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Technical-Architecture-v0.1.md",
@@ -28,6 +29,11 @@ if (!plan.includes(guidePath)) {
 const phase7GuidePath = "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md";
 if (!plan.includes(phase7GuidePath)) {
   throw new Error(`Development plan must link ${phase7GuidePath}`);
+}
+
+const browserSmokeGuidePath = "docs/InputFlow-Browser-Smoke-Guide.md";
+if (!plan.includes(browserSmokeGuidePath)) {
+  throw new Error(`Development plan must link ${browserSmokeGuidePath}`);
 }
 
 for (const adr of requiredDocs.filter((file) => file.startsWith("docs/adr/"))) {
