@@ -79,6 +79,18 @@ Phase 8 workflows should use:
 Optional matrix workflows may install all Playwright browsers with
 `pnpm browser:install` and run `pnpm browser:test:all`.
 
+## Cache And Failure Artifacts
+
+CI workflows should use `actions/setup-node` pnpm cache for dependency restore
+and `actions/cache` for the Playwright browser cache at
+`~/.cache/ms-playwright`.
+
+Browser-related workflows should upload `test-results/browser` on failure. The
+directory is the Playwright output location for retained traces and test
+results, so failed CI runs have enough evidence to classify the problem as
+install, browser launch, page harness, event payload, source attach, runtime, or
+package dry-run.
+
 ## Workflow Triggers
 
 The release dry-run workflow is manually triggered with `workflow_dispatch` in
