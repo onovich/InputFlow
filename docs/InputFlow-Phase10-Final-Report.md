@@ -54,7 +54,7 @@
 - Round 1-10 wrapper validation: passed each committed round.
 - `pnpm validate`: passed in Rounds 3, 6, 9, and wrapper commits.
 - `pnpm browser:test`: passed in Rounds 3, 6, 12, and 13.
-- `pnpm browser:test:all`: passed in Rounds 7 and 8 with 45 tests.
+- `pnpm browser:test:all`: passed in Rounds 7, 8, and 14 with 45 tests.
 - `pnpm release:dry-run`: passed in Round 12; this includes Chromium browser
   smoke and `pnpm package:dry-run`.
 - `pnpm docs:check`: passed in documentation rounds.
@@ -85,7 +85,9 @@
 
 - Round 13: used for validation refresh; `pnpm validate`, `pnpm browser:test`,
   `pnpm docs:check`, and `git diff --check` passed with no repair required.
-- Round 14: pending
+- Round 14: used for cross-browser refresh; `pnpm browser:test:all` passed
+  with 45 tests across Chromium, Firefox, and WebKit. This remains automated
+  fixture evidence, not physical controller acceptance.
 - Round 15: pending
 
 ## Remaining Risks
