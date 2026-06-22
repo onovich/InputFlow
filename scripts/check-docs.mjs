@@ -21,6 +21,7 @@ const requiredDocs = [
   "docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase9-Final-Report.md",
   "docs/InputFlow-Phase10-Physical-Gamepad-Acceptance-Goal-Mode-Execution-Guide.md",
+  "docs/InputFlow-Phase11-Sinan-Adapter-POC-Handoff-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Technical-Architecture-v0.1.md",
   "docs/InputFlow-Sinan-Alignment-and-Roadmap-2026-06-20.md",
   "docs/adr/0001-package-manager.md",
@@ -144,6 +145,11 @@ if (!plan.includes(phase10GuidePath)) {
 const phase10FinalReportPath = "docs/InputFlow-Phase10-Final-Report.md";
 if (!plan.includes(phase10FinalReportPath)) {
   throw new Error(`Development plan must link ${phase10FinalReportPath}`);
+}
+
+const phase11GuidePath = "docs/InputFlow-Phase11-Sinan-Adapter-POC-Handoff-Goal-Mode-Execution-Guide.md";
+if (!plan.includes(phase11GuidePath)) {
+  throw new Error(`Development plan must link ${phase11GuidePath}`);
 }
 
 for (const adr of requiredDocs.filter((file) => file.startsWith("docs/adr/"))) {

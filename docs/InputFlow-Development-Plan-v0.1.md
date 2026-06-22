@@ -10,6 +10,7 @@
 > Phase 8 Goal 入口：`docs/InputFlow-Phase8-CI-Release-Gates-Goal-Mode-Execution-Guide.md`（Phase 8，16 轮）
 > Phase 9 Goal 入口：`docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md`（Phase 9，16 轮）
 > Phase 10 Goal 入口：`docs/InputFlow-Phase10-Physical-Gamepad-Acceptance-Goal-Mode-Execution-Guide.md`（Phase 10，16 轮）
+> Phase 11 Goal 入口：`docs/InputFlow-Phase11-Sinan-Adapter-POC-Handoff-Goal-Mode-Execution-Guide.md`（Phase 11，16 轮）
 > Browser smoke 指南：`docs/InputFlow-Browser-Smoke-Guide.md`
 > CI troubleshooting 指南：`docs/InputFlow-CI-Troubleshooting.md`
 > Remote CI observation 指南：`docs/InputFlow-Remote-CI-Observation-Guide.md`
@@ -22,6 +23,7 @@
 > Phase 8 完成报告：`docs/InputFlow-Phase8-Final-Report.md`
 > Phase 9 完成报告：`docs/InputFlow-Phase9-Final-Report.md`（draft）
 > Phase 10 完成报告：`docs/InputFlow-Phase10-Final-Report.md`（complete）
+> Phase 11 完成报告：`docs/InputFlow-Phase11-Final-Report.md`（planned）
 > ADR 入口：`docs/adr/0001-package-manager.md`、`docs/adr/0002-host-semantics-boundary.md`、`docs/adr/0003-replay-first-class-contract.md`、`docs/adr/0004-context-lease-lifecycle.md`、`docs/adr/0005-schema-hot-path-boundary.md`、`docs/adr/0006-browser-matrix-strategy.md`、`docs/adr/0007-ci-release-gates.md`、`docs/adr/0008-v0.1-release-candidate-policy.md`、`docs/adr/0009-physical-gamepad-acceptance-policy.md`
 
 ---
