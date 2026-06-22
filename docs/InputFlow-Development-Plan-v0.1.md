@@ -14,6 +14,7 @@
 > Phase 11 Sinan handoff strategy：`docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md`
 > Phase 11 Sinan fixture inventory：`docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md`
 > Phase 11 Sinan blur reset scenario：`docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md`
+> Phase 11 Sinan diagnostics handoff: `docs/sinan-cooperation/inputflow-sinan-diagnostics-handoff.md`
 > Browser smoke 指南：`docs/InputFlow-Browser-Smoke-Guide.md`
 > CI troubleshooting 指南：`docs/InputFlow-CI-Troubleshooting.md`
 > Remote CI observation 指南：`docs/InputFlow-Remote-CI-Observation-Guide.md`
