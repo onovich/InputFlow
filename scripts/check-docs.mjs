@@ -9,6 +9,7 @@ const requiredDocs = [
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Final-Report.md",
   "docs/InputFlow-Phase8-CI-Release-Gates-Goal-Mode-Execution-Guide.md",
+  "docs/InputFlow-Phase8-Final-Report.md",
   "docs/InputFlow-Technical-Architecture-v0.1.md",
   "docs/InputFlow-Sinan-Alignment-and-Roadmap-2026-06-20.md",
   "docs/adr/0001-package-manager.md",
@@ -59,6 +60,11 @@ if (!plan.includes(phase7FinalReportPath)) {
 const phase8GuidePath = "docs/InputFlow-Phase8-CI-Release-Gates-Goal-Mode-Execution-Guide.md";
 if (!plan.includes(phase8GuidePath)) {
   throw new Error(`Development plan must link ${phase8GuidePath}`);
+}
+
+const phase8FinalReportPath = "docs/InputFlow-Phase8-Final-Report.md";
+if (!plan.includes(phase8FinalReportPath)) {
+  throw new Error(`Development plan must link ${phase8FinalReportPath}`);
 }
 
 for (const adr of requiredDocs.filter((file) => file.startsWith("docs/adr/"))) {
