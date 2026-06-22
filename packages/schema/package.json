@@ -1,8 +1,25 @@
 {
   "name": "@inputflow/schema",
   "version": "0.0.0",
+  "description": "Load-time schemas for InputFlow maps, overrides, and replay traces.",
+  "license": "UNLICENSED",
   "type": "module",
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onovich/InputFlow.git",
+    "directory": "packages/schema"
+  },
+  "homepage": "https://github.com/onovich/InputFlow#readme",
+  "bugs": {
+    "url": "https://github.com/onovich/InputFlow/issues"
+  },
+  "keywords": [
+    "input",
+    "schema",
+    "validation",
+    "typescript"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

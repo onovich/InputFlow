@@ -1,8 +1,25 @@
 {
   "name": "@inputflow/testing",
   "version": "0.0.0",
+  "description": "Virtual input, replay, and adapter-contract test helpers for InputFlow.",
+  "license": "UNLICENSED",
   "type": "module",
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onovich/InputFlow.git",
+    "directory": "packages/testing"
+  },
+  "homepage": "https://github.com/onovich/InputFlow#readme",
+  "bugs": {
+    "url": "https://github.com/onovich/InputFlow/issues"
+  },
+  "keywords": [
+    "input",
+    "testing",
+    "replay",
+    "typescript"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

@@ -1,8 +1,25 @@
 {
   "name": "@inputflow/core",
   "version": "0.0.0",
+  "description": "Deterministic DOM-free input runtime primitives for InputFlow.",
+  "license": "UNLICENSED",
   "type": "module",
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onovich/InputFlow.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/onovich/InputFlow#readme",
+  "bugs": {
+    "url": "https://github.com/onovich/InputFlow/issues"
+  },
+  "keywords": [
+    "input",
+    "game-input",
+    "runtime",
+    "typescript"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

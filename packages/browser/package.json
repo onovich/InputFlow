@@ -1,8 +1,25 @@
 {
   "name": "@inputflow/browser",
   "version": "0.0.0",
+  "description": "Browser input sources for InputFlow keyboard, pointer, wheel, and gamepad smoke.",
+  "license": "UNLICENSED",
   "type": "module",
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onovich/InputFlow.git",
+    "directory": "packages/browser"
+  },
+  "homepage": "https://github.com/onovich/InputFlow#readme",
+  "bugs": {
+    "url": "https://github.com/onovich/InputFlow/issues"
+  },
+  "keywords": [
+    "input",
+    "browser",
+    "gamepad",
+    "typescript"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
