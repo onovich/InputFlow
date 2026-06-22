@@ -58,6 +58,9 @@ evidence after the last RC validation commit.
 - Round 14 evidence refresh: `pnpm workflow:check` and
   `pnpm browser:test:all` passed locally with 45 tests across Chromium,
   Firefox, and WebKit.
+- Round 15 release confidence refresh: `pnpm validate`, `pnpm browser:test`,
+  `pnpm release:dry-run`, `pnpm package:dry-run`, `pnpm docs:check`,
+  `git diff --check`, and BOM checks passed.
 
 ## Corrective Work
 
@@ -97,6 +100,7 @@ Per-round commits so far:
 - Round 12: this final report draft update commit
 - Round 13: `858b435` docs: record phase 9 buffer verification
 - Round 14: this remote evidence refresh update commit
+- Round 15: this release confidence refresh update commit
 
 ## Buffer Round Use
 
@@ -106,10 +110,12 @@ Per-round commits so far:
 - Round 14: consumed. Refreshed required remote validate, required remote
   browser smoke, optional remote browser matrix, local workflow guard, and local
   three-browser smoke. No repair was required.
+- Round 15: consumed. Refreshed local validate, required Chromium smoke,
+  release dry-run, standalone package dry-run, docs guard, whitespace, and BOM
+  checks. No repair was required.
 
 ## Remaining Refreshes
 
-- Round 15 local release confidence refresh.
 - Round 16 final validation, final report update, push, and planner/checker
   handoff.
 
