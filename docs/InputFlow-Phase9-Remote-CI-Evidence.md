@@ -33,9 +33,24 @@ browser smoke, release dry-run, and optional matrix browser gates.
 After both fixes, the required remote validate and browser smoke gates passed on
 `main`.
 
+## Remote Release Dry-Run
+
+Observed commit:
+
+- Short SHA: `e44093b`
+- Full SHA: `e44093b28fcd2779e3dbd4162c71e0a2b1578563`
+- Branch: `main`
+
+| Workflow | Run id | Branch | Commit | Status | Conclusion | URL | Observed at |
+|---|---:|---|---|---|---|---|---|
+| `release-dry-run.yml` | `27939958958` | `main` | `e44093b28fcd2779e3dbd4162c71e0a2b1578563` | completed | success | https://github.com/onovich/InputFlow/actions/runs/27939958958 | 2026-06-22 16:34 +08:00 |
+
+The remote release dry-run executed `pnpm release:dry-run`, including required
+Chromium browser smoke and package dry-run checks. Local `pnpm release:dry-run`
+also passed in Round 9.
+
 ## Pending Remote Evidence
 
 Still pending for later Phase 9 rounds:
 
-- Remote `release-dry-run.yml` manual workflow dispatch and result.
 - Remote `optional-browser-matrix.yml` manual workflow dispatch or observation.
