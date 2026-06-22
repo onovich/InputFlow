@@ -56,6 +56,9 @@ Package metadata and dry-run evidence is maintained in
 Remote CI evidence is maintained in
 `docs/release/InputFlow-v0.1-Remote-CI-Evidence.md`.
 
+Local release confidence evidence is maintained in
+`docs/release/InputFlow-v0.1-Local-Release-Confidence.md`.
+
 ## Evidence Entry Points
 
 - Phase 9 final report: `docs/InputFlow-Phase9-Final-Report.md`
@@ -67,6 +70,7 @@ Remote CI evidence is maintained in
 - Phase 11 Sinan handoff packet: `docs/sinan-cooperation/inputflow-sinan-handoff-packet.md`
 - Package metadata audit: `docs/release/InputFlow-v0.1-Package-Metadata-Audit.md`
 - Remote CI evidence: `docs/release/InputFlow-v0.1-Remote-CI-Evidence.md`
+- Local release confidence: `docs/release/InputFlow-v0.1-Local-Release-Confidence.md`
 
 ## Non-Scope Confirmed
 

@@ -16,6 +16,7 @@
 > Phase 12 owner decision matrix: `docs/release/InputFlow-v0.1-Owner-Decision-Matrix.md`
 > Phase 12 package metadata audit: `docs/release/InputFlow-v0.1-Package-Metadata-Audit.md`
 > Phase 12 remote CI evidence: `docs/release/InputFlow-v0.1-Remote-CI-Evidence.md`
+> Phase 12 local release confidence: `docs/release/InputFlow-v0.1-Local-Release-Confidence.md`
 > Phase 11 Sinan handoff strategy：`docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md`
 > Phase 11 Sinan fixture inventory：`docs/sinan-cooperation/inputflow-sinan-contract-fixture-inventory.md`
 > Phase 11 Sinan blur reset scenario：`docs/sinan-cooperation/inputflow-sinan-blur-reset-scenario.md`

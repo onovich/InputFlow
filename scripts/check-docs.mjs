@@ -18,6 +18,7 @@ const requiredDocs = [
   "docs/release/InputFlow-v0.1-Owner-Decision-Matrix.md",
   "docs/release/InputFlow-v0.1-Package-Metadata-Audit.md",
   "docs/release/InputFlow-v0.1-Remote-CI-Evidence.md",
+  "docs/release/InputFlow-v0.1-Local-Release-Confidence.md",
   "docs/InputFlow-Phase0-6-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Browser-Matrix-Goal-Mode-Execution-Guide.md",
   "docs/InputFlow-Phase7-Final-Report.md",
@@ -206,6 +207,12 @@ if (!plan.includes(phase12PackageMetadataAuditPath)) {
 const phase12RemoteCiEvidencePath = "docs/release/InputFlow-v0.1-Remote-CI-Evidence.md";
 if (!plan.includes(phase12RemoteCiEvidencePath)) {
   throw new Error(`Development plan must link ${phase12RemoteCiEvidencePath}`);
+}
+
+const phase12LocalReleaseConfidencePath =
+  "docs/release/InputFlow-v0.1-Local-Release-Confidence.md";
+if (!plan.includes(phase12LocalReleaseConfidencePath)) {
+  throw new Error(`Development plan must link ${phase12LocalReleaseConfidencePath}`);
 }
 
 const phase11HandoffStrategyPath = "docs/sinan-cooperation/inputflow-sinan-poc-handoff-strategy.md";
