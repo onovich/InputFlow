@@ -91,6 +91,12 @@ const keyboardSmokeHtml = String.raw`
   </head>
   <body>
     <button id="target" type="button">keyboard target</button>
+    <input id="text-input" aria-label="text input" />
+    <textarea id="text-area" aria-label="text area"></textarea>
+    <select id="select-field" aria-label="select field">
+      <option>One</option>
+    </select>
+    <div id="editable-region" contenteditable="true" role="textbox">editable</div>
     <script type="module">
       import { createInputFlow } from "@inputflow/core";
       import { createKeyboardSource } from "@inputflow/browser";
