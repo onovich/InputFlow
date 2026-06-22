@@ -56,6 +56,8 @@ Completed before this draft:
 - `pnpm package:dry-run`: passed in Round 10.
 - `git diff --check`: passed with only CRLF normalization warnings.
 - BOM checks: passed for edited docs and scripts.
+- Round 13 buffer refresh: `pnpm sinan:contract:check`, `pnpm docs:check`,
+  `git diff --check`, and the explicit `packages/core` boundary scan passed.
 
 Final validation matrix is pending Round 16:
 
@@ -136,6 +138,19 @@ Sinan downstream owner still needs to provide:
 - Round 10: `4448ef7` - package/export audit
 - Round 11: `b852e66` - handoff packet
 - Round 12: this draft report update commit
+- Round 13: this buffer validation report update commit
+
+## Buffer Rounds
+
+- Round 13: consumed for boundary/docs guard refresh. The explicit core scan
+  command returned no output:
+
+  ```powershell
+  rg "(@playwright/test|playwright|react|three|@inputflow/browser|@actions|sinan|navigator|document|window)" packages/core/src packages/core/package.json -S
+  ```
+
+  `pnpm sinan:contract:check`, `pnpm docs:check`, and `git diff --check`
+  passed. No code or contract repair was required.
 
 ## Recommended Checker Conclusion
 
