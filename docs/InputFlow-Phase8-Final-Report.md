@@ -1,7 +1,7 @@
 # InputFlow Phase 8 Final Report
 
 Date: 2026-06-22
-Status: Draft after Round 13 buffer verification
+Status: Draft after Round 14 optional matrix verification
 
 ## Scope
 
@@ -27,7 +27,9 @@ Status: Draft after Round 13 buffer verification
   manual and runs `pnpm browser:test:all`.
 - Cache / artifact policy: browser workflows cache `~/.cache/ms-playwright` and
   upload `test-results/browser` on failure.
-- Gamepad checklist: `docs/InputFlow-Manual-Gamepad-Release-Checklist.md`.
+- Gamepad checklist: `docs/InputFlow-Manual-Gamepad-Release-Checklist.md`,
+  including the boundary between automated gamepad fixtures and physical
+  controller checks.
 - Dependency boundary: CI and Playwright configuration stays in workflows,
   scripts, tests, and docs; `@inputflow/core` remains free of Playwright and DOM
   dependencies.
@@ -37,16 +39,16 @@ Status: Draft after Round 13 buffer verification
 - `git diff --check`: passed through Round 12.
 - `pnpm validate`: passed through Round 13, with 27 test files and 86 tests.
 - `pnpm browser:test`: passed through Round 13 with 15 Chromium tests.
-- `pnpm browser:test:all`: passed in Round 6 with 45 tests across Chromium,
-  Firefox, and WebKit. Round 14-16 will refresh this result.
+- `pnpm browser:test:all`: passed through Round 14 with 45 tests across
+  Chromium, Firefox, and WebKit.
 - `pnpm release:dry-run`: passed through Round 11.
 - Workflow structure check: `pnpm workflow:check` and `pnpm structure:check`
-  passed through Round 13.
+  passed through Round 14.
 
 ## Git Record
 
 - Phase 8 baseline before Round 1: `38d2aba`.
-- Latest pushed commit entering Round 13: `2a43c55`.
+- Latest pushed commit entering Round 14: `529ecf3`.
 - Final commit: pending Round 16.
 - Pushed branch: `main`.
 
@@ -64,8 +66,11 @@ Per-round commits:
 - Round 10: `1ab0aae` docs: sync phase 8 ops gates
 - Round 11: `87c7c35` test: add workflow parity check
 - Round 12: `2a43c55` docs: draft phase 8 final report
-- Round 13: pending
-- Round 14: pending
+- Round 13: `529ecf3` docs: record phase 8 buffer verification
+- Round 14: consumed. Refreshed optional browser matrix with
+  `pnpm browser:test:all`, rechecked CI troubleshooting and workflow structure,
+  and clarified that physical Gamepad checks need a real controller page rather
+  than the automated Playwright fixture.
 - Round 15: pending
 - Round 16: pending
 

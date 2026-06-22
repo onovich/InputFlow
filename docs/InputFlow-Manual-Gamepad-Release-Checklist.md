@@ -10,6 +10,12 @@ Automated coverage still comes from the browser-level `navigator.getGamepads`
 fixture in `pnpm browser:test` and `pnpm browser:test:all`. This checklist is a
 manual release-confidence supplement, not an automated required gate.
 
+The Playwright gamepad smoke in this repository uses a controlled browser
+fixture for `navigator.getGamepads()`. It proves browser-source integration but
+does not prove that a physical controller pairs with a target browser. Use a
+consumer demo, downstream app page, or temporary local page wired to
+`createBrowserGamepadSource()` for the physical checks below.
+
 ## Required Setup
 
 Record the exact setup before testing:
@@ -24,6 +30,7 @@ Record the exact setup before testing:
 | Connection type | USB / Bluetooth / other |
 | InputFlow commit |  |
 | Command baseline | `pnpm validate`, `pnpm browser:test` |
+| Physical test page |  |
 
 Recommended controller coverage:
 
@@ -99,4 +106,3 @@ for the failing browser / controller class.
 
 If a failure is accepted, record the affected device, browser, and user-facing
 limitation in the release notes.
-
