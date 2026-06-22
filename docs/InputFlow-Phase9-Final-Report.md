@@ -1,7 +1,7 @@
 # InputFlow Phase 9 Final Report
 
 Date: 2026-06-22
-Status: DRAFT after Round 12, pending Rounds 13-16 final validation
+Status: RC_READY after Round 16 final validation
 
 ## Scope
 
@@ -14,12 +14,16 @@ Status: DRAFT after Round 12, pending Rounds 13-16 final validation
 Phase 9 explicitly excludes npm publish, GitHub Release, git tag creation,
 secrets, a Sinan package, React diagnostics, and rebind UI work.
 
-## Draft RC Readiness
+## RC Readiness
 
-Current Phase 9 evidence supports a provisional `RC_READY` direction, but this
-report is not final until Round 16 refreshes local validation, package dry-run,
-release dry-run, browser smoke, browser matrix, and remote GitHub Actions
-evidence after the last RC validation commit.
+Phase 9 concludes `RC_READY` for the v0.1 release candidate review target
+`003396ac240c7f9cc0f4aac96e0ee0c556fbb796`.
+
+This means the required local validation, required remote validate, required
+remote Chromium smoke, remote release dry-run, package dry-run audit, README,
+changelog, and release-candidate documentation are complete. It does not mean
+that npm packages were published, a GitHub Release was created, or a git tag was
+created.
 
 ## Evidence Snapshot
 
@@ -35,6 +39,10 @@ evidence after the last RC validation commit.
   `browser-smoke.yml` run `27940604244`, and
   `optional-browser-matrix.yml` run `27940638294` all succeeded on commit
   `858b435ae8cfcf97edbe9c55fe0d00c1ae34494d`.
+- Round 16 final remote evidence: `validate.yml` run `27940867958`,
+  `browser-smoke.yml` run `27940867703`, `release-dry-run.yml` run
+  `27940902512`, and `optional-browser-matrix.yml` run `27940902609` all
+  succeeded on commit `003396ac240c7f9cc0f4aac96e0ee0c556fbb796`.
 - Remote evidence document:
   `docs/InputFlow-Phase9-Remote-CI-Evidence.md`.
 - Package dry-run audit:
@@ -61,6 +69,9 @@ evidence after the last RC validation commit.
 - Round 15 release confidence refresh: `pnpm validate`, `pnpm browser:test`,
   `pnpm release:dry-run`, `pnpm package:dry-run`, `pnpm docs:check`,
   `git diff --check`, and BOM checks passed.
+- Round 16 final validation: `pnpm validate`, `pnpm workflow:check`,
+  `pnpm browser:test`, `pnpm browser:test:all`, `pnpm release:dry-run`,
+  `pnpm package:dry-run`, `git diff --check`, and BOM checks passed.
 
 ## Corrective Work
 
@@ -75,11 +86,11 @@ evidence:
 
 Both fixes are now covered by `scripts/check-workflows.mjs`.
 
-## Git Record Draft
+## Git Record
 
 - Phase 9 baseline before Round 1: `58fd689`.
-- Latest pushed commit entering this Round 12 draft: `0434733`.
-- Final report draft commit: this Round 12 report update on `main`.
+- Latest pushed commit entering Round 16 final report update: `003396a`.
+- Final report commit: this Round 16 report update on `main`.
 
 Per-round commits so far:
 
@@ -97,10 +108,11 @@ Per-round commits so far:
 - Round 9: `b65613a` docs: record remote release dry-run evidence
 - Round 10: `80edb8e` docs: record optional browser matrix evidence
 - Round 11: `0434733` docs: add phase 9 package dry-run audit
-- Round 12: this final report draft update commit
+- Round 12: `8dd59c7` docs: draft phase 9 final report
 - Round 13: `858b435` docs: record phase 9 buffer verification
-- Round 14: this remote evidence refresh update commit
-- Round 15: this release confidence refresh update commit
+- Round 14: `88ea0f3` docs: refresh phase 9 remote ci evidence
+- Round 15: `003396a` docs: record phase 9 release confidence
+- Round 16: this final report update commit
 
 ## Buffer Round Use
 
@@ -113,18 +125,17 @@ Per-round commits so far:
 - Round 15: consumed. Refreshed local validate, required Chromium smoke,
   release dry-run, standalone package dry-run, docs guard, whitespace, and BOM
   checks. No repair was required.
-
-## Remaining Refreshes
-
-- Round 16 final validation, final report update, push, and planner/checker
-  handoff.
+- Round 16: consumed. Refreshed final local validation, required remote
+  validate, required remote browser smoke, remote release dry-run, optional
+  remote browser matrix, package dry-run, whitespace, and BOM checks. No repair
+  was required.
 
 ## Remaining Risks
 
-- Final RC status still depends on the last Round 16 local and remote evidence
-  refresh.
 - Optional Firefox / WebKit matrix remains best effort, not a required release
   gate.
 - Physical Gamepad checks remain manual and depend on real controller hardware.
 - Local npm environment warnings can appear during `npm pack --dry-run`; they
   are non-blocking while the dry-run command exits successfully.
+- The final docs-only report closure commit should still be observed after push
+  and reported to the planner/checker handoff.

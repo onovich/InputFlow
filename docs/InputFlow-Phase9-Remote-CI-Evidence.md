@@ -83,8 +83,30 @@ Observed commit:
 Local Round 14 verification also passed `pnpm workflow:check` and
 `pnpm browser:test:all` with 45 tests across Chromium, Firefox, and WebKit.
 
+## Round 16 Final Remote Evidence
+
+Observed commit:
+
+- Short SHA: `003396a`
+- Full SHA: `003396ac240c7f9cc0f4aac96e0ee0c556fbb796`
+- Branch: `main`
+
+| Workflow | Run id | Event | Branch | Commit | Status | Conclusion | URL | Observed at |
+|---|---:|---|---|---|---|---|---|---|
+| `validate.yml` | `27940867958` | push | `main` | `003396ac240c7f9cc0f4aac96e0ee0c556fbb796` | completed | success | https://github.com/onovich/InputFlow/actions/runs/27940867958 | 2026-06-22 16:51 +08:00 |
+| `browser-smoke.yml` | `27940867703` | push | `main` | `003396ac240c7f9cc0f4aac96e0ee0c556fbb796` | completed | success | https://github.com/onovich/InputFlow/actions/runs/27940867703 | 2026-06-22 16:51 +08:00 |
+| `release-dry-run.yml` | `27940902512` | workflow_dispatch | `main` | `003396ac240c7f9cc0f4aac96e0ee0c556fbb796` | completed | success | https://github.com/onovich/InputFlow/actions/runs/27940902512 | 2026-06-22 16:52 +08:00 |
+| `optional-browser-matrix.yml` | `27940902609` | workflow_dispatch | `main` | `003396ac240c7f9cc0f4aac96e0ee0c556fbb796` | completed | success | https://github.com/onovich/InputFlow/actions/runs/27940902609 | 2026-06-22 16:52 +08:00 |
+
+Local Round 16 verification also passed `pnpm validate`,
+`pnpm workflow:check`, `pnpm browser:test`, `pnpm browser:test:all`,
+`pnpm release:dry-run`, `pnpm package:dry-run`, `git diff --check`, and BOM
+checks.
+
 ## Pending Remote Evidence
 
-Still pending for later Phase 9 rounds:
+No pending remote evidence remains for the Phase 9 RC validation target
+`003396ac240c7f9cc0f4aac96e0ee0c556fbb796`.
 
-- Final Phase 9 evidence refresh after the last required RC validation commit.
+The final docs-only report closure commit should still be observed after push
+and reported to the planner/checker handoff.
