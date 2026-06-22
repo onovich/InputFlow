@@ -19,6 +19,11 @@ release gates added during Phase 8.
 are explicit because they install Playwright browsers and may produce browser
 artifacts.
 
+For remote Phase 9 release-candidate evidence, use
+`docs/InputFlow-Remote-CI-Observation-Guide.md`. This troubleshooting guide
+classifies failures; the remote observation guide records run ids, URLs, and
+manual dispatch outcomes.
+
 ## Failure Classification
 
 | Symptom | Likely layer | Action |
@@ -75,4 +80,3 @@ Manual release confidence:
 
 Do not treat the optional matrix as a required pull-request gate unless a future
 ADR changes ADR 0006 and ADR 0007.
-

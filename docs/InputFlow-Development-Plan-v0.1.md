@@ -9,6 +9,7 @@
 > Phase 9 Goal 入口：`docs/InputFlow-Phase9-v0.1-Release-Candidate-Goal-Mode-Execution-Guide.md`（Phase 9，16 轮）
 > Browser smoke 指南：`docs/InputFlow-Browser-Smoke-Guide.md`
 > CI troubleshooting 指南：`docs/InputFlow-CI-Troubleshooting.md`
+> Remote CI observation 指南：`docs/InputFlow-Remote-CI-Observation-Guide.md`
 > Manual Gamepad checklist：`docs/InputFlow-Manual-Gamepad-Release-Checklist.md`
 > Phase 7 完成报告：`docs/InputFlow-Phase7-Final-Report.md`
 > Phase 8 完成报告：`docs/InputFlow-Phase8-Final-Report.md`
