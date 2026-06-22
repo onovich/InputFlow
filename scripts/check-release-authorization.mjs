@@ -12,6 +12,7 @@ const requiredDocs = [
   "docs/release/InputFlow-v0.1-Publish-Simulation-and-Provenance.md",
   "docs/release/InputFlow-v0.1-Rollback-and-Deprecation-Policy.md",
   "docs/release/InputFlow-v0.1-Final-Release-Candidate-Audit.md",
+  "docs/release/InputFlow-v0.1-Owner-Sign-Off-Checklist.md",
   "docs/InputFlow-Phase10-Physical-Gamepad-Evidence.md",
   "docs/InputFlow-Phase11-Final-Report.md",
   "docs/sinan-cooperation/inputflow-sinan-handoff-packet.md"
@@ -70,7 +71,7 @@ export const checkReleaseAuthorization = () => {
   for (const boundary of ["npm publish", "GitHub Release", "git tag", "secrets"]) {
     assertIncludes("authorization packet", packet, boundary);
   }
-  for (const file of requiredDocs.slice(1, 8)) {
+  for (const file of requiredDocs.slice(1, 9)) {
     assertIncludes("authorization packet", packet, file);
   }
 
@@ -126,6 +127,12 @@ export const checkReleaseAuthorization = () => {
   assertIncludes("rollback policy", rollbackPolicy, "npm deprecate");
   assertIncludes("rollback policy", rollbackPolicy, "unpublish");
   assertIncludes("rollback policy", rollbackPolicy, "AUTH_PACKET_READY_BLOCKED_OWNER_DECISIONS");
+
+  const ownerChecklist = readText("docs/release/InputFlow-v0.1-Owner-Sign-Off-Checklist.md");
+  assertIncludes("owner sign-off checklist", ownerChecklist, "Authorize v0.1 release");
+  assertIncludes("owner sign-off checklist", ownerChecklist, "Defer v0.1 release");
+  assertIncludes("owner sign-off checklist", ownerChecklist, "Decline v0.1 release");
+  assertIncludes("owner sign-off checklist", ownerChecklist, "AUTH_PACKET_READY_BLOCKED_OWNER_DECISIONS");
 
   const plan = readText("docs/InputFlow-Development-Plan-v0.1.md");
   for (const file of requiredDocs.slice(0, 7)) {
