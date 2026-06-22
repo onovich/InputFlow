@@ -50,6 +50,35 @@ Configured commands:
 - Structure check: `pnpm structure:check`
 - Docs check: `pnpm docs:check`
 - Root validate: `pnpm validate`
+- Smoke: `pnpm browser:test`
+- Package: `pnpm package:dry-run`
+- Release dry-run: `pnpm browser:test`, `pnpm package:dry-run`
+
+## Browser Smoke And Release Gate
+
+Default validation intentionally excludes Playwright browser smoke so routine
+`Validate.cmd` remains deterministic and fast.
+
+Use `Smoke.cmd` for the required Phase 7 Chromium browser smoke:
+
+```powershell
+C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\Smoke.cmd
+```
+
+Use `ReleaseDryRun.cmd` when preparing release confidence. It runs the required
+Chromium browser smoke before the package dry-run:
+
+```powershell
+C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\ReleaseDryRun.cmd
+```
+
+The optional Firefox and WebKit matrix remains explicit:
+
+```powershell
+pnpm browser:test:all
+```
+
+Install missing Playwright browsers with `pnpm browser:install`.
 
 ## Dev Server
 

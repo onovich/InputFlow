@@ -22,6 +22,16 @@ pnpm browser:test:all      # Chromium, Firefox, and WebKit best effort
 pnpm browser:install       # install Chromium, Firefox, and WebKit binaries
 ```
 
+The project ops wrappers expose the same required smoke and release gate:
+
+```txt
+C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\Smoke.cmd
+C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\ReleaseDryRun.cmd
+```
+
+`Smoke.cmd` runs the required Chromium browser smoke. `ReleaseDryRun.cmd` runs
+the required Chromium browser smoke and then `pnpm package:dry-run`.
+
 The smoke harness serves built package output from `packages/*/dist`. On a
 fresh checkout, run dependency restore and build before browser smoke:
 
@@ -85,4 +95,3 @@ dependencies into `@inputflow/core`.
 Browser-specific runtime fixes belong in `@inputflow/browser`. Shared action,
 binding, interaction, replay, and routing semantics belong in `@inputflow/core`
 only when they are host-agnostic.
-
