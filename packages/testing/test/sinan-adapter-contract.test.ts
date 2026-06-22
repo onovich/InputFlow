@@ -41,4 +41,22 @@ describe("Sinan adapter contract fixture", () => {
       justPressed: false
     });
   });
+
+  it("treats editor viewport select as a host-owned action id", () => {
+    const fixture = createSinanGateAdapterContractFixture();
+    const result = runSinanGateAdapterContractReplay(fixture.traces.editorSelect, fixture);
+
+    expect(result.frames[0]?.buttons[sinanGateActionIds.editorSelect]).toMatchObject({
+      isPressed: true,
+      justPressed: true
+    });
+    expect(result.frames[0]?.buttons[sinanGateActionIds.runtimeInteract]).toMatchObject({
+      isPressed: false,
+      justPressed: false
+    });
+    expect(result.frames[1]?.buttons[sinanGateActionIds.editorSelect]).toMatchObject({
+      isPressed: false,
+      justReleased: true
+    });
+  });
 });

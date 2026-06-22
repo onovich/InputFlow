@@ -7,17 +7,20 @@ export interface SinanGateAdapterContractFixture {
     readonly keyboardInteract: ReplayTrace;
     readonly pointerInteract: ReplayTrace;
     readonly gamepadInteract: ReplayTrace;
+    readonly editorSelect: ReplayTrace;
     readonly modalBlocksGameplay: ReplayTrace;
   };
 }
 
 export const sinanGateActionIds = {
   runtimeInteract: "runtime.gameplay.interact",
+  editorSelect: "editor.viewport.select",
   modalConfirm: "ui.modal.confirm"
 } as const;
 
 export const sinanGateMapIds = {
   gameplay: "gameplay",
+  editorViewport: "editorViewport",
   modal: "modal"
 } as const;
 
@@ -61,12 +64,42 @@ export const createSinanGateAdapterContractFixture = (): SinanGateAdapterContrac
     ]
   };
 
+  const editorViewportMap: InputMapDefinition = {
+    id: sinanGateMapIds.editorViewport,
+    actions: [{ id: sinanGateActionIds.editorSelect, valueType: "button" }],
+    bindings: [
+      {
+        id: "editor.viewport.select.pointer",
+        action: sinanGateActionIds.editorSelect,
+        source: { kind: "control", path: "<Pointer>/button/primary" }
+      }
+    ]
+  };
+
   return {
-    maps: [gameplayMap, modalMap],
+    maps: [gameplayMap, modalMap, editorViewportMap],
     traces: {
       keyboardInteract: createGameplayPressTrace("<Keyboard>/code/KeyE"),
       pointerInteract: createGameplayPressTrace("<Pointer>/button/primary"),
       gamepadInteract: createGameplayPressTrace("<Gamepad>/button/south"),
+      editorSelect: {
+        schemaVersion: 1,
+        kind: "raw-control-trace",
+        clock: "relative-ms",
+        events: [
+          {
+            t: 0,
+            type: "context.activate",
+            contextId: "editorViewport",
+            priority: 500,
+            maps: [sinanGateMapIds.editorViewport]
+          },
+          { t: 16, type: "control", control: "<Pointer>/button/primary", value: 1 },
+          { t: 16, type: "frame" },
+          { t: 32, type: "control", control: "<Pointer>/button/primary", value: 0 },
+          { t: 32, type: "frame" }
+        ]
+      },
       modalBlocksGameplay: {
         schemaVersion: 1,
         kind: "raw-control-trace",
